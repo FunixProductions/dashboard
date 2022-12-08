@@ -8,6 +8,5 @@ import {AlertDTO, AlertImportance} from "../dtos/alertDTO";
 })
 export class AlertContainerComponent {
   @Input() alert: AlertDTO = new AlertDTO();
-
   AlertImportance = AlertImportance;
 }

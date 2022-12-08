@@ -9,6 +9,7 @@ import { SidebarFunixprodComponent } from './components/sidebar/sidebar-funixpro
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { AlertsComponent } from './components/topbar/alerts/alerts.component';
 import { AlertContainerComponent } from './components/topbar/alerts/alert-container/alert-container.component';
+import { UserComponent } from './components/topbar/user/user.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AlertContainerComponent } from './components/topbar/alerts/alert-contai
     SidebarFunixprodComponent,
     TopbarComponent,
     AlertsComponent,
-    AlertContainerComponent
+    AlertContainerComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
