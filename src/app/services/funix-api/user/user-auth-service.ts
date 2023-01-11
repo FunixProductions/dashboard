@@ -26,23 +26,23 @@ export class UserAuthService {
   }
 
   currentUser(): Observable<UserDTO> {
-    const headers: HttpHeaders = this.buildHeader('');
+    let headers: HttpHeaders = this.buildHeader('');
     const bearerToken: string | null = localStorage.getItem('user-token-requests');
 
     if (bearerToken !== null) {
-      headers.append('Authorization', bearerToken);
+      headers = headers.append('Authorization', 'Bearer ' + bearerToken);
     }
 
-    return this.httpClient.get<UserDTO>(this.url + 'current/', {headers: headers});
+    return this.httpClient.get<UserDTO>(this.url + 'current', {headers: headers});
   }
 
   private buildHeader(googleCaptchaCode: string) : HttpHeaders {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
     });
 
     if (googleCaptchaCode !== null && googleCaptchaCode.length > 0) {
-      headers.append('google_reCaptcha', googleCaptchaCode);
+      headers = headers.append('google_reCaptcha', googleCaptchaCode);
     }
     return headers;
   }

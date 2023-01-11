@@ -12,6 +12,10 @@ import {SidebarPacifistaComponent} from "./sidebar-pacifista/sidebar-pacifista.c
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    SidebarComponent
   ]
+
 })
 export class SidebarModule { }
