@@ -6,11 +6,11 @@ import {DashboardComponent} from "./features/dashboard/dashboard.component";
 const routes: Routes = [
   {
     path: 'login',
-    component: HomeComponent
+    loadChildren: () => HomeComponent
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    loadChildren: () => DashboardComponent
   },
   {
     path: '**',

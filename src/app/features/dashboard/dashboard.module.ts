@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {TopbarModule} from "./components/topbar/topbar.module";
-import {SidebarModule} from "./components/sidebar/sidebar.module";
+import {DashboardComponent} from "./dashboard.component";
+import {SidebarComponent} from "./components/sidebar/sidebar.component";
+import {TopbarComponent} from "./components/topbar/topbar.component";
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    DashboardComponent,
+  ],
   imports: [
     CommonModule,
-    TopbarModule,
-    SidebarModule
   ]
+
 })
 export class DashboardModule { }
