@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UserDTO} from "./dtos/userDTO";
+import {UserDTO} from "../../../dto/funix-api/user/user-dto";
+import {UserAuthService} from "../../../services/funix-api/user/user-auth-service";
 
 @Component({
   selector: 'app-user',
@@ -9,9 +10,15 @@ import {UserDTO} from "./dtos/userDTO";
 export class UserComponent implements OnInit {
   private userDTO: UserDTO = new UserDTO();
 
+  constructor(private authService: UserAuthService) {
+  }
+
   ngOnInit(): void {
-    this.userDTO.email = "test@funixgaming.fr";
-    this.userDTO.username = "TestUser";
+    this.authService.currentUser().subscribe({
+      next: (user: UserDTO) => {
+        this.userDTO = user;
+      }
+    });
   }
 
   public getUsername(): string | undefined {

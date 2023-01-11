@@ -13,7 +13,7 @@ import {UserComponent} from "./user/user.component";
     UserComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
     TopbarComponent
