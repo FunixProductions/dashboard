@@ -1,4 +1,4 @@
-import {ApiDTO} from "../../../../dto/api-dto";
+import {ApiDTO} from "../../../../../../dto/api-dto";
 
 export enum AlertImportance {
   URGENT = "URGENT",
