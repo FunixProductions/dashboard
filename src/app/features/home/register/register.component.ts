@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class RegisterComponent {
 
+  username: string = '';
+  email: string = '';
+  password: string = '';
+  passwordConfirmation: string = '';
+  acceptCgu: boolean = false;
+  acceptCgv: boolean = false;
+
+  register(): void {
+  }
+
 }
