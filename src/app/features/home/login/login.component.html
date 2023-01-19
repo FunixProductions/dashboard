@@ -19,20 +19,24 @@
                            id="inputUsername" name="username" [(ngModel)]="username" aria-describedby="usernameHelp"
                            placeholder="Identifiant">
                   </div>
+
                   <div class="form-group">
                     <input type="password" class="form-control form-control-user"
                            id="password" name="password" [(ngModel)]="password" placeholder="Mot de passe">
                   </div>
+
                   <div class="form-group">
                     <div class="custom-control custom-checkbox small">
                       <input type="checkbox" [(ngModel)]="stayLogin" name="stayLogin" class="custom-control-input" id="customCheck">
                       <label class="custom-control-label" for="customCheck">Rester connecté</label>
                     </div>
                   </div>
+
                   <button (click)="login()" [disabled]="!username || !password" class="btn btn-primary btn-user btn-block">
                     Connection
                   </button>
                 </form>
+
                 <hr>
                 <div class="text-center">
                   <a class="small" href="/forgotpassword">Mot de passe oublié ?</a>

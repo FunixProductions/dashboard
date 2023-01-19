@@ -3,6 +3,7 @@ import {UserAuthService} from "../../../services/funix-api/user/user-auth-servic
 import {UserCreationDTO} from "../../../dto/funix-api/user/requests/user-creation-dto";
 import {UserDTO} from "../../../dto/funix-api/user/user-dto";
 import {Router} from "@angular/router";
+import {ReCaptchaV3Service} from "ng-recaptcha";
 
 @Component({
   selector: 'app-register',
@@ -19,6 +20,7 @@ export class RegisterComponent {
   acceptCgv: boolean = false;
 
   constructor(private userAuthService: UserAuthService,
+              private reCaptchaService: ReCaptchaV3Service,
               private router: Router) {
   }
 
@@ -31,15 +33,17 @@ export class RegisterComponent {
     userCreationRequest.acceptCGU = this.acceptCgu;
     userCreationRequest.acceptCGV = this.acceptCgv;
 
-    this.userAuthService.register(userCreationRequest, '').subscribe({
-        next: (userDto : UserDTO) => {
-          this.router.navigate(['login']);
-        },
-        error: err => {
-          //TODO popup error
+    this.reCaptchaService.execute('login').subscribe((token: string) => {
+      this.userAuthService.register(userCreationRequest, token).subscribe({
+          next: (userDto : UserDTO) => {
+            this.router.navigate(['login']);
+          },
+          error: err => {
+            //TODO popup error
+          }
         }
-      }
-    )
+      )
+    });
   }
 
 }
