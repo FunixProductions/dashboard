@@ -1,0 +1,74 @@
+<div class="container">
+
+  <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+      <!-- Nested Row within Card Body -->
+      <div class="row">
+        <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+        <div class="col-lg-7">
+          <div class="p-5">
+            <div class="text-center">
+              <h1 class="h4 text-gray-900 mb-4">Création de compte</h1>
+            </div>
+            <form class="user">
+
+              <div class="form-group">
+                <input type="text" class="form-control form-control-user" required [(ngModel)]="username" id="inputUsername"
+                       placeholder="Identifiant" name="username">
+              </div>
+
+              <div class="form-group">
+                <input type="email" class="form-control form-control-user" required [(ngModel)]="email" id="inputEmail"
+                       placeholder="Email" name="email">
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <input type="password" class="form-control form-control-user"
+                         id="inputPassword" required [(ngModel)]="password" placeholder="Mot de passe" name="password">
+                </div>
+                <div class="col-sm-6">
+                  <input type="password" class="form-control form-control-user"
+                         id="exampleRepeatPassword" required [(ngModel)]="passwordConfirmation" placeholder="Répétez le mot de passe" name="passwordConfirmation">
+                </div>
+              </div>
+
+              <div class="form-group">
+
+                <div class="custom-control custom-checkbox small">
+                  <input type="checkbox" class="custom-control-input" [(ngModel)]="acceptCgu" id="cgu" name="acceptCgu">
+                  <label class="custom-control-label" for="cgu">Accepter les CGU de la FunixProductions</label>
+                </div>
+                <div>
+                  <a href="https://funixgaming.fr/cgu" class="small">
+                    CGU de la FunixProductions
+                  </a>
+                </div>
+
+                <div class="custom-control custom-checkbox small">
+                  <input type="checkbox" class="custom-control-input" [(ngModel)]="acceptCgv" name="acceptCgv" id="cgv">
+                  <label class="custom-control-label" for="cgv">Accepter les CGV de la FunixProductions</label>
+                </div>
+                <div>
+                  <a href="https://funixgaming.fr/cgv" class="small">
+                    CGV de la FunixProductions
+                  </a>
+                </div>
+
+              </div>
+
+              <button (click)="register()" [disabled]="!username || !email || !passwordConfirmation || !password || !acceptCgv || !acceptCgu" class="btn btn-primary btn-user btn-block">
+                Créer le compte
+              </button>
+            </form>
+            <hr>
+            <div class="text-center">
+              <a class="small" href="/login">Vous avez un compte ? Connectez-vous !</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
