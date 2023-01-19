@@ -17,16 +17,16 @@ export class UserAuthService {
   constructor(protected httpClient: HttpClient) {
   }
 
-  register(request: UserCreationDTO, googleCaptchaCode: string): Observable<UserDTO> {
-    return this.httpClient.post<UserDTO>(this.url + 'register', request, {headers: this.buildHeader(googleCaptchaCode)});
+  register(request: UserCreationDTO): Observable<UserDTO> {
+    return this.httpClient.post<UserDTO>(this.url + 'register', request, {headers: this.buildHeader()});
   }
 
-  login(request: UserLoginDTO, googleCaptchaCode: string): Observable<UserTokenDTO> {
-    return this.httpClient.post<UserTokenDTO>(this.url + 'login', request, {headers: this.buildHeader(googleCaptchaCode)});
+  login(request: UserLoginDTO): Observable<UserTokenDTO> {
+    return this.httpClient.post<UserTokenDTO>(this.url + 'login', request, {headers: this.buildHeader()});
   }
 
   currentUser(): Observable<UserDTO> {
-    let headers: HttpHeaders = this.buildHeader('');
+    let headers: HttpHeaders = this.buildHeader();
     const bearerToken: string | null = localStorage.getItem('user-token-requests');
 
     if (bearerToken !== null) {
@@ -36,15 +36,10 @@ export class UserAuthService {
     return this.httpClient.get<UserDTO>(this.url + 'current', {headers: headers});
   }
 
-  private buildHeader(googleCaptchaCode: string) : HttpHeaders {
-    let headers = new HttpHeaders({
+  private buildHeader() : HttpHeaders {
+    return new HttpHeaders({
       'Content-Type': 'application/json',
     });
-
-    if (googleCaptchaCode !== null && googleCaptchaCode.length > 0) {
-      headers = headers.append('google_reCaptcha', googleCaptchaCode);
-    }
-    return headers;
   }
 
 }
