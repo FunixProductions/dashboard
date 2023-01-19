@@ -34,7 +34,9 @@ export class RegisterComponent {
     userCreationRequest.acceptCGV = this.acceptCgv;
 
     this.reCaptchaService.execute('login').subscribe((token: string) => {
-      this.userAuthService.register(userCreationRequest, token).subscribe({
+      userCreationRequest.googleCaptcha = token;
+
+      this.userAuthService.register(userCreationRequest).subscribe({
           next: (userDto : UserDTO) => {
             this.router.navigate(['login']);
           },
