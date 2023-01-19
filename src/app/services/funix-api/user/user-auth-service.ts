@@ -18,11 +18,11 @@ export class UserAuthService {
   }
 
   register(request: UserCreationDTO, googleCaptchaCode: string): Observable<UserDTO> {
-    return this.httpClient.post<UserDTO>(this.url, request, {headers: this.buildHeader(googleCaptchaCode)});
+    return this.httpClient.post<UserDTO>(this.url + 'register', request, {headers: this.buildHeader(googleCaptchaCode)});
   }
 
   login(request: UserLoginDTO, googleCaptchaCode: string): Observable<UserTokenDTO> {
-    return this.httpClient.post<UserTokenDTO>(this.url, request, {headers: this.buildHeader(googleCaptchaCode)});
+    return this.httpClient.post<UserTokenDTO>(this.url + 'login', request, {headers: this.buildHeader(googleCaptchaCode)});
   }
 
   currentUser(): Observable<UserDTO> {

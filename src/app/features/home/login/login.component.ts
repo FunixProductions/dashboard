@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import {UserLoginDTO} from "../../../dto/funix-api/user/requests/user-login-dto";
+import {UserAuthService} from "../../../services/funix-api/user/user-auth-service";
+import {Router} from "@angular/router";
+import {UserTokenDTO} from "../../../dto/funix-api/user/user-token-dto";
 
 @Component({
   selector: 'app-login',
@@ -11,8 +15,29 @@ export class LoginComponent {
   password: string = '';
   stayLogin: boolean = false;
 
-  login(): void {
+  constructor(private userAuthService: UserAuthService,
+              private router: Router) {
+  }
 
+  login(): void {
+    const loginRequest: UserLoginDTO = new UserLoginDTO();
+    loginRequest.username = this.username;
+    loginRequest.password = this.password;
+    loginRequest.stayConnected = this.stayLogin;
+
+    this.userAuthService.login(loginRequest, '').subscribe({
+      next: (loginDto: UserTokenDTO) => {
+        if (loginDto.token) {
+          localStorage.setItem('user-token-requests', loginDto.token);
+          this.router.navigate(['dashboard'])
+        } else {
+          //TODO popup error
+        }
+      },
+      error: err => {
+        //TODO popup error
+      }
+    })
   }
 
 }
