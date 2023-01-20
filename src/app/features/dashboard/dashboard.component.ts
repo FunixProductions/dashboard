@@ -9,13 +9,10 @@ import {UserDTO, UserRole} from "../../dto/funix-api/user/user-dto";
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
   constructor(private userAuthService: UserAuthService,
               private router: Router) {
-  }
-
-  ngOnInit(): void {
     this.canActivate();
   }
 
