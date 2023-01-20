@@ -10,7 +10,8 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)
   },
-  { path: '',
+  {
+    path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full'
   },

@@ -1,6 +1,6 @@
-export interface QueryParam  {
-  key: string;
-  type: string;
+export class QueryParam  {
+  key: string = '';
+  type: string = ':eq:';
   value?: string | string[];
 }
 export class QueryBuilder {
@@ -37,5 +37,9 @@ export class QueryBuilder {
       this.queryArray.push(param);
     }
     return this;
+  }
+
+  reset(): void {
+    this.queryArray = [];
   }
 }

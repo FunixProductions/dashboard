@@ -1,21 +1,14 @@
 import {ApiDTO} from "./api-dto";
 
-export interface Paginated<T extends ApiDTO> {
-  content: T[];
-  actualPage: number;
-  elementsPerPage: number;
-  totalElementsDatabase: number;
+export class Paginated<T extends ApiDTO> {
+  content: T[] = [];
+  actualPage: number = 0;
+  elementsPerPage: number = 0;
+  totalElementsDatabase: number = 0;
 }
 
-export interface PageOption {
-  elemsPerPage: number;
-  page: number;
-  sort: string;
-}
-
-export interface RequestParams {
-  elemsPerPage?: number;
-  page?: number;
-  sort?: string;
-  search?: string;
+export class PageOption {
+  elemsPerPage: number = 15;
+  page: number = 0;
+  sort: string = '';
 }

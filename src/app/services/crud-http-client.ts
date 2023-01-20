@@ -3,8 +3,15 @@ import {ApiDTO} from "../dto/api-dto";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
-import {PageOption, Paginated, RequestParams} from "../dto/paginated";
+import {PageOption, Paginated} from "../dto/paginated";
 import {QueryBuilder} from "../utils/query.builder";
+
+interface RequestParams {
+  elemsPerPage?: number;
+  page?: number;
+  sort?: string;
+  search?: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +21,7 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> {
   domain: string = environment.funixApiUrl;
   path: string = '';
 
-  private headers: HttpHeaders = new HttpHeaders({
+  private readonly headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json'
   });
 
@@ -22,7 +29,7 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> {
     const bearerToken: string | null = this.getBearer();
 
     if (bearerToken !== null) {
-      this.headers.append('Authorization', 'Bearer ' + this.getBearer());
+      this.headers = this.headers.append('Authorization', 'Bearer ' + this.getBearer());
     }
   }
 
@@ -38,6 +45,7 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> {
       sort: options.sort!,
       search: (queryBuilder === null ? '' : queryBuilder.get())
     };
+
     return this.http.get<Paginated<DTO>>(this.domain + this.path, {headers: this.headers, params: {...params}});
   }
 
