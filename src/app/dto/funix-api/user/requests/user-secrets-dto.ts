@@ -1,5 +1,5 @@
-import {UserDTO} from "../../../../features/dashboard/components/topbar/user/dtos/userDTO";
+import {UserDTO} from "../user-dto";
 
-class UserSecretsDTO extends UserDTO {
+export class UserSecretsDTO extends UserDTO {
   password: string = '';
 }
