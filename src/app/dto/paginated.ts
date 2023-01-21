@@ -3,6 +3,7 @@ import {ApiDTO} from "./api-dto";
 export class Paginated<T extends ApiDTO> {
   content: T[] = [];
   actualPage: number = 0;
+  totalPages: number = 1;
   elementsPerPage: number = 0;
   totalElementsDatabase: number = 0;
 }

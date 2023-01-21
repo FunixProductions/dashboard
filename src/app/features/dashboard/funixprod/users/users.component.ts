@@ -48,6 +48,20 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  pageUp(): void {
+    if (this.users.totalPages > this.page + 1) {
+      ++this.page;
+      this.updateUserList();
+    }
+  }
+
+  pageDown(): void {
+    if (this.page > 0) {
+      --this.page;
+      this.updateUserList();
+    }
+  }
+
   private updateUserList(): void {
     const pageOption: PageOption = new PageOption();
     pageOption.sort = this.sort;
