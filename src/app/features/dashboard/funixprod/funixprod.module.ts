@@ -16,6 +16,7 @@ import { FunixbotCommandsEditComponent } from './funixbot/funixbot-commands/funi
 import { FunixbotUserExpEditComponent } from './funixbot/funixbot-user-exp/funixbot-user-exp-edit/funixbot-user-exp-edit.component';
 import { FunixbotCommandsRemoveModalComponent } from './funixbot/funixbot-commands/funixbot-commands-remove-modal/funixbot-commands-remove-modal.component';
 import { FunixbotUserExpRemoveModalComponent } from './funixbot/funixbot-user-exp/funixbot-user-exp-remove-modal/funixbot-user-exp-remove-modal.component';
+import { FunixbotCommandCreateModalComponent } from './funixbot/funixbot-commands/funixbot-command-create-modal/funixbot-command-create-modal.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { FunixbotUserExpRemoveModalComponent } from './funixbot/funixbot-user-ex
     FunixbotCommandsEditComponent,
     FunixbotUserExpEditComponent,
     FunixbotCommandsRemoveModalComponent,
-    FunixbotUserExpRemoveModalComponent
+    FunixbotUserExpRemoveModalComponent,
+    FunixbotCommandCreateModalComponent
   ],
     imports: [
         CommonModule,

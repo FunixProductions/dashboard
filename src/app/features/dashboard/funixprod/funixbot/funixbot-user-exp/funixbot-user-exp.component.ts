@@ -16,7 +16,7 @@ export class FunixbotUserExpComponent implements OnInit {
   columnsToDisplay = ['twitch-user-id', 'level', 'xp', 'xp-next-level', 'actions'];
 
   users: Paginated<FunixbotUserExpDto> = new Paginated<FunixbotUserExpDto>();
-  sort: string = 'level:asc,xp:asc';
+  sort: string = 'level:desc,xp:desc';
   page: number = 0;
   elemsPerPage: number = 30;
 

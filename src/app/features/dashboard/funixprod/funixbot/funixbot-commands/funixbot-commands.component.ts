@@ -9,6 +9,9 @@ import {FunixbotCommandsEditComponent} from "./funixbot-commands-edit/funixbot-c
 import {
   FunixbotCommandsRemoveModalComponent
 } from "./funixbot-commands-remove-modal/funixbot-commands-remove-modal.component";
+import {
+  FunixbotCommandCreateModalComponent
+} from "./funixbot-command-create-modal/funixbot-command-create-modal.component";
 
 @Component({
   selector: 'app-funixbot-commands',
@@ -42,6 +45,14 @@ export class FunixbotCommandsComponent implements OnInit {
         command: command
       }
     });
+
+    dialogRef.afterClosed().subscribe(res => {
+      this.updateList();
+    });
+  }
+
+  openCreationModal(): void {
+    const dialogRef = this.dialog.open(FunixbotCommandCreateModalComponent);
 
     dialogRef.afterClosed().subscribe(res => {
       this.updateList();
