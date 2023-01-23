@@ -27,8 +27,6 @@ export class UsersComponent implements OnInit {
   searchEmail: QueryParam = new QueryParam();
   searchRole: QueryParam = new QueryParam();
 
-  queryBuilder = new QueryBuilder();
-
   constructor(private userCrudService: UserCrudService,
               private router: Router,
               private dialog: MatDialog) {
@@ -89,12 +87,12 @@ export class UsersComponent implements OnInit {
     pageOption.page = this.page;
     pageOption.elemsPerPage = this.elemsPerPage;
 
-    this.queryBuilder = new QueryBuilder();
-    this.queryBuilder.addParam(this.searchUsername);
-    this.queryBuilder.addParam(this.searchEmail);
-    this.queryBuilder.addParam(this.searchRole);
+    const queryBuilder: QueryBuilder = new QueryBuilder();
+    queryBuilder.addParam(this.searchUsername);
+    queryBuilder.addParam(this.searchEmail);
+    queryBuilder.addParam(this.searchRole);
 
-    this.userCrudService.find(pageOption, this.queryBuilder).subscribe({
+    this.userCrudService.find(pageOption, queryBuilder).subscribe({
       next: (userList: Paginated<UserDTO>) => {
         this.users = userList;
       }

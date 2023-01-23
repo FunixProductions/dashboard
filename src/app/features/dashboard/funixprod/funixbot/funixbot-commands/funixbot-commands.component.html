@@ -1,1 +1,80 @@
-<p>funixbot-commands works!</p>
+<h1 class="h3 mb-2 text-gray-800">FunixBot Commandes</h1>
+<p class="mb-4">
+  Depuis cette liste vous pouvez gérer les différentes commandes qu'utilise FunixBot<br/>
+  Vous pouvez en supprimer ou en ajouter.
+</p>
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h4 class="m-0 font-weight-bold text-primary">FunixBot Commandes</h4>
+  </div>
+
+  <div class="card-body">
+    <div class="col-md-12">
+      <p>Nombre de commandes : {{ commands.totalElementsDatabase }}</p>
+    </div>
+
+    <div class="table-responsive">
+      <table mat-table [dataSource]="commands.content" class="table table-bordered" id="dataTable">
+
+        <ng-container matColumnDef="command">
+          <th mat-header-cell *matHeaderCellDef>
+            Commande
+            <div class="input-group">
+              <input #searchCommand (keyup)="onSearchChange('command', searchCommand.value)" type="text" class="form-control bg-light border-0 small" placeholder="Recherche commande">
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let c">{{ c.command }}</td>
+          <th mat-footer-cell *matFooterCellDef>Commande</th>
+        </ng-container>
+
+        <ng-container matColumnDef="message">
+          <th mat-header-cell *matHeaderCellDef>Message</th>
+          <td mat-cell *matCellDef="let c">{{ c.message }}</td>
+          <th mat-footer-cell *matFooterCellDef>Message</th>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef> Date de création </th>
+          <td mat-cell *matCellDef="let c">{{ c.createdAt ? (c.createdAt | date : 'dd/MM/YY - HH:mm') : '-'  }}</td>
+          <th mat-footer-cell *matFooterCellDef> Date de création </th>
+        </ng-container>
+
+        <ng-container matColumnDef="updatedAt">
+          <th mat-header-cell *matHeaderCellDef> Date de mise à jour </th>
+          <td mat-cell *matCellDef="let c">{{ c.updatedAt ? (c.updatedAt | date : 'dd/MM/YY - HH:mm') : '-'  }}</td>
+          <th mat-footer-cell *matFooterCellDef> Date de mise à jour </th>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let c">
+            <div class="container-fluid">
+              <button (click)="openEditDialog(c)" class="btn btn-info btn-circle btn-sm">
+                <i class="fas fa-pen"></i>
+              </button>
+
+              <button (click)="openRemoveDialog(c)" class="btn btn-danger btn-circle btn-sm">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </td>
+          <th mat-footer-cell *matFooterCellDef> Actions </th>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+        <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
+      </table>
+
+      <mat-paginator [length]="commands.totalElementsDatabase"
+                     (page)="onPaginateChange($event)"
+                     [pageIndex]="page"
+                     [pageSize]="elemsPerPage"
+                     [hidePageSize]="true"
+                     aria-label="Pages"
+                     showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+</div>
