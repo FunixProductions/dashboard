@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {
+  FunixbotCommandsCrudService
+} from "../../../../../../services/funix-api/funixbot/funixbot-commands-crud-service";
+import {FunixbotCommandDto} from "../../../../../../dto/funix-api/funixbot/funixbot-command-dto";
 
 @Component({
   selector: 'app-funixbot-commands-edit',
@@ -6,5 +11,25 @@ import { Component } from '@angular/core';
   styleUrls: ['./funixbot-commands-edit.component.css']
 })
 export class FunixbotCommandsEditComponent {
+
+  command: FunixbotCommandDto = new FunixbotCommandDto();
+
+  constructor(public dialogRef: MatDialogRef<FunixbotCommandsEditComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private funixBotCommandsService: FunixbotCommandsCrudService) {
+    this.command = data.command;
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  onYesClick(): void {
+    this.funixBotCommandsService.patch(this.command).subscribe({
+      next: () => {
+        this.dialogRef.close();
+      }
+    })
+  }
 
 }

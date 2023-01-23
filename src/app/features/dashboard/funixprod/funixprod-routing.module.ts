@@ -18,9 +18,7 @@ const routes: Routes = [
       { path: 'users/:id', component: UserEditComponent},
 
       { path: 'funixbot/commands', component: FunixbotCommandsComponent},
-      { path: 'funixbot/commands/:id', component: FunixbotCommandsEditComponent},
       { path: 'funixbot/userexp', component: FunixbotUserExpComponent},
-      { path: 'funixbot/userexp/:id', component: FunixbotUserExpEditComponent},
 
       { path: '', redirectTo: 'users', pathMatch: 'full'},
       { path: '**', redirectTo: 'users' }
