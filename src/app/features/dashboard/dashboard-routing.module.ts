@@ -5,9 +5,23 @@ import {HomeDashboardComponent} from "./home/home-dashboard.component";
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, children: [
-      { path: 'home', component: HomeDashboardComponent},
-      { path: '', redirectTo: 'home', pathMatch: 'full'},
-      { path: '**', redirectTo: 'home' }
+      {
+        path: 'home',
+        component: HomeDashboardComponent
+      },
+      {
+        path: 'funixprod',
+        loadChildren: () => import('./funixprod/funixprod.module').then(m => m.FunixprodModule)
+      },
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      },
+      {
+        path: '**',
+        redirectTo: 'home'
+      }
     ]
   }
 ];
