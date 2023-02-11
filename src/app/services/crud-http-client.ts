@@ -1,10 +1,11 @@
 import {Injectable} from "@angular/core";
 import {ApiDTO} from "../dto/api-dto";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import {PageOption, Paginated} from "../dto/paginated";
 import {QueryBuilder} from "../utils/query.builder";
+import {FunixprodHttpClient} from "./funixprod-http-client";
 
 interface RequestParams {
   elemsPerPage?: number;
@@ -16,21 +17,13 @@ interface RequestParams {
 @Injectable({
   providedIn: 'root'
 })
-export abstract class CrudHttpClient<DTO extends ApiDTO> {
+export abstract class CrudHttpClient<DTO extends ApiDTO> extends FunixprodHttpClient {
 
   domain: string = environment.funixApiUrl;
   path: string = '';
 
-  private readonly headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json'
-  });
-
   protected constructor(protected http: HttpClient) {
-    const bearerToken: string | null = this.getBearer();
-
-    if (bearerToken !== null) {
-      this.headers = this.headers.append('Authorization', 'Bearer ' + this.getBearer());
-    }
+    super();
   }
 
   /**
@@ -62,15 +55,11 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> {
   }
 
   delete(id: string): Observable<any> {
+    const httpParams: HttpParams = new HttpParams().set('id', id);
+
     return this.http.delete(this.domain + this.path, {
-      params: {
-        id
-      },
+      params: httpParams,
       headers: this.headers
     })
-  }
-
-  private getBearer(): string | null {
-    return localStorage.getItem('user-token-requests');
   }
 }

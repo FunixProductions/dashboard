@@ -1,0 +1,37 @@
+<div class="card">
+  <div class="card-header">
+    <h3 mat-dialog-title class="text-primary">{{ creation ? 'Création' : 'Suppression' }} des eventsub streamer twitch.</h3>
+  </div>
+
+  <div mat-dialog-content class="card-body">
+    <form class="user">
+
+      <div class="form-group">
+        <input type="text" [(ngModel)]="streamerUsername"
+               name="streamerUsername"
+               class="form-control form-control-user"
+               placeholder="Pseudo de streamer">
+      </div>
+    </form>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary btn-icon-split" (click)="onNoClick()">
+    <span class="icon text-white-50">
+      <i class="fas fa-arrow-right"></i>
+    </span>
+      <span class="text">
+      Annuler
+    </span>
+    </button>
+
+    <button [disabled]="loading" class="btn btn-{{ creation ? 'success' : 'danger' }} btn-icon-split" (click)="onYesClick()">
+    <span class="icon text-white-50">
+      <i class="fas fa-{{ creation ? 'paper-plane' : 'trash' }}"></i>
+    </span>
+      <span class="text">
+      {{ creation ? 'Créer' : 'Supprimer' }}
+    </span>
+    </button>
+  </div>
+</div>
