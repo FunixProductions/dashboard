@@ -17,6 +17,8 @@ import { FunixbotUserExpEditComponent } from './funixbot/funixbot-user-exp/funix
 import { FunixbotCommandsRemoveModalComponent } from './funixbot/funixbot-commands/funixbot-commands-remove-modal/funixbot-commands-remove-modal.component';
 import { FunixbotUserExpRemoveModalComponent } from './funixbot/funixbot-user-exp/funixbot-user-exp-remove-modal/funixbot-user-exp-remove-modal.component';
 import { FunixbotCommandCreateModalComponent } from './funixbot/funixbot-commands/funixbot-command-create-modal/funixbot-command-create-modal.component';
+import { TwitchEventsubComponent } from './twitch/twitch-eventsub/twitch-eventsub.component';
+import { TwitchEventsubModalComponent } from './twitch/twitch-eventsub-modal/twitch-eventsub-modal.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { FunixbotCommandCreateModalComponent } from './funixbot/funixbot-command
     FunixbotUserExpEditComponent,
     FunixbotCommandsRemoveModalComponent,
     FunixbotUserExpRemoveModalComponent,
-    FunixbotCommandCreateModalComponent
+    FunixbotCommandCreateModalComponent,
+    TwitchEventsubComponent,
+    TwitchEventsubModalComponent
   ],
     imports: [
         CommonModule,

@@ -2,23 +2,40 @@
   FunixAPI
 </div>
 
+<!-- User section -->
 <li class="nav-item">
   <a class="nav-link" href="/dashboard/funixprod/users">
     <i class="fas fa-fw fa-user"></i>
     <span>Utilisateurs</span></a>
 </li>
 
+<!-- FunixBot section -->
 <li class="nav-item">
-  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-     aria-expanded="true" aria-controls="collapseTwo">
+  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#funixbotCollapse"
+     aria-expanded="true" aria-controls="funixbotCollapse">
     <i class="fas fa-fw fa-cog"></i>
     <span>FunixBot</span>
   </a>
-  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+  <div id="funixbotCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
       <h6 class="collapse-header">Entités</h6>
       <a class="collapse-item" href="/dashboard/funixprod/funixbot/commands">Commandes</a>
       <a class="collapse-item" href="/dashboard/funixprod/funixbot/userexp">UserExperience</a>
+    </div>
+  </div>
+</li>
+
+<!-- Twitch section -->
+<li class="nav-item">
+  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#twitchCollapse"
+     aria-expanded="true" aria-controls="twitchCollapse">
+    <i class="fas fa-fw fa-film"></i>
+    <span>Twitch</span>
+  </a>
+  <div id="twitchCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+      <h6 class="collapse-header">Tools</h6>
+      <a class="collapse-item" href="/dashboard/funixprod/twitch/eventsub">Twitch eventsub</a>
     </div>
   </div>
 </li>

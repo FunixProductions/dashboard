@@ -11,6 +11,7 @@ import {FunixbotUserExpComponent} from "./funixbot/funixbot-user-exp/funixbot-us
 import {
   FunixbotUserExpEditComponent
 } from "./funixbot/funixbot-user-exp/funixbot-user-exp-edit/funixbot-user-exp-edit.component";
+import {TwitchEventsubComponent} from "./twitch/twitch-eventsub/twitch-eventsub.component";
 
 const routes: Routes = [
   { path: '', component: FunixprodComponent, children: [
@@ -19,6 +20,8 @@ const routes: Routes = [
 
       { path: 'funixbot/commands', component: FunixbotCommandsComponent},
       { path: 'funixbot/userexp', component: FunixbotUserExpComponent},
+
+      { path: 'twitch/eventsub', component: TwitchEventsubComponent},
 
       { path: '', redirectTo: 'users', pathMatch: 'full'},
       { path: '**', redirectTo: 'users' }
