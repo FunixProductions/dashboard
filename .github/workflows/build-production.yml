@@ -1,0 +1,37 @@
+name: Build production
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build-pterodactyl-image-and-restart-prod:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push funix api pterodactyl dockerfile
+        run: |
+          docker build . --tag ghcr.io/funixproductions/funix-pteroq-dashboard:latest -f pterodactyl.Dockerfile
+          docker push ghcr.io/funixproductions/funix-pteroq-dashboard:latest
+
+      - name: Send start signal to restart funixapi with new version
+        run: |
+          curl "https://pterodactyl.funixgaming.fr/api/client/servers/4eeba516/power?signal=restart" \
+            -X POST \
+            -H 'Accept: application/json' \
+            -H 'Content-Type: application/json' \
+            -H 'Authorization: Bearer ${{ secrets.PTERODACTYL_API_KEY }}'
