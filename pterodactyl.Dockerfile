@@ -24,8 +24,8 @@ ENV USER container
 ENV HOME /home/container
 WORKDIR /home/container
 
-COPY ./nginx /home/container/
-COPY --from=BUILD /container/build-dashboard/dist/dashboard /home/container/webroot
+COPY ./nginx /tmp/nginx/
+COPY --from=BUILD /container/build-dashboard/dist/dashboard /tmp/nginx/webroot
 
 COPY ./entrypoint.sh /entrypoint.sh
 
