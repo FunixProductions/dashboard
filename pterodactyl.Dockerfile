@@ -19,14 +19,13 @@ EXPOSE 9855
 
 RUN apk --update --no-cache add nginx
 
-COPY ./nginx /home/container/
-
-COPY --from=BUILD /container/build-dashboard/dist/dashboard /home/container/webroot
-
 USER container
 ENV USER container
 ENV HOME /home/container
 WORKDIR /home/container
+
+COPY ./nginx /home/container/
+COPY --from=BUILD /container/build-dashboard/dist/dashboard /home/container/webroot
 
 COPY ./entrypoint.sh /entrypoint.sh
 
