@@ -1,8 +1,8 @@
 name: Build production
 
 on:
-  release:
-    types: [created]
+  push:
+    branches: [ master ]:
 
 jobs:
   build-pterodactyl-image-and-restart-prod:
