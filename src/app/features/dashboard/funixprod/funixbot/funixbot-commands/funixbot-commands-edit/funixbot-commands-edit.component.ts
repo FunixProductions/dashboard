@@ -2,8 +2,8 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {
   FunixbotCommandsCrudService
-} from "../../../../../../services/funix-api/funixbot/funixbot-commands-crud-service";
-import {FunixbotCommandDto} from "../../../../../../dto/funix-api/funixbot/funixbot-command-dto";
+} from "../../../../../../services/funix-api/funixbot/services/funixbot-commands-crud-service";
+import {FunixbotCommandDto} from "../../../../../../services/funix-api/funixbot/dtos/funixbot-command-dto";
 
 @Component({
   selector: 'app-funixbot-commands-edit',

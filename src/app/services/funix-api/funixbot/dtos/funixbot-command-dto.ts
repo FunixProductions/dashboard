@@ -1,4 +1,4 @@
-import {ApiDTO} from "../../api-dto";
+import {ApiDTO} from "../../../core/dtos/api-dto";
 
 export class FunixbotCommandDto extends ApiDTO {
   command: string = '';

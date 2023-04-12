@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {UserDTO, UserRole} from "../../../../../dto/funix-api/user/user-dto";
+import {UserDTO, UserRole} from "../../../../../services/funix-api/user/dtos/user-dto";
 import {ActivatedRoute} from "@angular/router";
-import {UserCrudService} from "../../../../../services/funix-api/user/user-crud-service";
+import {UserCrudService} from "../../../../../services/funix-api/user/services/user-crud-service";
 
 @Component({
   selector: 'app-user-edit',

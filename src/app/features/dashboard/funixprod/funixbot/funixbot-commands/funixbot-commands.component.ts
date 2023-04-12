@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {PageOption, Paginated} from "../../../../../dto/paginated";
-import {FunixbotCommandDto} from "../../../../../dto/funix-api/funixbot/funixbot-command-dto";
+import {PageOption, Paginated} from "../../../../../services/core/dtos/paginated";
+import {FunixbotCommandDto} from "../../../../../services/funix-api/funixbot/dtos/funixbot-command-dto";
 import {QueryBuilder, QueryParam} from "../../../../../utils/query.builder";
-import {FunixbotCommandsCrudService} from "../../../../../services/funix-api/funixbot/funixbot-commands-crud-service";
+import {FunixbotCommandsCrudService} from "../../../../../services/funix-api/funixbot/services/funixbot-commands-crud-service";
 import {MatDialog} from "@angular/material/dialog";
 import {PageEvent} from "@angular/material/paginator";
 import {FunixbotCommandsEditComponent} from "./funixbot-commands-edit/funixbot-commands-edit.component";

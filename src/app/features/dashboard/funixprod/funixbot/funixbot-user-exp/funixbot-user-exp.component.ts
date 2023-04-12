@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {PageOption, Paginated} from "../../../../../dto/paginated";
-import {FunixbotUserExpDto} from "../../../../../dto/funix-api/funixbot/funixbot-user-exp-dto";
-import {FunixbotUserExpCrudService} from "../../../../../services/funix-api/funixbot/funixbot-user-exp-crud-service";
+import {PageOption, Paginated} from "../../../../../services/core/dtos/paginated";
+import {FunixbotUserExpDto} from "../../../../../services/funix-api/funixbot/dtos/funixbot-user-exp-dto";
+import {FunixbotUserExpCrudService} from "../../../../../services/funix-api/funixbot/services/funixbot-user-exp-crud-service";
 import {Observable} from "rxjs";
 import {QueryBuilder} from "../../../../../utils/query.builder";
 import {PageEvent} from "@angular/material/paginator";

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {UserDTO} from "../../../../dto/funix-api/user/user-dto";
-import {PageOption, Paginated} from "../../../../dto/paginated";
-import {UserCrudService} from "../../../../services/funix-api/user/user-crud-service";
+import {UserDTO} from "../../../../services/funix-api/user/dtos/user-dto";
+import {PageOption, Paginated} from "../../../../services/core/dtos/paginated";
+import {UserCrudService} from "../../../../services/funix-api/user/services/user-crud-service";
 import {Observable} from "rxjs";
 import {QueryBuilder, QueryParam} from "../../../../utils/query.builder";
 import {Router} from "@angular/router";

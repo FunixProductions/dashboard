@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
-import {CrudHttpClient} from "../../crud-http-client";
-import {UserDTO} from "../../../dto/funix-api/user/user-dto";
+import {CrudHttpClient} from "../../../crud-http-client";
+import {UserDTO} from "../dtos/user-dto";
 
 @Injectable({
   providedIn: 'root'

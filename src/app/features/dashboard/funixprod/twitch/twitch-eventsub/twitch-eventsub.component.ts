@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import {
   Condition,
   TwitchEventSubListDTO
-} from "../../../../../dto/funix-api/external_api/twitch/eventsub/TwitchEventSubListDTO";
-import {TwitchEventsubService} from "../../../../../services/funix-api/external_api/twitch/twitch-eventsub-service";
+} from "../../../../../services/funix-api/external_api/twitch/dtos/TwitchEventSubListDTO";
+import {TwitchEventsubService} from "../../../../../services/funix-api/external_api/twitch/services/twitch-eventsub-service";
 import {MatDialog} from "@angular/material/dialog";
 import {TwitchEventsubModalComponent} from "../twitch-eventsub-modal/twitch-eventsub-modal.component";
 

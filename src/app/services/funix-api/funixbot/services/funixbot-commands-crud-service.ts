@@ -1,5 +1,5 @@
-import {CrudHttpClient} from "../../crud-http-client";
-import {FunixbotCommandDto} from "../../../dto/funix-api/funixbot/funixbot-command-dto";
+import {CrudHttpClient} from "../../../crud-http-client";
+import {FunixbotCommandDto} from "../dtos/funixbot-command-dto";
 import {Injectable} from "@angular/core";
 
 @Injectable({

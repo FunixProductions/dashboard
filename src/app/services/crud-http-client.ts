@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
-import {ApiDTO} from "../dto/api-dto";
+import {ApiDTO} from "./core/dtos/api-dto";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
-import {PageOption, Paginated} from "../dto/paginated";
+import {PageOption, Paginated} from "./core/dtos/paginated";
 import {QueryBuilder} from "../utils/query.builder";
 import {FunixprodHttpClient} from "./funixprod-http-client";
 

@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {TwitchEventsubService} from "../../../../../services/funix-api/external_api/twitch/twitch-eventsub-service";
+import {TwitchEventsubService} from "../../../../../services/funix-api/external_api/twitch/services/twitch-eventsub-service";
 
 @Component({
   selector: 'app-twitch-eventsub-modal',

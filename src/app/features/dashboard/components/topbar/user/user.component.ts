@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UserDTO} from "../../../../../dto/funix-api/user/user-dto";
-import {UserAuthService} from "../../../../../services/funix-api/user/user-auth-service";
+import {UserDTO} from "../../../../../services/funix-api/user/dtos/user-dto";
+import {UserAuthService} from "../../../../../services/funix-api/user/services/user-auth-service";
 
 @Component({
   selector: 'app-user',

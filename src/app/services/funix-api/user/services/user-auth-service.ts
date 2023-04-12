@@ -1,12 +1,12 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {UserCreationDTO} from "../../../dto/funix-api/user/requests/user-creation-dto";
-import {UserDTO} from "../../../dto/funix-api/user/user-dto";
-import {environment} from "../../../../environments/environment";
-import {UserLoginDTO} from "../../../dto/funix-api/user/requests/user-login-dto";
-import {UserTokenDTO} from "../../../dto/funix-api/user/user-token-dto";
-import {FunixprodHttpClient} from "../../funixprod-http-client";
+import {UserCreationDTO} from "../dtos/requests/user-creation-dto";
+import {UserDTO} from "../dtos/user-dto";
+import {environment} from "../../../../../environments/environment";
+import {UserLoginDTO} from "../dtos/requests/user-login-dto";
+import {UserTokenDTO} from "../dtos/user-token-dto";
+import {FunixprodHttpClient} from "../../../funixprod-http-client";
 
 @Injectable({
   providedIn: 'root'

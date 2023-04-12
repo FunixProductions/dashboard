@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {UserAuthService} from "../../../services/funix-api/user/user-auth-service";
-import {UserCreationDTO} from "../../../dto/funix-api/user/requests/user-creation-dto";
-import {UserDTO} from "../../../dto/funix-api/user/user-dto";
+import {UserAuthService} from "../../../services/funix-api/user/services/user-auth-service";
+import {UserCreationDTO} from "../../../services/funix-api/user/dtos/requests/user-creation-dto";
+import {UserDTO} from "../../../services/funix-api/user/dtos/user-dto";
 import {Router} from "@angular/router";
 import {ReCaptchaV3Service} from "ng-recaptcha";
 
