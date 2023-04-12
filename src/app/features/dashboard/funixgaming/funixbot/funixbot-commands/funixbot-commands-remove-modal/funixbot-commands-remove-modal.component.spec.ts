@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FunixbotCommandsRemoveModalComponent } from './funixbot-commands-remove-modal.component';
+import {FunixbotCommandsRemoveModalComponent} from './funixbot-commands-remove-modal.component';
 
 describe('FunixbotCommandsRemoveModalComponent', () => {
   let component: FunixbotCommandsRemoveModalComponent;

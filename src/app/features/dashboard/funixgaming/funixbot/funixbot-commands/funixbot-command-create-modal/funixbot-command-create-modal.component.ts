@@ -1,6 +1,6 @@
-import {Component, Inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {FunixbotCommandDto} from "../../../../../../services/funix-api/funixbot/dtos/funixbot-command-dto";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MatDialogRef} from "@angular/material/dialog";
 import {
   FunixbotCommandsCrudService
 } from "../../../../../../services/funix-api/funixbot/services/funixbot-commands-crud-service";

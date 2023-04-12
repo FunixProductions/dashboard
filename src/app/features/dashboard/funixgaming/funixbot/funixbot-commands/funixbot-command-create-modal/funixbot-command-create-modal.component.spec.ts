@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FunixbotCommandCreateModalComponent } from './funixbot-command-create-modal.component';
+import {FunixbotCommandCreateModalComponent} from './funixbot-command-create-modal.component';
 
 describe('FunixCommandCreateModalComponent', () => {
   let component: FunixbotCommandCreateModalComponent;

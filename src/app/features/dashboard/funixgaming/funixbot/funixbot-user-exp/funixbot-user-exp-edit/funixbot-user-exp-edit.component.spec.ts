@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FunixbotUserExpEditComponent } from './funixbot-user-exp-edit.component';
+import {FunixbotUserExpEditComponent} from './funixbot-user-exp-edit.component';
 
 describe('FunixbotUserExpEditComponent', () => {
   let component: FunixbotUserExpEditComponent;
