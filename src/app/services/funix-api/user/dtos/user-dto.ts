@@ -1,4 +1,4 @@
-import {ApiDTO} from "../../../core/dtos/api-dto";
+import ApiDTO from "../../../core/dtos/api-dto";
 
 export enum UserRole {
   USER = "USER",

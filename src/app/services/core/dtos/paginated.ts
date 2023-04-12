@@ -1,4 +1,4 @@
-import {ApiDTO} from "./api-dto";
+import ApiDTO from "./api-dto";
 
 export class Paginated<T extends ApiDTO> {
   content: T[] = [];

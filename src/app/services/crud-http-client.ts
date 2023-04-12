@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {ApiDTO} from "./core/dtos/api-dto";
+import ApiDTO from "./core/dtos/api-dto";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";

@@ -14,6 +14,10 @@ const routes: Routes = [
         loadChildren: () => import('./funixprod/funixprod.module').then(m => m.FunixprodModule)
       },
       {
+        path: 'pacifista',
+        loadChildren: () => import('./pacifista/pacifista.module').then(m => m.PacifistaModule)
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
@@ -23,7 +27,7 @@ const routes: Routes = [
         redirectTo: 'home'
       }
     ]
-  }
+  },
 ];
 
 @NgModule({
