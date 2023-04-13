@@ -1,0 +1,59 @@
+<h1 class="h3 mb-4 text-gray-800">{{ news.id ? 'Modification' : 'Création' }} d'une news</h1>
+
+<div class="container">
+  <form class="user">
+
+    <div class="form-group">
+      <label for="newsNameInput">Nom de la news</label>
+      <input type="text" [(ngModel)]="news.name"
+             name="name"
+             id="newsNameInput"
+             class="form-control form-control-user"
+             placeholder="Nom">
+    </div>
+
+    <div class="form-group">
+      <label for="titleNewsInput">Titre de la news</label>
+      <input type="text" [(ngModel)]="news.title"
+             name="title"
+             id="titleNewsInput"
+             class="form-control form-control-user"
+             placeholder="Titre">
+    </div>
+
+    <div class="form-group">
+      <label for="subTitleNewsInput">Sous-Titre de la news</label>
+      <input type="text" [(ngModel)]="news.subtitle"
+             name="title"
+             id="subTitleNewsInput"
+             class="form-control form-control-user"
+             placeholder="Sous-Titre">
+    </div>
+
+    <div class="form-group">
+      <label for="articleNewsUrlInput">URL de l'image de la news</label>
+      <input type="text" [(ngModel)]="news.articleImageUrl"
+             name="title"
+             id="articleNewsUrlInput"
+             class="form-control form-control-user"
+             placeholder="Url d'image">
+    </div>
+
+    <div class="form-group">
+      <label>Corps de la news</label>
+      <editor [init]="{
+                      base_url: '/tinymce',
+                      suffix: '.min'
+                      }"
+              name="body"
+              [(ngModel)]="news.body"></editor>
+    </div>
+
+    <button (click)="saveEntity()"
+            [disabled]="!(news.name && news.title && news.subtitle &&
+            news.articleImageUrl && news.body)"
+            class="btn btn-primary btn-user btn-block">
+      {{ news.id ? 'Modifier' : 'Créer' }} l'article
+    </button>
+  </form>
+</div>
