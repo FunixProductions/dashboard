@@ -8,7 +8,7 @@ RUN npm install -g @angular/cli
 
 COPY . .
 
-RUN npm install
+RUN npm ci
 RUN ng build
 
 FROM alpine as NGINX

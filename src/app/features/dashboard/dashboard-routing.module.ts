@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "./dashboard.component";
 import {HomeDashboardComponent} from "./home/home-dashboard.component";
@@ -14,6 +14,14 @@ const routes: Routes = [
         loadChildren: () => import('./funixprod/funixprod.module').then(m => m.FunixprodModule)
       },
       {
+        path: 'pacifista',
+        loadChildren: () => import('./pacifista/pacifista.module').then(m => m.PacifistaModule)
+      },
+      {
+        path: 'funixgaming',
+        loadChildren: () => import('./funixgaming/funixgaming.module').then(m => m.FunixgamingModule)
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
@@ -23,7 +31,7 @@ const routes: Routes = [
         redirectTo: 'home'
       }
     ]
-  }
+  },
 ];
 
 @NgModule({

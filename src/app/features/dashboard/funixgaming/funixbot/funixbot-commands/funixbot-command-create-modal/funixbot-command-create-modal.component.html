@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-header">
+    <h3 mat-dialog-title class="text-primary">Création de commande.</h3>
+  </div>
+
+  <div mat-dialog-content class="card-body">
+    <form class="user">
+
+      <div class="form-group">
+        <label for="commandNameInput">Commande</label>
+        <input type="text" id="commandNameInput" [(ngModel)]="command.command"
+               name="command"
+               class="form-control form-control-user"
+               placeholder="Commande">
+      </div>
+
+      <div class="form-group">
+        <label for="commandMessageInput">Message</label>
+        <textarea type="text" id="commandMessageInput" [(ngModel)]="command.message"
+                  name="message" class="form-control" placeholder="Message de la commande"></textarea>
+      </div>
+    </form>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary btn-icon-split" (click)="onNoClick()">
+    <span class="icon text-white-50">
+      <i class="fas fa-arrow-right"></i>
+    </span>
+      <span class="text">
+      Annuler
+    </span>
+    </button>
+
+    <button class="btn btn-success btn-icon-split" (click)="onYesClick()">
+    <span class="icon text-white-50">
+      <i class="fas fa-paper-plane"></i>
+    </span>
+      <span class="text">
+      Créer
+    </span>
+    </button>
+  </div>
+</div>
