@@ -12,10 +12,9 @@ import {CategoryEditModalComponent} from './categories/category-edit-modal/categ
 import {CategoryRemoveModalComponent} from './categories/category-remove-modal/category-remove-modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {FormsModule} from "@angular/forms";
-import {ArticleCreationModalComponent} from './articles/article-creation-modal/article-creation-modal.component';
-import {ArticleEditModalComponent} from './articles/article-edit-modal/article-edit-modal.component';
 import {ArticleRemoveModalComponent} from './articles/article-remove-modal/article-remove-modal.component';
-
+import {ArticleGestionComponent} from './articles/article-gestion/article-gestion.component';
+import {EditorModule, TINYMCE_SCRIPT_SRC} from "@tinymce/tinymce-angular";
 
 @NgModule({
   declarations: [
@@ -25,9 +24,8 @@ import {ArticleRemoveModalComponent} from './articles/article-remove-modal/artic
     CategoryCreationModalComponent,
     CategoryEditModalComponent,
     CategoryRemoveModalComponent,
-    ArticleCreationModalComponent,
-    ArticleEditModalComponent,
-    ArticleRemoveModalComponent
+    ArticleRemoveModalComponent,
+    ArticleGestionComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +33,11 @@ import {ArticleRemoveModalComponent} from './articles/article-remove-modal/artic
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    EditorModule
+  ],
+  providers: [
+    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
   ]
 })
 export class ShopModule { }

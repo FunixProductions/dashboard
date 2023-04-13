@@ -7,17 +7,17 @@
     <form class="user">
 
       <div class="form-group">
-        <input type="text" [(ngModel)]="command.command"
+        <label for="commandNameInput">Commande</label>
+        <input type="text" id="commandNameInput" [(ngModel)]="command.command"
                name="command"
                class="form-control form-control-user"
                placeholder="Commande">
       </div>
 
       <div class="form-group">
-        <input type="text" [(ngModel)]="command.message"
-               name="message"
-               class="form-control form-control-user"
-               placeholder="Message de la commande">
+        <label for="commandMessageInput">Message</label>
+        <textarea type="text" id="commandMessageInput" [(ngModel)]="command.message"
+                  name="message" class="form-control" placeholder="Message de la commande"></textarea>
       </div>
     </form>
 

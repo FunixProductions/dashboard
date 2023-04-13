@@ -9,8 +9,6 @@ import PacifistaShopArticleDTO
   from "../../../../../services/pacifista-api/web/shop/articles/dtos/PacifistaShopArticleDTO";
 import PacifistaShopArticleService
   from "../../../../../services/pacifista-api/web/shop/articles/services/PacifistaShopArticleService";
-import {ArticleEditModalComponent} from "./article-edit-modal/article-edit-modal.component";
-import {ArticleCreationModalComponent} from "./article-creation-modal/article-creation-modal.component";
 import {ArticleRemoveModalComponent} from "./article-remove-modal/article-remove-modal.component";
 
 @Component({
@@ -39,26 +37,6 @@ export class ArticlesComponent implements OnInit {
     this.updateList();
   }
 
-  openEditDialog(article: PacifistaShopArticleDTO): void {
-    const dialogRef = this.dialog.open(ArticleEditModalComponent, {
-      data: {
-        article: article
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      this.updateList();
-    });
-  }
-
-  openCreationModal(): void {
-    const dialogRef = this.dialog.open(ArticleCreationModalComponent);
-
-    dialogRef.afterClosed().subscribe(() => {
-      this.updateList();
-    });
-  }
-
   openRemoveDialog(article: PacifistaShopCategoryDTO): void {
     const dialogRef = this.dialog.open(ArticleRemoveModalComponent, {
       data: {
@@ -72,10 +50,8 @@ export class ArticlesComponent implements OnInit {
   }
 
   onSearchChange(champ: string, data: string): void {
-    if (champ === 'name') {
-      this.searchQuery.value = data;
-    }
-
+    this.searchQuery.key = champ;
+    this.searchQuery.value = data;
     this.updateList();
   }
 

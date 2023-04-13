@@ -1,0 +1,77 @@
+<h1 class="h3 mb-4 text-gray-800">{{ article.id ? 'Modification' : 'Création' }} d'un article</h1>
+
+<div class="container">
+  <form class="user">
+
+    <div class="form-group">
+      <label for="articleNameInput">Nom de l'article</label>
+      <input type="text" [(ngModel)]="article.name"
+             name="name"
+             id="articleNameInput"
+             class="form-control form-control-user"
+             placeholder="Nom de l'article">
+    </div>
+
+    <div class="form-group">
+      <label for="articleCategoryInput">Catégorie de l'article</label>
+      <input type="text"
+             [(ngModel)]="categorySearch"
+             (keyup)="searchCategory()"
+             name="categorySearch"
+             id="articleCategoryInput"
+             class="form-control form-control-user"
+             placeholder="Rechercher une catégorie...">
+      <ul>
+        <li *ngFor="let result of categoriesSearchResult"
+            (click)="selectCategory(result)">{{result.name}}</li>
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <label for="articleDescriptionInput">Description de l'article</label>
+      <textarea type="text" [(ngModel)]="article.description"
+                name="description"
+                id="articleDescriptionInput"
+                class="form-control"
+                placeholder="Description de l'article"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="articleImageInput">Image de l'article (url)</label>
+      <input type="text" [(ngModel)]="article.logoUrl"
+             name="logoUrl"
+             id="articleImageInput"
+             class="form-control form-control-user"
+             placeholder="Url de l'image">
+    </div>
+
+    <div class="form-group">
+      <label for="articlePriceInput">Prix de l'article en €</label>
+      <input type="number" min="0.01" step="any"
+             [(ngModel)]="article.price"
+             name="price"
+             id="articlePriceInput"
+             class="form-control form-control-user"
+             placeholder="Prix de l'article en €">
+    </div>
+
+    <div class="form-group">
+      <label>Corps de l'article</label>
+      <editor [init]="{
+                      base_url: '/tinymce',
+                      suffix: '.min'
+                      }"
+              name="htmlDescription"
+              [(ngModel)]="article.htmlDescription"></editor>
+    </div>
+
+    <button (click)="saveEntity()"
+            [disabled]="!(article.category && article.category.id &&
+            article.name && article.description &&
+            article.htmlDescription && article.logoUrl &&
+            article.price)"
+            class="btn btn-primary btn-user btn-block">
+      {{ article.id ? 'Modifier' : 'Créer' }} l'article
+    </button>
+  </form>
+</div>
