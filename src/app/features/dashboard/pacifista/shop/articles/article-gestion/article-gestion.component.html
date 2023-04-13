@@ -21,10 +21,11 @@
              id="articleCategoryInput"
              class="form-control form-control-user"
              placeholder="Rechercher une catégorie...">
-      <ul>
-        <li *ngFor="let result of categoriesSearchResult"
-            (click)="selectCategory(result)">{{result.name}}</li>
-      </ul>
+      <div class="input-group-append">
+        <select class="form-control search-dropdown" *ngIf="categoriesSearchResult.length > 0">
+          <option *ngFor="let result of categoriesSearchResult" (click)="selectCategory(result)">{{result.name}}</option>
+        </select>
+      </div>
     </div>
 
     <div class="form-group">

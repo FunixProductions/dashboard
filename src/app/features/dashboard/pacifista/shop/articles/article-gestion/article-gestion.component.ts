@@ -44,6 +44,8 @@ export class ArticleGestionComponent implements AfterViewInit {
         });
       }
     });
+
+    this.searchCategory();
   }
 
   saveEntity(): void {
@@ -60,6 +62,7 @@ export class ArticleGestionComponent implements AfterViewInit {
 
     queryParam.key = 'name';
     queryParam.value = this.categorySearch;
+    queryParam.type = QueryBuilder.like;
     queryBuilder.addParam(queryParam);
 
     this.categoryService.find(this.pageOption, queryBuilder).subscribe({
