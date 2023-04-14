@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserDTO, UserRole} from "../../../../../services/funix-api/user/dtos/user-dto";
 import {ActivatedRoute} from "@angular/router";
 import {UserCrudService} from "../../../../../services/funix-api/user/services/user-crud-service";
+import NotificationsService from "../../../../../services/core/services/NotificationsService";
 
 @Component({
   selector: 'app-user-edit',
@@ -14,7 +15,8 @@ export class UserEditComponent implements OnInit {
   roles: string[] = []
 
   constructor(private route: ActivatedRoute,
-              private userService: UserCrudService) {
+              private userService: UserCrudService,
+              private notificationService: NotificationsService) {
     for (const role in UserRole) {
       this.roles.push(role);
     }
@@ -25,13 +27,24 @@ export class UserEditComponent implements OnInit {
       this.userService.getById(params['id']).subscribe({
         next: (user: UserDTO) => {
           this.userToEdit = user;
+        },
+        error: err => {
+          this.notificationService.onErrorRequest(err);
         }
       })
     })
   }
 
   saveUserEdit(): void {
-    this.userService.patch(this.userToEdit).subscribe();
+    this.userService.patch(this.userToEdit).subscribe({
+      next: (user: UserDTO) => {
+        this.userToEdit = user;
+        this.notificationService.success('Utilisateur ' + user.username + ' mis à jour.');
+      },
+      error: err => {
+        this.notificationService.onErrorRequest(err);
+      }
+    });
   }
 
 }

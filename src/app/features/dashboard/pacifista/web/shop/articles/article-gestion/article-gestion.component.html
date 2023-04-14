@@ -21,10 +21,13 @@
              id="articleCategoryInput"
              class="form-control form-control-user"
              placeholder="Rechercher une catégorie...">
-      <div class="input-group-append">
-        <select class="form-control search-dropdown" *ngIf="categoriesSearchResult.length > 0">
-          <option *ngFor="let result of categoriesSearchResult" (click)="selectCategory(result)">{{result.name}}</option>
-        </select>
+
+      <div *ngIf="categoriesSearchResult.length > 0">
+        <button *ngFor="let result of categoriesSearchResult"
+                (click)="selectCategory(result)"
+                class="m-2 btn {{ article.category && article.category.name && article.category.name === result.name ? 'btn-success' : 'btn-info' }}">
+          {{result.name}}
+        </button>
       </div>
     </div>
 

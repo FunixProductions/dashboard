@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {UserAuthService} from "../../../services/funix-api/user/services/user-auth-service";
 import {UserCreationDTO} from "../../../services/funix-api/user/dtos/requests/user-creation-dto";
-import {UserDTO} from "../../../services/funix-api/user/dtos/user-dto";
 import {Router} from "@angular/router";
 import {ReCaptchaV3Service} from "ng-recaptcha";
+import NotificationsService from "../../../services/core/services/NotificationsService";
 
 @Component({
   selector: 'app-register',
@@ -21,7 +21,8 @@ export class RegisterComponent {
 
   constructor(private userAuthService: UserAuthService,
               private reCaptchaService: ReCaptchaV3Service,
-              private router: Router) {
+              private router: Router,
+              private notificationService: NotificationsService) {
   }
 
   register(): void {
@@ -37,11 +38,11 @@ export class RegisterComponent {
       userCreationRequest.googleCaptcha = token;
 
       this.userAuthService.register(userCreationRequest).subscribe({
-          next: (userDto : UserDTO) => {
+          next: () => {
             this.router.navigate(['login']);
           },
           error: err => {
-            //TODO popup error
+            this.notificationService.onErrorRequest(err);
           }
         }
       )

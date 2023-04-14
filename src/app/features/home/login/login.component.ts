@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {UserLoginDTO} from "../../../services/funix-api/user/dtos/requests/user-login-dto";
 import {UserAuthService} from "../../../services/funix-api/user/services/user-auth-service";
 import {Router} from "@angular/router";
 import {UserTokenDTO} from "../../../services/funix-api/user/dtos/user-token-dto";
 import {ReCaptchaV3Service} from "ng-recaptcha";
+import NotificationsService from "../../../services/core/services/NotificationsService";
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent {
 
   constructor(private userAuthService: UserAuthService,
               private reCaptchaService: ReCaptchaV3Service,
-              private router: Router) {
+              private router: Router,
+              private notificationService: NotificationsService) {
   }
 
   login(): void {
@@ -36,11 +38,11 @@ export class LoginComponent {
             localStorage.setItem('user-token-requests', loginDto.token);
             this.router.navigate(['dashboard'])
           } else {
-            //TODO popup error
+            this.notificationService.error('Veuillez vous reconnecter, une erreur est survenue.');
           }
         },
         error: err => {
-          //TODO popup error
+          this.notificationService.onErrorRequest(err);
         }
       });
     });

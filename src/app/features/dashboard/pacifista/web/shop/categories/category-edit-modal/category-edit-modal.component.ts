@@ -4,6 +4,7 @@ import PacifistaShopCategoryDTO
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import PacifistaShopCategoryService
   from "../../../../../../../services/pacifista-api/web/shop/categories/services/PacifistaShopCategoryService";
+import NotificationsService from "../../../../../../../services/core/services/NotificationsService";
 
 @Component({
   selector: 'app-category-edit-modal',
@@ -16,7 +17,8 @@ export class CategoryEditModalComponent {
 
   constructor(public dialogRef: MatDialogRef<CategoryEditModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private categoryService: PacifistaShopCategoryService) {
+              private categoryService: PacifistaShopCategoryService,
+              private notificationService: NotificationsService) {
     this.category = data.category;
   }
 
@@ -28,6 +30,10 @@ export class CategoryEditModalComponent {
     this.categoryService.patch(this.category).subscribe({
       next: () => {
         this.dialogRef.close();
+        this.notificationService.success('Catégorie mise à jour.');
+      },
+      error: err => {
+        this.notificationService.onErrorRequest(err);
       }
     })
   }
