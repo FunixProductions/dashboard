@@ -4,6 +4,7 @@ import PacifistaShopArticleDTO
   from "../../../../../../../services/pacifista-api/web/shop/articles/dtos/PacifistaShopArticleDTO";
 import PacifistaShopArticleService
   from "../../../../../../../services/pacifista-api/web/shop/articles/services/PacifistaShopArticleService";
+import NotificationsService from "../../../../../../../services/core/services/NotificationsService";
 
 @Component({
   selector: 'app-article-remove-modal',
@@ -16,7 +17,8 @@ export class ArticleRemoveModalComponent {
 
   constructor(public dialogRef: MatDialogRef<ArticleRemoveModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private articleService: PacifistaShopArticleService) {
+              private articleService: PacifistaShopArticleService,
+              private notificationService: NotificationsService) {
     this.article = data.article;
   }
 
@@ -29,6 +31,9 @@ export class ArticleRemoveModalComponent {
       this.articleService.delete(this.article.id).subscribe({
         next: () => {
           this.dialogRef.close();
+        },
+        error: err => {
+          this.notificationService.onErrorRequest(err);
         }
       });
     }

@@ -1,6 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {TwitchEventsubService} from "../../../../../services/funix-api/external_api/twitch/services/twitch-eventsub-service";
+import {
+  TwitchEventsubService
+} from "../../../../../services/funix-api/external_api/twitch/services/twitch-eventsub-service";
+import NotificationsService from "../../../../../services/core/services/NotificationsService";
 
 @Component({
   selector: 'app-twitch-eventsub-modal',
@@ -15,7 +18,8 @@ export class TwitchEventsubModalComponent {
 
   constructor(private dialogRef: MatDialogRef<TwitchEventsubModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private eventSubService: TwitchEventsubService) {
+              private eventSubService: TwitchEventsubService,
+              private notificationService: NotificationsService) {
     this.creation = data.creation;
   }
 
@@ -27,8 +31,10 @@ export class TwitchEventsubModalComponent {
         next: () => {
           this.loading = false;
           this.dialogRef.close();
+          this.notificationService.success('Notifications crées !');
         },
         error: err => {
+          this.notificationService.onErrorRequest(err);
           this.loading = false;
         }
       });
@@ -37,8 +43,10 @@ export class TwitchEventsubModalComponent {
         next: () => {
           this.loading = false;
           this.dialogRef.close();
+          this.notificationService.success('Notifications supprimées !');
         },
         error: err => {
+          this.notificationService.onErrorRequest(err);
           this.loading = false;
         }
       });

@@ -10,6 +10,7 @@ import PacifistaShopCategoryDTO
   from "../../../../../../../services/pacifista-api/web/shop/categories/dtos/PacifistaShopCategoryDTO";
 import {PageOption, Paginated} from "../../../../../../../services/core/dtos/paginated";
 import {QueryBuilder, QueryParam} from "../../../../../../../utils/query.builder";
+import NotificationsService from "../../../../../../../services/core/services/NotificationsService";
 
 @Component({
   selector: 'app-article-gestion',
@@ -27,7 +28,8 @@ export class ArticleGestionComponent implements AfterViewInit {
 
   constructor(private route: ActivatedRoute,
               private articleService: PacifistaShopArticleService,
-              private categoryService: PacifistaShopCategoryService) {
+              private categoryService: PacifistaShopCategoryService,
+              private notificationService: NotificationsService) {
     this.pageOption.elemsPerPage = 5;
     this.pageOption.page = 0;
   }
@@ -50,9 +52,25 @@ export class ArticleGestionComponent implements AfterViewInit {
 
   saveEntity(): void {
     if (this.article.id) {
-      this.articleService.patch(this.article).subscribe();
+      this.articleService.patch(this.article).subscribe({
+        next: (article: PacifistaShopArticleDTO) => {
+          this.article = article;
+          this.notificationService.success('Article mis à jour.');
+        },
+        error: err => {
+          this.notificationService.onErrorRequest(err);
+        }
+      });
     } else {
-      this.articleService.create(this.article).subscribe();
+      this.articleService.create(this.article).subscribe({
+        next: (article: PacifistaShopArticleDTO) => {
+          this.article = article;
+          this.notificationService.success('Article crée.');
+        },
+        error: err => {
+          this.notificationService.onErrorRequest(err);
+        }
+      });
     }
   }
 
@@ -68,14 +86,15 @@ export class ArticleGestionComponent implements AfterViewInit {
     this.categoryService.find(this.pageOption, queryBuilder).subscribe({
       next: (categories: Paginated<PacifistaShopCategoryDTO>) => {
         this.categoriesSearchResult = categories.content;
+      },
+      error: err => {
+        this.notificationService.onErrorRequest(err);
       }
     });
   }
 
   selectCategory(category: PacifistaShopCategoryDTO): void {
     this.article.category = category;
-    this.categorySearch = '';
-    this.categoriesSearchResult = [];
   }
 
 }

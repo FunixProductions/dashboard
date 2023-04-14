@@ -4,6 +4,7 @@ import PacifistaShopCategoryService
   from "../../../../../../../services/pacifista-api/web/shop/categories/services/PacifistaShopCategoryService";
 import PacifistaShopCategoryDTO
   from "../../../../../../../services/pacifista-api/web/shop/categories/dtos/PacifistaShopCategoryDTO";
+import NotificationsService from "../../../../../../../services/core/services/NotificationsService";
 
 @Component({
   selector: 'app-category-remove-modal',
@@ -16,7 +17,8 @@ export class CategoryRemoveModalComponent {
 
   constructor(public dialogRef: MatDialogRef<CategoryRemoveModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private categoryService: PacifistaShopCategoryService) {
+              private categoryService: PacifistaShopCategoryService,
+              private notificationService: NotificationsService) {
     this.category = data.category;
   }
 
@@ -29,6 +31,10 @@ export class CategoryRemoveModalComponent {
       this.categoryService.delete(this.category.id).subscribe({
         next: () => {
           this.dialogRef.close();
+          this.notificationService.success('Vous avz supprimé une catégorie');
+        },
+        error: err => {
+          this.notificationService.onErrorRequest(err);
         }
       });
     }
