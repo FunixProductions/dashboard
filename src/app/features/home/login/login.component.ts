@@ -30,9 +30,7 @@ export class LoginComponent {
     loginRequest.stayConnected = this.stayLogin;
 
     this.reCaptchaService.execute('login').subscribe((token: string) => {
-      loginRequest.googleCaptcha = token;
-
-      this.userAuthService.login(loginRequest).subscribe({
+      this.userAuthService.login(loginRequest, token).subscribe({
         next: (loginDto: UserTokenDTO) => {
           if (loginDto.token) {
             localStorage.setItem('user-token-requests', loginDto.token);

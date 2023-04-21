@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {ServiceWorkerModule} from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,11 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: true,
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   exports: [
     MatSnackBarModule
