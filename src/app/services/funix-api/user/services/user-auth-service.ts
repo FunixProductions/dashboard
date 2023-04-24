@@ -34,7 +34,13 @@ export class UserAuthService extends FunixprodHttpClient {
     let headers = this.headers;
     headers = headers.set(this.captchaHeaderCode, captchaCode);
 
-    return this.httpClient.post<UserTokenDTO>(this.url + 'login', request, {headers: headers});
+    return this.httpClient.post<UserTokenDTO>(this.url + 'login', request, {headers: headers}).pipe(
+      tap((userTokenDto: UserTokenDTO) => {
+        if (userTokenDto.user) {
+          this.userDtoCache = userTokenDto.user;
+        }
+      })
+    );
   }
 
   currentUser(): Observable<UserDTO> {

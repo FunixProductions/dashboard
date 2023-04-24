@@ -1,12 +1,12 @@
 <!-- User section -->
-<li class="nav-item">
+<li class="nav-item" *ngIf="hasAccessToPanelWithAdmin()">
   <a class="nav-link" href="/dashboard/funixprod/users">
     <i class="fas fa-fw fa-user"></i>
     <span>Utilisateurs</span></a>
 </li>
 
 <!-- Twitch section -->
-<li class="nav-item">
+<li class="nav-item" *ngIf="hasAccessToPanelWithAdmin()">
   <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#twitchCollapse"
      aria-expanded="false" aria-controls="twitchCollapse">
     <i class="fas fa-fw fa-film"></i>

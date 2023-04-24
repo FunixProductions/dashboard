@@ -7,7 +7,6 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {ServiceWorkerModule} from '@angular/service-worker';
-import {UserAuthService} from "./services/funix-api/user/services/user-auth-service";
 
 @NgModule({
   declarations: [
@@ -31,7 +30,4 @@ import {UserAuthService} from "./services/funix-api/user/services/user-auth-serv
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(authService: UserAuthService) {
-    authService.currentUser().subscribe();
-  }
 }
