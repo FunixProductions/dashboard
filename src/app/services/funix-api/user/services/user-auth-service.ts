@@ -13,7 +13,7 @@ import {FunixprodHttpClient} from "../../../funixprod-http-client";
 })
 export class UserAuthService extends FunixprodHttpClient {
 
-  private readonly captchaHeaderCode = 'X-Captcha-Google-Code';
+  private readonly captchaHeaderCode: string = 'X-Captcha-Google-Code';
 
   url: string = environment.funixApiUrl + 'user/auth/';
 
@@ -38,17 +38,15 @@ export class UserAuthService extends FunixprodHttpClient {
   }
 
   currentUser(): Observable<UserDTO> {
-    if (this.userDtoCache === null) {
-      return this.httpClient.get<UserDTO>(this.url + 'current', {headers: this.headers}).pipe(
-        tap((userDto) => {
-          console.log(userDto);
-          console.log(this.userDtoCache);
-          this.userDtoCache = userDto;
-        })
-      );
-    } else {
+    if (this.userDtoCache !== null) {
       return of(this.userDtoCache);
     }
+
+    return this.httpClient.get<UserDTO>(this.url + 'current', {headers: this.headers}).pipe(
+      tap((userDto: UserDTO) => {
+        this.userDtoCache = userDto;
+      })
+    );
   }
 
 }
