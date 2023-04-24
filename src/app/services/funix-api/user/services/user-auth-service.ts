@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, of, tap} from "rxjs";
 import {UserCreationDTO} from "../dtos/requests/user-creation-dto";
 import {UserDTO} from "../dtos/user-dto";
 import {environment} from "../../../../../environments/environment";
@@ -13,9 +13,11 @@ import {FunixprodHttpClient} from "../../../funixprod-http-client";
 })
 export class UserAuthService extends FunixprodHttpClient {
 
-  private readonly captchaHeaderCode = 'X-Captcha-Google-Code';
+  private readonly captchaHeaderCode: string = 'X-Captcha-Google-Code';
 
   url: string = environment.funixApiUrl + 'user/auth/';
+
+  private userDtoCache: UserDTO | null = null;
 
   constructor(protected httpClient: HttpClient) {
     super();
@@ -32,11 +34,25 @@ export class UserAuthService extends FunixprodHttpClient {
     let headers = this.headers;
     headers = headers.set(this.captchaHeaderCode, captchaCode);
 
-    return this.httpClient.post<UserTokenDTO>(this.url + 'login', request, {headers: headers});
+    return this.httpClient.post<UserTokenDTO>(this.url + 'login', request, {headers: headers}).pipe(
+      tap((userTokenDto: UserTokenDTO) => {
+        if (userTokenDto.user) {
+          this.userDtoCache = userTokenDto.user;
+        }
+      })
+    );
   }
 
   currentUser(): Observable<UserDTO> {
-    return this.httpClient.get<UserDTO>(this.url + 'current', {headers: this.headers});
+    if (this.userDtoCache !== null) {
+      return of(this.userDtoCache);
+    }
+
+    return this.httpClient.get<UserDTO>(this.url + 'current', {headers: this.headers}).pipe(
+      tap((userDto: UserDTO) => {
+        this.userDtoCache = userDto;
+      })
+    );
   }
 
 }

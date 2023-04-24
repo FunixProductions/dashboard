@@ -29,4 +29,5 @@ import {ServiceWorkerModule} from '@angular/service-worker';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
