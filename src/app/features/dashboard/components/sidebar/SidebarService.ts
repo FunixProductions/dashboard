@@ -6,11 +6,9 @@ export abstract class SidebarService {
   currentUser?: UserDTO;
 
   protected constructor(private authService: UserAuthService) {
-    authService.currentUser(this.updateCurrentUser);
-  }
-
-  private updateCurrentUser(userDTO: UserDTO): void {
-    this.currentUser = userDTO;
+    this.authService.currentUser().subscribe((user) => {
+      this.currentUser = user;
+    });
   }
 
   hasAccessToPanelWithAdmin(): boolean {

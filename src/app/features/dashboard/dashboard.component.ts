@@ -17,7 +17,7 @@ export class DashboardComponent {
   }
 
   canActivate(): void {
-    const user: Observable<UserDTO> = this.userAuthService.currentUserNoCb();
+    const user: Observable<UserDTO> = this.userAuthService.currentUser();
 
     user.subscribe({
       error: () => {

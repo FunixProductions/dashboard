@@ -11,11 +11,11 @@ export class UserComponent {
   private userDTO: UserDTO = new UserDTO();
 
   constructor(private authService: UserAuthService) {
-    this.authService.currentUser(this.updateCurrentUser);
-  }
-
-  private updateCurrentUser(userDTO: UserDTO): void {
-    this.userDTO = userDTO;
+    this.authService.currentUser().subscribe({
+      next: (user: UserDTO) => {
+        this.userDTO = user;
+      }
+    });
   }
 
   public getUsername(): string | undefined {

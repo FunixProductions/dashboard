@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {Observable, tap} from "rxjs";
+import {Observable, of, tap} from "rxjs";
 import {UserCreationDTO} from "../dtos/requests/user-creation-dto";
 import {UserDTO} from "../dtos/user-dto";
 import {environment} from "../../../../../environments/environment";
@@ -39,21 +39,15 @@ export class UserAuthService extends FunixprodHttpClient {
     );
   }
 
-  currentUserNoCb(): Observable<UserDTO> {
-    return this.httpClient.get<UserDTO>(this.url + 'current', {headers: super.headers});
-  }
-
-  currentUser(callback: (user: UserDTO) => void): void {
+  currentUser(): Observable<UserDTO> {
     if (this.userDtoCache !== null) {
-      callback(this.userDtoCache);
+      return of(this.userDtoCache);
     }
 
-    this.httpClient.get<UserDTO>(this.url + 'current', {headers: super.headers}).subscribe({
-        next: (userDTO: UserDTO) => {
-          this.userDtoCache = userDTO;
-          callback(userDTO);
-        }
-      }
+    return this.httpClient.get<UserDTO>(this.url + 'current', {headers: super.headers}).pipe(
+      tap((userDto: UserDTO) => {
+        this.userDtoCache = userDto;
+      })
     );
   }
 
