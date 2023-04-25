@@ -4,11 +4,12 @@ import {environment} from "../../../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import PacifistaSupportTicketMessageDTO from "../dtos/PacifistaSupportTicketMessageDTO";
+import {Paginated} from "../../../../core/dtos/paginated";
 
 @Injectable({
   providedIn: 'root'
 })
-export default class PacifistaSupportTicketService extends CrudHttpClient<PacifistaSupportTicketMessageDTO> {
+export default class PacifistaSupportTicketMessageService extends CrudHttpClient<PacifistaSupportTicketMessageDTO> {
   override domain: string = environment.pacifistaApiUrl;
   override path: string = 'support/ticket';
 
@@ -16,8 +17,8 @@ export default class PacifistaSupportTicketService extends CrudHttpClient<Pacifi
     super(httpClient);
   }
 
-  fetchUserTickets(page: number = 0, elemsPerPage: number = 10, ticketId: string): Observable<PacifistaSupportTicketMessageDTO> {
-    return this.httpClient.get<PacifistaSupportTicketMessageDTO>(
+  fetchUserTickets(page: number = 0, elemsPerPage: number = 10, ticketId: string): Observable<Paginated<PacifistaSupportTicketMessageDTO>> {
+    return this.httpClient.get<Paginated<PacifistaSupportTicketMessageDTO>>(
       this.domain + this.path + '/web?page=' + page + "&elemsPerPage=" + elemsPerPage + "&ticketid=" + ticketId,
       {headers: this.headers}
     );

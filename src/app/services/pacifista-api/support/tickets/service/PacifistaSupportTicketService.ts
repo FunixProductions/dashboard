@@ -1,9 +1,10 @@
 import {CrudHttpClient} from "../../../../crud-http-client";
-import PacifistaSupportTicketDTO from "../dtos/PacifistaSupportTicketDTO";
+import PacifistaSupportTicketDTO, {TicketStatus} from "../dtos/PacifistaSupportTicketDTO";
 import {Injectable} from "@angular/core";
 import {environment} from "../../../../../../environments/environment";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import {Paginated} from "../../../../core/dtos/paginated";
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,11 @@ export default class PacifistaSupportTicketService extends CrudHttpClient<Pacifi
     super(httpClient);
   }
 
-  fetchUserTickets(page: number = 0, elemsPerPage: number = 10): Observable<PacifistaSupportTicketDTO> {
-    return this.httpClient.get<PacifistaSupportTicketDTO>(
-      this.domain + this.path + '/web?page=' + page + "&elemsPerPage=" + elemsPerPage,
+  fetchUserTickets(page: number = 0, elemsPerPage: number = 10, ticketStatus: TicketStatus[] = []): Observable<Paginated<PacifistaSupportTicketDTO>> {
+    const ticketStatusSearch: string = ticketStatus.length === 0 ? 'all' : '[' + ticketStatus.join('|') + ']';
+
+    return this.httpClient.get<Paginated<PacifistaSupportTicketDTO>>(
+      this.domain + this.path + '/web?page=' + page + '&elemsPerPage=' + elemsPerPage + '&ticketStatus=' + ticketStatusSearch,
       {headers: this.headers}
     );
   }

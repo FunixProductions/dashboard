@@ -5,7 +5,7 @@ export abstract class SidebarService {
 
   currentUser?: UserDTO;
 
-  protected constructor(private authService: UserAuthService) {
+  protected constructor(protected authService: UserAuthService) {
     this.authService.currentUser().subscribe((user) => {
       this.currentUser = user;
     });
