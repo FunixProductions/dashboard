@@ -1,0 +1,30 @@
+<!-- Tickets section -->
+
+<!-- User section -->
+<li class="nav-item" *ngIf="hasAccessToPanelWithPacifistaModo()">
+  <a class="nav-link" href="/dashboard/pacifista/tickets">
+    <i class="fas fa-fw fa-ticket-alt"></i>
+    <span>Tickets</span></a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#ticketsCollapse"
+     aria-expanded="false" aria-controls="ticketsCollapse">
+    <i class="fas fa-fw fa-ticket-alt"></i>
+    <span>Tickets</span>
+  </a>
+  <div id="ticketsCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+
+      <div *ngIf="hasAccessToPanelWithPacifistaModo()">
+        <h6 class="collapse-header">Tickets staff</h6>
+        <a class="collapse-item" href="/dashboard/pacifista/tickets">Tickets</a>
+      </div>
+
+      <div>
+        <h6 class="collapse-header">Tickets staff</h6>
+        <a class="collapse-item" href="/dashboard/pacifista/tickets">Tickets </a>
+      </div>
+    </div>
+  </div>
+</li>

@@ -5,6 +5,7 @@ import {PacifistaComponent} from "./pacifista.component";
 const routes: Routes = [
   { path: '', component: PacifistaComponent, children: [
       { path: 'web', loadChildren: () => import('./web/web.module').then(m => m.WebModule) },
+      { path: 'tickets', loadChildren: () => import('./tickets/tickets.module').then(m => m.TicketsModule) },
 
       {
         path: '',

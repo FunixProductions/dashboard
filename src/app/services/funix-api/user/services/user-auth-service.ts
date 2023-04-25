@@ -13,8 +13,6 @@ import {FunixprodHttpClient} from "../../../funixprod-http-client";
 })
 export class UserAuthService extends FunixprodHttpClient {
 
-  private readonly captchaHeaderCode: string = 'X-Captcha-Google-Code';
-
   url: string = environment.funixApiUrl + 'user/auth/';
 
   private userDtoCache: UserDTO | null = null;
@@ -24,17 +22,15 @@ export class UserAuthService extends FunixprodHttpClient {
   }
 
   register(request: UserCreationDTO, captchaCode: string): Observable<UserDTO> {
-    let headers = this.headers;
-    headers = headers.set(this.captchaHeaderCode, captchaCode);
+    super.addCaptchaToHeader(captchaCode);
 
-    return this.httpClient.post<UserDTO>(this.url + 'register', request, {headers: headers});
+    return this.httpClient.post<UserDTO>(this.url + 'register', request, {headers: super.headers});
   }
 
   login(request: UserLoginDTO, captchaCode: string): Observable<UserTokenDTO> {
-    let headers = this.headers;
-    headers = headers.set(this.captchaHeaderCode, captchaCode);
+    super.addCaptchaToHeader(captchaCode);
 
-    return this.httpClient.post<UserTokenDTO>(this.url + 'login', request, {headers: headers}).pipe(
+    return this.httpClient.post<UserTokenDTO>(this.url + 'login', request, {headers: super.headers}).pipe(
       tap((userTokenDto: UserTokenDTO) => {
         if (userTokenDto.user) {
           this.userDtoCache = userTokenDto.user;
@@ -48,7 +44,7 @@ export class UserAuthService extends FunixprodHttpClient {
       return of(this.userDtoCache);
     }
 
-    return this.httpClient.get<UserDTO>(this.url + 'current', {headers: this.headers}).pipe(
+    return this.httpClient.get<UserDTO>(this.url + 'current', {headers: super.headers}).pipe(
       tap((userDto: UserDTO) => {
         this.userDtoCache = userDto;
       })

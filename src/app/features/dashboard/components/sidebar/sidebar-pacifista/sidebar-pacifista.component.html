@@ -1,18 +1,3 @@
-<!-- Web section -->
-<li class="nav-item" *ngIf="hasAccessToPanelWithPacifistaAdmin()">
-  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#webCollapse"
-     aria-expanded="false" aria-controls="webCollapse">
-    <i class="fas fa-fw fa-globe"></i>
-    <span>Web</span>
-  </a>
-  <div id="webCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-    <div class="bg-white py-2 collapse-inner rounded">
-      <h6 class="collapse-header">Boutique</h6>
-      <a class="collapse-item" href="/dashboard/pacifista/web/shop/categories">Categories</a>
-      <a class="collapse-item" href="/dashboard/pacifista/web/shop/articles">Articles</a>
+<app-web-nav></app-web-nav>
 
-      <h6 class="collapse-header">News</h6>
-      <a class="collapse-item" href="/dashboard/pacifista/web/news">News</a>
-    </div>
-  </div>
-</li>
+<app-tickets-nav></app-tickets-nav>
