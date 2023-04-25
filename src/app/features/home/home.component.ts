@@ -15,7 +15,7 @@ export class HomeComponent {
   }
 
   canActivate(): void {
-    this.userAuthService.currentUser().subscribe({
+    this.userAuthService.currentUserNoCb().subscribe({
       next: () => {
         this.router.navigate(['dashboard']);
       }
