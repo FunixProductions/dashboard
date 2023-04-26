@@ -1,47 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {UserDTO} from "../../../../services/funix-api/user/dtos/user-dto";
-import {PageOption, Paginated} from "../../../../services/core/dtos/paginated";
 import {UserCrudService} from "../../../../services/funix-api/user/services/user-crud-service";
-import {Observable} from "rxjs";
-import {QueryBuilder, QueryParam} from "../../../../utils/query.builder";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {UserRemoveModalComponent} from "./user-remove-modal/user-remove-modal.component";
-import {PageEvent} from "@angular/material/paginator";
+import {ListComponent} from "../../../../services/core/components/lists/ListComponent";
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent extends ListComponent<UserDTO, UserCrudService> {
 
   columnsToDisplay = ['username', 'email', 'role', 'createdAt', 'updatedAt', 'actions'];
-
-  users: Paginated<UserDTO> = new Paginated<UserDTO>();
-  sort: string = 'createdAt:desc';
-  page: number = 0;
-  elemsPerPage: number = 20;
-
-  searchUsername: QueryParam = new QueryParam();
-  searchEmail: QueryParam = new QueryParam();
-  searchRole: QueryParam = new QueryParam();
 
   constructor(private userCrudService: UserCrudService,
               private router: Router,
               private dialog: MatDialog) {
-    this.searchUsername.key = 'username';
-    this.searchUsername.type = QueryBuilder.like;
-
-    this.searchEmail.key = 'email';
-    this.searchEmail.type = QueryBuilder.like;
-
-    this.searchRole.key = 'role'
-    this.searchRole.type = QueryBuilder.notEqual;
-  }
-
-  ngOnInit(): void {
-    this.updateUserList();
+    super(userCrudService);
   }
 
   getEditUrl(userDto: UserDTO): string {
@@ -55,47 +32,8 @@ export class UsersComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(res => {
-      this.updateUserList();
-    });
-  }
-
-  onSearchChange(champ: string, data: string): void {
-    if (champ === 'username') {
-      this.searchUsername.value = data;
-    } else if (champ === 'email') {
-      this.searchEmail.value = data;
-    } else if (champ === 'role') {
-      if (data === 'true') {
-        this.searchRole.value = 'USER';
-      } else {
-        this.searchRole.value = '';
-      }
-    }
-
-    this.updateUserList();
-  }
-
-  onPaginateChange(event: PageEvent): void {
-    this.page = event.pageIndex;
-    this.updateUserList();
-  }
-
-  private updateUserList(): void {
-    const pageOption: PageOption = new PageOption();
-    pageOption.sort = this.sort;
-    pageOption.page = this.page;
-    pageOption.elemsPerPage = this.elemsPerPage;
-
-    const queryBuilder: QueryBuilder = new QueryBuilder();
-    queryBuilder.addParam(this.searchUsername);
-    queryBuilder.addParam(this.searchEmail);
-    queryBuilder.addParam(this.searchRole);
-
-    this.userCrudService.find(pageOption, queryBuilder).subscribe({
-      next: (userList: Paginated<UserDTO>) => {
-        this.users = userList;
-      }
+    dialogRef.afterClosed().subscribe(() => {
+      this.updateList();
     });
   }
 
