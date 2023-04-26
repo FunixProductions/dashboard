@@ -8,15 +8,15 @@
   <div id="ticketsCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
 
-      <a class="collapse-item" href="/dashboard/pacifista/tickets/new">Créer un ticket</a>
-      <a class="collapse-item" href="/dashboard/pacifista/tickets">
+      <a class="collapse-item" href="/dashboard/pacifista/tickets/create">Créer un ticket</a>
+      <a class="collapse-item" href="/dashboard/pacifista/tickets/list?staff=false">
         Vos tickets
         <span class="badge badge-danger">{{ ticketsAmountUserActive.length }}</span>
       </a>
 
       <div *ngIf="hasAccessToPanelWithPacifistaModo()">
         <h6 class="collapse-header">Tickets staff</h6>
-        <a class="collapse-item" href="/dashboard/pacifista/tickets/all">
+        <a class="collapse-item" href="/dashboard/pacifista/tickets/list?staff=true">
           Tickets
           <span class="badge badge-danger">{{ ticketsAmountStaffActive.length }}</span>
         </a>

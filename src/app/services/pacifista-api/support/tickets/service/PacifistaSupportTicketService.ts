@@ -18,11 +18,15 @@ export default class PacifistaSupportTicketService extends CrudHttpClient<Pacifi
   }
 
   fetchUserTickets(page: number = 0, elemsPerPage: number = 10, ticketStatus: TicketStatus[] = []): Observable<Paginated<PacifistaSupportTicketDTO>> {
-    const ticketStatusSearch: string = ticketStatus.length === 0 ? 'all' : '[' + ticketStatus.join('|') + ']';
+    const params = {
+      page: page.toString(),
+      elemsPerPage: elemsPerPage.toString(),
+      ticketStatus: ticketStatus.length === 0 ? 'all' : '[' + ticketStatus.join('|') + ']'
+    }
 
     return this.httpClient.get<Paginated<PacifistaSupportTicketDTO>>(
-      this.domain + this.path + '/web?page=' + page + '&elemsPerPage=' + elemsPerPage + '&ticketStatus=' + ticketStatusSearch,
-      {headers: this.headers}
+      this.domain + this.path + '/web',
+      {headers: this.headers, params: params},
     );
   }
 
