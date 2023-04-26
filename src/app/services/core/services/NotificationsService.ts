@@ -13,7 +13,13 @@ export default class NotificationsService {
     if (err.error && err.error.error) {
       this.error('Erreur : ' + err.error.error);
     } else {
-      this.error('Une erreur interne est survenue veuillez re essayer.');
+      if (err.status === 401) {
+        this.error('Vous devez être connecté pour accéder à cette ressource.');
+      } else if (err.status === 403) {
+        this.error('Vous n\'avez pas les droits pour accéder à cette ressource.');
+      } else {
+        this.error('Une erreur interne est survenue veuillez re essayer.');
+      }
     }
   }
 

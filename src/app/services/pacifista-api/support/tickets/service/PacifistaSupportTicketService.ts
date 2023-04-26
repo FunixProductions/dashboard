@@ -31,13 +31,13 @@ export default class PacifistaSupportTicketService extends CrudHttpClient<Pacifi
   }
 
   createTicketFromWeb(request: PacifistaSupportTicketDTO, captchaCode: string): Observable<PacifistaSupportTicketDTO> {
-    super.addCaptchaToHeader(captchaCode);
+    this.addCaptchaToHeader(captchaCode);
 
     return this.httpClient.post<PacifistaSupportTicketDTO>(
       this.domain + this.path + '/web',
       request,
       {
-        headers: super.headers
+        headers: this.headers
       }
     )
   }

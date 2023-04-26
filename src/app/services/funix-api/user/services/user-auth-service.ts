@@ -22,15 +22,15 @@ export class UserAuthService extends FunixprodHttpClient {
   }
 
   register(request: UserCreationDTO, captchaCode: string): Observable<UserDTO> {
-    super.addCaptchaToHeader(captchaCode);
+    this.addCaptchaToHeader(captchaCode);
 
-    return this.httpClient.post<UserDTO>(this.url + 'register', request, {headers: super.headers});
+    return this.httpClient.post<UserDTO>(this.url + 'register', request, {headers: this.headers});
   }
 
   login(request: UserLoginDTO, captchaCode: string): Observable<UserTokenDTO> {
-    super.addCaptchaToHeader(captchaCode);
+    this.addCaptchaToHeader(captchaCode);
 
-    return this.httpClient.post<UserTokenDTO>(this.url + 'login', request, {headers: super.headers});
+    return this.httpClient.post<UserTokenDTO>(this.url + 'login', request, {headers: this.headers});
   }
 
   currentUser(): Observable<UserDTO> {

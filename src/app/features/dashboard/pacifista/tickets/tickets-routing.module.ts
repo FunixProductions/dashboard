@@ -3,6 +3,7 @@ import {NgModule} from "@angular/core";
 import {TicketsComponent} from "./tickets.component";
 import {TicketListComponent} from "./ticket-list/ticket-list.component";
 import {TicketCreationComponent} from "./ticket-creation/ticket-creation.component";
+import {TicketMessagingComponent} from "./ticket-messaging/ticket-messaging.component";
 
 const routes: Routes = [
   { path: '', component: TicketsComponent, children: [
@@ -13,6 +14,10 @@ const routes: Routes = [
       {
         path: 'create',
         component: TicketCreationComponent
+      },
+      {
+        path: 'messages/:ticket-id',
+        component: TicketMessagingComponent
       },
 
       {

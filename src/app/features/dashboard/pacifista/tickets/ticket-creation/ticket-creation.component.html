@@ -1,1 +1,39 @@
-<p>ticket-creation works!</p>
+<h1 class="h3 mb-4 text-gray-800">Création d'un ticket</h1>
+<p>
+  Sur cette page vous allez pouvoir envoyer une demande à l'équipe de Pacifista.<br/>
+  Nous allons vous répondre dans les plus brefs délais.<br/>
+  Pour toute demande commerciale veuillez passer par <a href="mailto:contact@pacifista.fr">contact@pacifista.fr</a>
+</p>
+
+<div class="container">
+  <form class="user">
+
+    <div class="form-group">
+      <label for="ticketNameInput">Nom du ticket</label>
+      <input type="text" [(ngModel)]="object"
+             name="name"
+             id="ticketNameInput"
+             class="form-control form-control-user"
+             placeholder="Nom du ticket">
+    </div>
+
+    <div class="form-group">
+      <h3>Type de demande</h3>
+      <p>Cliquez sur le type correspondant à vôtre demande. Celà nous permet de cibler les demandes et de les trier.</p>
+
+      <div class="row align-content-between">
+        <div class="col" *ngFor="let typeSel of ticketTypes">
+          <button class="m-2 btn btn-{{ type && type === typeSel.value ? 'success' : 'info' }}" (click)="selectType(typeSel.value)">
+            {{ typeSel.viewValue }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button (click)="createTicket()"
+            [disabled]="!(object && type && object.length > 0)"
+            class="btn btn-primary btn-user btn-block">
+      Créer le ticket
+    </button>
+  </form>
+</div>

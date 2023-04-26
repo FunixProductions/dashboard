@@ -18,20 +18,26 @@ export default class PacifistaSupportTicketMessageService extends CrudHttpClient
   }
 
   fetchUserTickets(page: number = 0, elemsPerPage: number = 10, ticketId: string): Observable<Paginated<PacifistaSupportTicketMessageDTO>> {
+    const params = {
+      page: page.toString(),
+      elemsPerPage: elemsPerPage.toString(),
+      ticketid: ticketId
+    };
+
     return this.httpClient.get<Paginated<PacifistaSupportTicketMessageDTO>>(
-      this.domain + this.path + '/web?page=' + page + "&elemsPerPage=" + elemsPerPage + "&ticketid=" + ticketId,
-      {headers: this.headers}
+      this.domain + this.path + '/web',
+      {headers: this.headers, params: params}
     );
   }
 
   createTicketFromWeb(request: PacifistaSupportTicketMessageDTO, captchaCode: string): Observable<PacifistaSupportTicketMessageDTO> {
-    super.addCaptchaToHeader(captchaCode);
+    this.addCaptchaToHeader(captchaCode);
 
     return this.httpClient.post<PacifistaSupportTicketMessageDTO>(
       this.domain + this.path + '/web',
       request,
       {
-        headers: super.headers
+        headers: this.headers
       }
     )
   }

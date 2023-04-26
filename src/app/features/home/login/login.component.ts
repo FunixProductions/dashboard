@@ -34,7 +34,7 @@ export class LoginComponent {
         next: (loginDto: UserTokenDTO) => {
           if (loginDto.token) {
             localStorage.setItem('user-token-requests', loginDto.token);
-            this.router.navigate(['dashboard'])
+            this.router.navigate(['dashboard']);
           } else {
             this.notificationService.error('Veuillez vous reconnecter, une erreur est survenue.');
           }
