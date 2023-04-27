@@ -9,6 +9,7 @@ import PacifistaSupportTicketDTO, {
 import {PageOption} from "../../../../../../../services/core/dtos/paginated";
 import {QueryBuilder, QueryParam} from "../../../../../../../utils/query.builder";
 import NotificationsService from "../../../../../../../services/core/services/NotificationsService";
+import {UserRole} from "../../../../../../../services/funix-api/user/dtos/user-dto";
 
 @Component({
   selector: 'app-tickets-nav',
@@ -17,8 +18,7 @@ import NotificationsService from "../../../../../../../services/core/services/No
 })
 export class TicketsNavComponent extends SidebarService implements OnInit {
 
-  ticketsAmountStaffActive: PacifistaSupportTicketDTO[] = [];
-  ticketsAmountUserActive: PacifistaSupportTicketDTO[] = [];
+  ticketsActive: PacifistaSupportTicketDTO[] = [];
 
   constructor(authService: UserAuthService,
               protected ticketService: PacifistaSupportTicketService,
@@ -27,14 +27,21 @@ export class TicketsNavComponent extends SidebarService implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchAmountStaffActive();
-    this.fetchAmountUserActive();
+    this.authService.currentUser().subscribe({
+      next: user => {
+        if (user.role && (user.role === UserRole.PACIFISTA_ADMIN || user.role === UserRole.PACIFISTA_MODERATOR || user.role === UserRole.ADMIN)) {
+          this.fetchAmountStaffActive();
+        } else {
+          this.fetchAmountUserActive();
+        }
+      }
+    })
   }
 
   private fetchAmountUserActive(): void {
     this.ticketService.fetchUserTickets(0, 100, [TicketStatus.IN_PROGRESS, TicketStatus.CREATED]).subscribe({
       next: ticketsActive => {
-        this.ticketsAmountUserActive = ticketsActive.content;
+        this.ticketsActive = ticketsActive.content;
       }
     })
   }
@@ -53,9 +60,10 @@ export class TicketsNavComponent extends SidebarService implements OnInit {
 
     this.ticketService.find(pageOption, queryBuilder).subscribe({
       next: ticketsActive => {
-        this.ticketsAmountStaffActive = ticketsActive.content;
+        this.ticketsActive = ticketsActive.content;
       }
     });
   }
 
+  protected readonly UserRole = UserRole;
 }

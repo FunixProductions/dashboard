@@ -43,7 +43,7 @@
           <th mat-header-cell *matHeaderCellDef>
             Role
             <div class="custom-control custom-checkbox small">
-              <input #checkStaff (click)="onSearchChange('role', checkStaff.checked.toString())" type="checkbox" class="custom-control-input" id="checkStaff">
+              <input #checkStaff (click)="switchRoleList(checkStaff.checked)" type="checkbox" class="custom-control-input" id="checkStaff">
               <label class="custom-control-label" for="checkStaff">Uniquement le staff</label>
             </div>
           </th>

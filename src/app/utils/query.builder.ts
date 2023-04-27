@@ -33,8 +33,17 @@ export class QueryBuilder {
   }
 
   addParam(param: QueryParam) : QueryBuilder {
-    if (param?.value && param.value.length > 0) {
-      this.queryArray.push(param);
+    if (param.key.length > 0) {
+      if (!param.value || param.value.length <= 0) {
+
+        const indexToRemove = this.queryArray.findIndex(q => q.key === param.key);
+        if (indexToRemove >= 0) {
+          this.queryArray.splice(indexToRemove, 1);
+        }
+
+      } else {
+        this.addParamOnlyIfAbsent(param);
+      }
     }
     return this;
   }
@@ -42,4 +51,15 @@ export class QueryBuilder {
   reset(): void {
     this.queryArray = [];
   }
+
+  private addParamOnlyIfAbsent(param: QueryParam): void {
+    const indexToUpdate = this.queryArray.findIndex(q => q.key === param.key);
+
+    if (indexToUpdate >= 0) {
+      this.queryArray[indexToUpdate] = param;
+    } else {
+      this.queryArray.push(param);
+    }
+  }
+
 }

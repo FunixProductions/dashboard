@@ -10,34 +10,37 @@ export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttp
   sort: string = 'createdAt:desc';
   page: number = 0;
   elemsPerPage: number = 30;
-  searchQuery: QueryParam = new QueryParam();
+
+  protected queryBuilder: QueryBuilder = new QueryBuilder();
+  protected pageOption: PageOption = new PageOption();
 
   protected constructor(protected service: SERVICE) {
-    this.searchQuery.type = QueryBuilder.like;
     this.updateList();
+
+    this.pageOption.sort = this.sort;
+    this.pageOption.page = this.page;
+    this.pageOption.elemsPerPage = this.elemsPerPage;
   }
 
-  onSearchChange(champ: string, data: string): void {
-    this.searchQuery.key = champ;
-    this.searchQuery.value = data;
+  onSearchChange(champ: string, data: string | string[], queryType: string = QueryBuilder.like): void {
+    const queryParam: QueryParam = new QueryParam();
+    queryParam.key = champ;
+    queryParam.type = queryType;
+    queryParam.value = data;
+
+    this.queryBuilder.addParam(queryParam);
     this.updateList();
   }
 
   onPaginateChange(event: PageEvent): void {
     this.page = event.pageIndex;
+    this.pageOption.page = this.page;
+
     this.updateList();
   }
 
   updateList(): void {
-    const pageOption: PageOption = new PageOption();
-    pageOption.sort = this.sort;
-    pageOption.page = this.page;
-    pageOption.elemsPerPage = this.elemsPerPage;
-
-    const queryBuilder: QueryBuilder = new QueryBuilder();
-    queryBuilder.addParam(this.searchQuery);
-
-    this.service.find(pageOption, queryBuilder).subscribe({
+    this.service.find(this.pageOption, this.queryBuilder).subscribe({
       next: (entitiesGot: Paginated<DTO>) => {
         this.entities = entitiesGot;
       }

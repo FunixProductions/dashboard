@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {UserDTO} from "../../../../services/funix-api/user/dtos/user-dto";
+import {UserDTO, UserRole} from "../../../../services/funix-api/user/dtos/user-dto";
 import {UserCrudService} from "../../../../services/funix-api/user/services/user-crud-service";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
@@ -35,6 +35,14 @@ export class UsersComponent extends ListComponent<UserDTO, UserCrudService> {
     dialogRef.afterClosed().subscribe(() => {
       this.updateList();
     });
+  }
+
+  switchRoleList(onlyStaff: boolean): void {
+    if (onlyStaff) {
+      this.onSearchChange('role', [UserRole.ADMIN, UserRole.PACIFISTA_ADMIN, UserRole.PACIFISTA_MODERATOR, UserRole.MODERATOR]);
+    } else {
+      this.onSearchChange('role', '');
+    }
   }
 
 }

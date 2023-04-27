@@ -4,9 +4,14 @@ import {TicketsComponent} from "./tickets.component";
 import {TicketListComponent} from "./ticket-list/ticket-list.component";
 import {TicketCreationComponent} from "./ticket-creation/ticket-creation.component";
 import {TicketMessagingComponent} from "./ticket-messaging/ticket-messaging.component";
+import {TicketListStaffComponent} from "./ticket-list-staff/ticket-list-staff.component";
 
 const routes: Routes = [
   { path: '', component: TicketsComponent, children: [
+      {
+        path: 'list-staff',
+        component: TicketListStaffComponent
+      },
       {
         path: 'list',
         component: TicketListComponent

@@ -3,24 +3,26 @@
      aria-expanded="false" aria-controls="ticketsCollapse">
     <i class="fas fa-fw fa-ticket-alt"></i>
     <span>Support </span>
-    <span class="badge badge-secondary">{{ ticketsAmountStaffActive.length + ticketsAmountUserActive.length }}</span>
+    <span class="badge badge-secondary">{{ ticketsActive.length }}</span>
   </a>
   <div id="ticketsCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
 
-      <a class="collapse-item" href="/dashboard/pacifista/tickets/create">Créer un ticket</a>
-      <a class="collapse-item" href="/dashboard/pacifista/tickets/list?staff=false">
-        Vos tickets
-        <span class="badge badge-danger">{{ ticketsAmountUserActive.length }}</span>
-      </a>
-
-      <div *ngIf="hasAccessToPanelWithPacifistaModo()">
-        <h6 class="collapse-header">Tickets staff</h6>
-        <a class="collapse-item" href="/dashboard/pacifista/tickets/list?staff=true">
+      <div *ngIf="currentUser?.role === UserRole.USER; else elseBlock">
+        <a class="collapse-item" href="/dashboard/pacifista/tickets/create">Créer un ticket</a>
+        <a class="collapse-item" href="/dashboard/pacifista/tickets/list">
           Tickets
-          <span class="badge badge-danger">{{ ticketsAmountStaffActive.length }}</span>
+          <span class="badge badge-danger">{{ ticketsActive.length }}</span>
         </a>
       </div>
+
+      <ng-template #elseBlock>
+        <a class="collapse-item" href="/dashboard/pacifista/tickets/list-staff">
+          Tickets
+          <span class="badge badge-danger">{{ ticketsActive.length }}</span>
+        </a>
+      </ng-template>
+
     </div>
   </div>
 </li>

@@ -12,10 +12,11 @@ import {ListComponent} from "../../../../../services/core/components/lists/ListC
 })
 export class TicketListComponent extends ListComponent<PacifistaSupportTicketDTO, PacifistaSupportTicketService> {
 
-  columnsToDisplay = ['object', 'createdByName', 'creationSource', 'createdAt', 'updatedAt', 'actions']
+  columnsToDisplay = ['object', 'createdByName', 'ticketType', 'status', 'creationSource', 'createdAt', 'updatedAt', 'actions']
 
   constructor(private ticketService: PacifistaSupportTicketService) {
     super(ticketService);
   }
+
 
 }
