@@ -4,6 +4,7 @@ import PacifistaSupportTicketDTO
 import PacifistaSupportTicketService
   from "../../../../../services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
 import {ListComponent} from "../../../../../services/core/components/lists/ListComponent";
+import {Paginated} from "../../../../../services/core/dtos/paginated";
 
 @Component({
   selector: 'app-ticket-list',
@@ -18,5 +19,11 @@ export class TicketListComponent extends ListComponent<PacifistaSupportTicketDTO
     super(ticketService);
   }
 
-
+  override updateList() {
+    this.service.fetchUserTickets(this.page, this.elemsPerPage).subscribe({
+      next: (entitiesGot: Paginated<PacifistaSupportTicketDTO>) => {
+        this.entities = entitiesGot;
+      }
+    });
+  }
 }
