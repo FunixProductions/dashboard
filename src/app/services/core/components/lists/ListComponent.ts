@@ -15,11 +15,10 @@ export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttp
   protected pageOption: PageOption = new PageOption();
 
   protected constructor(protected service: SERVICE) {
-    this.updateList();
-
     this.pageOption.sort = this.sort;
     this.pageOption.page = this.page;
     this.pageOption.elemsPerPage = this.elemsPerPage;
+    this.updateList();
   }
 
   onSearchChange(champ: string, data: string | string[], queryType: string = QueryBuilder.like): void {
