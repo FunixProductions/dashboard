@@ -16,6 +16,8 @@ import {TicketsDoneListComponent} from './ticket-list/tickets-done-list/tickets-
 import {
   TicketsInProgressListComponent
 } from './ticket-list/tickets-in-progress-list/tickets-in-progress-list.component';
+import {TicketsStaffPendingComponent} from './ticket-list-staff/tickets-staff-pending/tickets-staff-pending.component';
+import {TicketsStaffDoneComponent} from './ticket-list-staff/tickets-staff-done/tickets-staff-done.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import {
     TicketListStaffComponent,
     TicketsDoneListComponent,
     TicketsInProgressListComponent,
+    TicketsStaffPendingComponent,
+    TicketsStaffDoneComponent,
   ],
   imports: [
     CommonModule,
