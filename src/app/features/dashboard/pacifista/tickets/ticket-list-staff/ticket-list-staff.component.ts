@@ -16,16 +16,16 @@ export class TicketListStaffComponent extends ListComponent<PacifistaSupportTick
 
   columnsToDisplay = ['object', 'createdByName', 'ticketType', 'status', 'creationSource', 'createdAt', 'updatedAt', 'actions']
 
+  pending: boolean = true;
+
   constructor(private ticketService: PacifistaSupportTicketService) {
     super(ticketService);
+    this.switchToPending();
   }
 
-  switchListToOnlyActive(active: boolean): void {
-    if (active) {
-      this.onSearchChange('status', [TicketStatus.CREATED, TicketStatus.IN_PROGRESS], QueryBuilder.equal);
-    } else {
-      this.onSearchChange('status', '');
-    }
+  switchToPending(pending: boolean = true) {
+    super.onSearchChange('status', pending ? [TicketStatus.CREATED, TicketStatus.IN_PROGRESS] : TicketStatus.SOLVED, QueryBuilder.equal);
+    this.pending = pending;
   }
 
 }

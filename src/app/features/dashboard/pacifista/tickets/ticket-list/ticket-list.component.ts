@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
-import PacifistaSupportTicketDTO
-  from "../../../../../services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
+import PacifistaSupportTicketDTO, {
+  TicketStatus
+} from "../../../../../services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
 import PacifistaSupportTicketService
   from "../../../../../services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
 import {ListComponent} from "../../../../../services/core/components/lists/ListComponent";
@@ -15,15 +16,24 @@ export class TicketListComponent extends ListComponent<PacifistaSupportTicketDTO
 
   columnsToDisplay = ['object', 'createdByName', 'ticketType', 'status', 'creationSource', 'createdAt', 'updatedAt', 'actions']
 
+  pending: boolean = true;
+
   constructor(private ticketService: PacifistaSupportTicketService) {
     super(ticketService);
+    this.switchToPending();
+  }
+
+  switchToPending(pending: boolean = true) {
+    this.pending = pending;
+    this.updateList();
   }
 
   override updateList() {
-    this.service.fetchUserTickets(this.page, this.elemsPerPage).subscribe({
+    this.service.fetchUserTickets(this.page, this.elemsPerPage, this.pending ? [TicketStatus.IN_PROGRESS, TicketStatus.CREATED] : [TicketStatus.SOLVED]).subscribe({
       next: (entitiesGot: Paginated<PacifistaSupportTicketDTO>) => {
         this.entities = entitiesGot;
       }
     });
   }
+
 }

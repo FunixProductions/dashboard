@@ -12,12 +12,6 @@ import {environment} from "../../../../../environments/environment";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
 import {TicketListStaffComponent} from './ticket-list-staff/ticket-list-staff.component';
-import {TicketsDoneListComponent} from './ticket-list/tickets-done-list/tickets-done-list.component';
-import {
-  TicketsInProgressListComponent
-} from './ticket-list/tickets-in-progress-list/tickets-in-progress-list.component';
-import {TicketsStaffPendingComponent} from './ticket-list-staff/tickets-staff-pending/tickets-staff-pending.component';
-import {TicketsStaffDoneComponent} from './ticket-list-staff/tickets-staff-done/tickets-staff-done.component';
 
 @NgModule({
   declarations: [
@@ -26,10 +20,6 @@ import {TicketsStaffDoneComponent} from './ticket-list-staff/tickets-staff-done/
     TicketListComponent,
     TicketMessagingComponent,
     TicketListStaffComponent,
-    TicketsDoneListComponent,
-    TicketsInProgressListComponent,
-    TicketsStaffPendingComponent,
-    TicketsStaffDoneComponent,
   ],
   imports: [
     CommonModule,
