@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {UserRemoveModalComponent} from "./user-remove-modal/user-remove-modal.component";
 import {ListComponent} from "../../../../services/core/components/lists/ListComponent";
+import {QueryBuilder} from "../../../../utils/query.builder";
 
 @Component({
   selector: 'app-users',
@@ -39,7 +40,7 @@ export class UsersComponent extends ListComponent<UserDTO, UserCrudService> {
 
   switchRoleList(onlyStaff: boolean): void {
     if (onlyStaff) {
-      this.onSearchChange('role', [UserRole.ADMIN, UserRole.PACIFISTA_ADMIN, UserRole.PACIFISTA_MODERATOR, UserRole.MODERATOR]);
+      this.onSearchChange('role', [UserRole.ADMIN, UserRole.PACIFISTA_ADMIN, UserRole.PACIFISTA_MODERATOR, UserRole.MODERATOR], QueryBuilder.equal);
     } else {
       this.onSearchChange('role', '');
     }

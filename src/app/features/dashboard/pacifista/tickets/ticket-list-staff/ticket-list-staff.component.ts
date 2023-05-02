@@ -5,6 +5,7 @@ import PacifistaSupportTicketDTO, {
 } from "../../../../../services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
 import PacifistaSupportTicketService
   from "../../../../../services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
+import {QueryBuilder} from "../../../../../utils/query.builder";
 
 @Component({
   selector: 'app-ticket-list-staff',
@@ -21,7 +22,7 @@ export class TicketListStaffComponent extends ListComponent<PacifistaSupportTick
 
   switchListToOnlyActive(active: boolean): void {
     if (active) {
-      this.onSearchChange('status', [TicketStatus.CREATED, TicketStatus.IN_PROGRESS]);
+      this.onSearchChange('status', [TicketStatus.CREATED, TicketStatus.IN_PROGRESS], QueryBuilder.equal);
     } else {
       this.onSearchChange('status', '');
     }
