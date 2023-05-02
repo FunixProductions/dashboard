@@ -7,6 +7,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import {ServiceWorkerModule} from '@angular/service-worker';
     BrowserAnimationsModule,
     MatSnackBarModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: true,
+      enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],

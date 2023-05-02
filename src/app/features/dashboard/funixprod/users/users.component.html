@@ -11,11 +11,11 @@
 
   <div class="card-body">
     <div class="col-md-12">
-      <p>Nombre de comptes : {{ users.totalElementsDatabase }}</p>
+      <p>Nombre de comptes : {{ entities.totalElementsDatabase }}</p>
     </div>
 
     <div class="table-responsive">
-      <table mat-table [dataSource]="users.content" class="table table-bordered" id="dataTable">
+      <table mat-table [dataSource]="entities.content" class="table table-bordered" id="dataTable">
 
         <ng-container matColumnDef="username">
           <th mat-header-cell *matHeaderCellDef>
@@ -43,7 +43,7 @@
           <th mat-header-cell *matHeaderCellDef>
             Role
             <div class="custom-control custom-checkbox small">
-              <input #checkStaff (click)="onSearchChange('role', checkStaff.checked.toString())" type="checkbox" class="custom-control-input" id="checkStaff">
+              <input #checkStaff (click)="switchRoleList(checkStaff.checked)" type="checkbox" class="custom-control-input" id="checkStaff">
               <label class="custom-control-label" for="checkStaff">Uniquement le staff</label>
             </div>
           </th>
@@ -84,7 +84,7 @@
         <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
       </table>
 
-      <mat-paginator [length]="users.totalElementsDatabase"
+      <mat-paginator [length]="entities.totalElementsDatabase"
                      (page)="onPaginateChange($event)"
                      [pageIndex]="page"
                      [pageSize]="elemsPerPage"

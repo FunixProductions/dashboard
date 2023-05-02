@@ -19,11 +19,11 @@
 
   <div class="card-body">
     <div class="col-md-12">
-      <p>Nombre de catégories : {{ categories.totalElementsDatabase }}</p>
+      <p>Nombre de catégories : {{ entities.totalElementsDatabase }}</p>
     </div>
 
     <div class="table-responsive">
-      <table mat-table [dataSource]="categories.content" class="table table-bordered" id="dataTable">
+      <table mat-table [dataSource]="entities.content" class="table table-bordered" id="dataTable">
 
         <ng-container matColumnDef="categoryName">
           <th mat-header-cell *matHeaderCellDef>
@@ -69,7 +69,7 @@
         <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
       </table>
 
-      <mat-paginator [length]="categories.totalElementsDatabase"
+      <mat-paginator [length]="entities.totalElementsDatabase"
                      (page)="onPaginateChange($event)"
                      [pageIndex]="page"
                      [pageSize]="elemsPerPage"

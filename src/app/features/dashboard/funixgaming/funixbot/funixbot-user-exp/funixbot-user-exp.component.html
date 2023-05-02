@@ -10,11 +10,11 @@
 
   <div class="card-body">
     <div class="col-md-12">
-      <p>Nombre de comptes : {{ users.totalElementsDatabase }}</p>
+      <p>Nombre de comptes : {{ entities.totalElementsDatabase }}</p>
     </div>
 
     <div class="table-responsive">
-      <table mat-table [dataSource]="users.content" class="table table-bordered" id="dataTable">
+      <table mat-table [dataSource]="entities.content" class="table table-bordered" id="dataTable">
 
         <ng-container matColumnDef="twitch-user-id">
           <th mat-header-cell *matHeaderCellDef>Twitch user ID</th>
@@ -52,7 +52,7 @@
         <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
       </table>
 
-      <mat-paginator [length]="users.totalElementsDatabase"
+      <mat-paginator [length]="entities.totalElementsDatabase"
                      (page)="onPaginateChange($event)"
                      [pageIndex]="page"
                      [pageSize]="elemsPerPage"
