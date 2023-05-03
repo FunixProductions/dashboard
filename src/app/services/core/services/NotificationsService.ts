@@ -11,14 +11,18 @@ export default class NotificationsService {
 
   public onErrorRequest(err: HttpErrorResponse): void {
     if (err.error && err.error.error) {
-      this.error('Erreur : ' + err.error.error);
+      this.error('Erreur : ' + err.error.error + ' (Erreur ' + err.status + ')');
     } else {
       if (err.status === 401) {
-        this.error('Vous devez être connecté pour accéder à cette ressource.');
+        this.error('Vous devez être connecté pour accéder à cette ressource. (Erreur 401)');
       } else if (err.status === 403) {
-        this.error('Vous n\'avez pas les droits pour accéder à cette ressource.');
+        this.error('Vous n\'avez pas les droits pour accéder à cette ressource. (Erreur 403)');
+      } else if (err.status === 404) {
+        this.error('La ressource demandée est introuvable. (Erreur 404)');
+      } else if (err.status === 400) {
+        this.error('Votre requête est invalide. (Erreur 400)');
       } else {
-        this.error('Une erreur interne est survenue veuillez re essayer.');
+        this.error('Une erreur interne est survenue veuillez re essayer. (Erreur ' + err.status + ')');
       }
     }
   }

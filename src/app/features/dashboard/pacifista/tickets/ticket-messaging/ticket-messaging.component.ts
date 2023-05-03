@@ -9,9 +9,12 @@ import {UserDTO, UserRole} from "../../../../../services/funix-api/user/dtos/use
 import {UserAuthService} from "../../../../../services/funix-api/user/services/user-auth-service";
 import {PageOption, Paginated} from "../../../../../services/core/dtos/paginated";
 import {QueryBuilder, QueryParam} from "../../../../../utils/query.builder";
-import PacifistaSupportTicketDTO
-  from "../../../../../services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
+import PacifistaSupportTicketDTO, {
+  TicketStatus
+} from "../../../../../services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
 import {ReCaptchaV3Service} from "ng-recaptcha";
+import PacifistaSupportTicketService
+  from "../../../../../services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
 
 @Component({
   selector: 'app-ticket-messaging',
@@ -28,10 +31,24 @@ export class TicketMessagingComponent implements AfterViewInit {
   messageInput: string = '';
 
   constructor(private ticketMessageService: PacifistaSupportTicketMessageService,
+              private ticketService: PacifistaSupportTicketService,
               private notificationService: NotificationsService,
               private recaptchaService: ReCaptchaV3Service,
               private authService: UserAuthService,
               private route: ActivatedRoute) {
+  }
+
+  ngAfterViewInit(): void {
+    this.route.params.subscribe(params => {
+      const ticketId = params['ticket-id'];
+
+      if (ticketId) {
+        this.ticketId = ticketId;
+        this.fetchCurrentUser();
+      } else {
+        this.notificationService.error('Aucun ticket sélectionné.');
+      }
+    });
   }
 
   postNewMessage(): void {
@@ -56,18 +73,63 @@ export class TicketMessagingComponent implements AfterViewInit {
     }
   }
 
+  closeTicket(): void {
+    if (this.ticketId) {
+      this.ticketService.getById(this.ticketId).subscribe({
+        next: ticket => {
+          ticket.status = TicketStatus.SOLVED;
+
+          this.ticketService.patch(ticket).subscribe({
+            next: () => {
+              this.notificationService.success('Ticket fermé avec succès.');
+            },
+            error: errorPatch => {
+              this.notificationService.onErrorRequest(errorPatch);
+            }
+          });
+        },
+        error: error => {
+          this.notificationService.onErrorRequest(error);
+        }
+      });
+    }
+  }
+
+  isActualUserIsStaff(): boolean {
+    return this.actualUser !== undefined && this.actualUser.role !== undefined && (this.actualUser.role === UserRole.PACIFISTA_MODERATOR ||
+      this.actualUser.role === UserRole.PACIFISTA_ADMIN || this.actualUser.role === UserRole.ADMIN);
+  }
+
+  isOwnMessage(message: PacifistaSupportTicketMessageDTO): boolean {
+    return this.actualUser !== undefined && message.writtenById !== undefined && this.actualUser.id === message.writtenById;
+  }
+
   private postStaffMessage(messageDTO: PacifistaSupportTicketMessageDTO): void {
     messageDTO.writtenById = this.actualUser?.id;
     messageDTO.writtenByName = this.actualUser?.username;
 
     this.ticketMessageService.create(messageDTO).subscribe({
-      next: () => {
+      next: ticketMessage => {
         this.messageInput = '';
+        this.updateTicketStatusToInProgress(ticketMessage);
       },
       error: error => {
         this.notificationService.onErrorRequest(error);
       }
     });
+  }
+
+  private updateTicketStatusToInProgress(ticketMessage: PacifistaSupportTicketMessageDTO): void {
+    if (ticketMessage.ticket && ticketMessage.ticket.status && ticketMessage.ticket.status === TicketStatus.CREATED) {
+      const ticket = ticketMessage.ticket;
+      ticket.status = TicketStatus.IN_PROGRESS;
+
+      this.ticketService.patch(ticket).subscribe({
+        error: errorPatch => {
+          this.notificationService.onErrorRequest(errorPatch);
+        }
+      });
+    }
   }
 
   private postUserMessage(messageDTO: PacifistaSupportTicketMessageDTO): void {
@@ -84,19 +146,6 @@ export class TicketMessagingComponent implements AfterViewInit {
       },
       error: () => {
         this.notificationService.error('La vérification captcha (anti robot) a échouée.');
-      }
-    });
-  }
-
-  ngAfterViewInit(): void {
-    this.route.params.subscribe(params => {
-      const ticketId = params['ticket-id'];
-
-      if (ticketId) {
-        this.ticketId = ticketId;
-        this.fetchCurrentUser();
-      } else {
-        this.notificationService.error('Aucun ticket sélectionné.');
       }
     });
   }
@@ -143,7 +192,7 @@ export class TicketMessagingComponent implements AfterViewInit {
       const pageOption: PageOption = new PageOption();
       pageOption.page = 0;
       pageOption.elemsPerPage = 300;
-      pageOption.sort = 'createdAt:desc';
+      pageOption.sort = 'createdAt:asc';
 
       const queryBuilder: QueryBuilder = new QueryBuilder();
       const queryParam: QueryParam = new QueryParam();
