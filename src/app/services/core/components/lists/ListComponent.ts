@@ -17,7 +17,6 @@ export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttp
   protected constructor(protected service: SERVICE) {
     this.pageOption.sort = this.sort;
     this.pageOption.page = this.page;
-    this.pageOption.elemsPerPage = this.elemsPerPage;
     this.updateList();
   }
 
