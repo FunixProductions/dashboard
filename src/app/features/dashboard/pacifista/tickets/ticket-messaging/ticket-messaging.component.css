@@ -99,6 +99,12 @@
   height: 0
 }
 
+.chat .chat-history {
+  overflow-y: scroll;
+  height: 65vh;
+  flex-direction: column-reverse;
+}
+
 @media only screen and (max-width: 767px) {
   .chat-app .people-list {
     height: 465px;

@@ -1,29 +1,37 @@
 <div class="chat">
-  <div class="chat-history">
+  <div class="chat-history" #chatScroll [scrollTop]="chatScroll.scrollHeight">
     <ul class="m-b-0">
-      <li class="clearfix">
-        <div class="message-data text-right">
-          <span class="message-data-time">10:10 AM, Today</span>
-          <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar" />
+      <li class="clearfix" *ngFor="let message of messages">
+        <div *ngIf="isOwnMessage(message); else elseUserMessage">
+          <div class="message-data text-right">
+            <span><i class="fa fa-user-alt"></i> {{ message.writtenByName }}</span>
+            <span class="message-data-time">| {{ message.createdAt ? (message.createdAt | date : 'dd/MM/YY - HH:mm') : '-'  }}</span>
+          </div>
+          <div class="message other-message float-right">{{ message.message }}</div>
         </div>
-        <div class="message other-message float-right">Hi Aiden, how are you? How is the project coming along?</div>
-      </li>
-      <li class="clearfix">
-        <div class="message-data"><span class="message-data-time">10:12 AM, Today</span></div>
-        <div class="message my-message">Are we meeting today?</div>
-      </li>
-      <li class="clearfix">
-        <div class="message-data"><span class="message-data-time">10:15 AM, Today</span></div>
-        <div class="message my-message">Project has been already finished and I have results to show you.</div>
+
+        <ng-template #elseUserMessage>
+          <li class="clearfix">
+            <div class="message-data">
+              <span class="message-data-time">{{ message.createdAt ? (message.createdAt | date : 'dd/MM/YY - HH:mm') : '-'  }} | </span>
+              <span>{{ message.writtenByName }} <i class="fa fa-user-alt"></i></span>
+            </div>
+            <div class="message my-message">{{ message.message }}</div>
+          </li>
+        </ng-template>
       </li>
     </ul>
   </div>
+
   <div class="chat-message clearfix">
     <div class="input-group mb-0">
       <div class="input-group-prepend">
-        <span class="input-group-text"><i class="fa fa-send"></i></span>
+        <span class="input-group-text"><i class="fa fa-paper-plane"></i></span>
       </div>
-      <input type="text" class="form-control" placeholder="Enter text here..." />
+      <input type="text" class="form-control" [(ngModel)]="messageInput" (keydown.enter)="postNewMessage()" placeholder="Enter text here..." />
+      <button class="ml-2 btn btn-success" (click)="postNewMessage()">Envoyer</button>
     </div>
+
+    <button class="mt-2 btn btn-danger" *ngIf="isActualUserIsStaff()" (click)="closeTicket()">Fermer le ticket</button>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import {CrudHttpClient} from "../../../../crud-http-client";
+import {CrudHttpClient} from "../../../../core/components/requests/crud-http-client";
 import PacifistaSupportTicketDTO, {TicketStatus} from "../dtos/PacifistaSupportTicketDTO";
 import {Injectable} from "@angular/core";
 import {environment} from "../../../../../../environments/environment";

@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
-import ApiDTO from "./core/dtos/api-dto";
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {environment} from "../../environments/environment";
+import ApiDTO from "../../dtos/api-dto";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {environment} from "../../../../../environments/environment";
 import {Observable} from "rxjs";
-import {PageOption, Paginated} from "./core/dtos/paginated";
-import {QueryBuilder} from "../utils/query.builder";
+import {PageOption, Paginated} from "../../dtos/paginated";
+import {QueryBuilder} from "../../../../utils/query.builder";
 import {FunixprodHttpClient} from "./funixprod-http-client";
 
 interface RequestParams {
@@ -19,7 +19,7 @@ interface RequestParams {
 })
 export abstract class CrudHttpClient<DTO extends ApiDTO> extends FunixprodHttpClient {
 
-  domain: string = environment.funixApiUrl;
+  domain: string = environment.funixgamingApiUrl;
   path: string = '';
 
   protected constructor(protected http: HttpClient) {

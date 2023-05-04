@@ -13,9 +13,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     if (this.swUpdate.isEnabled) {
-      this.swUpdate.versionUpdates.subscribe(() => {
-        if(confirm("Une nouvelle version du dashboard est disponible. Voulez-vous recharger la page ?")) {
-          window.location.reload();
+      this.swUpdate.versionUpdates.subscribe((event) => {
+        if (event.type === 'VERSION_READY') {
+          if (confirm("Une nouvelle version du dashboard est disponible. Voulez-vous recharger la page ?")) {
+            window.location.reload();
+          }
         }
       });
     }

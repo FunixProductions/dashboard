@@ -1,4 +1,4 @@
-import {CrudHttpClient} from "../../../crud-http-client";
+import {CrudHttpClient} from "../../../core/components/requests/crud-http-client";
 import {FunixbotUserExpDto} from "../dtos/funixbot-user-exp-dto";
 import {Injectable} from "@angular/core";
 

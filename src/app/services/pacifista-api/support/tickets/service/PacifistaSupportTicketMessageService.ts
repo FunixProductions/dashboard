@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {CrudHttpClient} from "../../../../crud-http-client";
+import {CrudHttpClient} from "../../../../core/components/requests/crud-http-client";
 import {environment} from "../../../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
@@ -11,17 +11,17 @@ import {Paginated} from "../../../../core/dtos/paginated";
 })
 export default class PacifistaSupportTicketMessageService extends CrudHttpClient<PacifistaSupportTicketMessageDTO> {
   override domain: string = environment.pacifistaApiUrl;
-  override path: string = 'support/ticket';
+  override path: string = 'support/ticket/message';
 
   constructor(protected httpClient: HttpClient) {
     super(httpClient);
   }
 
-  fetchUserTickets(page: number = 0, elemsPerPage: number = 10, ticketId: string): Observable<Paginated<PacifistaSupportTicketMessageDTO>> {
+  fetchUserTicketMessages(page: number = 0, elemsPerPage: number = 10, ticketId: string): Observable<Paginated<PacifistaSupportTicketMessageDTO>> {
     const params = {
       page: page.toString(),
       elemsPerPage: elemsPerPage.toString(),
-      ticketid: ticketId
+      ticketId: ticketId
     };
 
     return this.httpClient.get<Paginated<PacifistaSupportTicketMessageDTO>>(
@@ -30,7 +30,7 @@ export default class PacifistaSupportTicketMessageService extends CrudHttpClient
     );
   }
 
-  createTicketFromWeb(request: PacifistaSupportTicketMessageDTO, captchaCode: string): Observable<PacifistaSupportTicketMessageDTO> {
+  createTicketMessageFromWeb(request: PacifistaSupportTicketMessageDTO, captchaCode: string): Observable<PacifistaSupportTicketMessageDTO> {
     this.addCaptchaToHeader(captchaCode);
 
     return this.httpClient.post<PacifistaSupportTicketMessageDTO>(

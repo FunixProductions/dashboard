@@ -6,14 +6,14 @@ import {UserDTO} from "../dtos/user-dto";
 import {environment} from "../../../../../environments/environment";
 import {UserLoginDTO} from "../dtos/requests/user-login-dto";
 import {UserTokenDTO} from "../dtos/user-token-dto";
-import {FunixprodHttpClient} from "../../../funixprod-http-client";
+import {FunixprodHttpClient} from "../../../core/components/requests/funixprod-http-client";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAuthService extends FunixprodHttpClient {
 
-  url: string = environment.funixApiUrl + 'user/auth/';
+  url: string = environment.funixgamingApiUrl + 'user/auth/';
 
   private userDtoCache: Observable<UserDTO> | null = null;
 

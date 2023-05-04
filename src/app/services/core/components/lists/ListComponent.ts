@@ -1,5 +1,5 @@
 import ApiDTO from "../../dtos/api-dto";
-import {CrudHttpClient} from "../../../crud-http-client";
+import {CrudHttpClient} from "../requests/crud-http-client";
 import {PageOption, Paginated} from "../../dtos/paginated";
 import {QueryBuilder, QueryParam} from "../../../../utils/query.builder";
 import {PageEvent} from "@angular/material/paginator";
@@ -17,7 +17,6 @@ export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttp
   protected constructor(protected service: SERVICE) {
     this.pageOption.sort = this.sort;
     this.pageOption.page = this.page;
-    this.pageOption.elemsPerPage = this.elemsPerPage;
     this.updateList();
   }
 
