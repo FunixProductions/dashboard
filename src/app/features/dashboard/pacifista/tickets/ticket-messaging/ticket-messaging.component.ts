@@ -15,6 +15,9 @@ import PacifistaSupportTicketDTO, {
 import {ReCaptchaV3Service} from "ng-recaptcha";
 import PacifistaSupportTicketService
   from "../../../../../services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
+import PacifistaSupportTicketMessageWebsocketService
+  from "../../../../../services/pacifista-api/support/tickets/service/PacifistaSupportTicketMessageWebsocketService";
+import {ApiWebsocket} from "../../../../../services/core/components/websocket/ApiWebsocket";
 
 @Component({
   selector: 'app-ticket-messaging',
@@ -22,6 +25,9 @@ import PacifistaSupportTicketService
   styleUrls: ['./ticket-messaging.component.css']
 })
 export class TicketMessagingComponent implements AfterViewInit {
+
+  private static readonly SUBSCRIBE_TICKET_MESSAGE: string = 'subscribe-channel';
+  private static readonly MESSAGE_EVENT: string = 'ticket-message-event';
 
   columnsToDisplay = ['object', 'createdByName', 'ticketType', 'status', 'creationSource', 'createdAt', 'updatedAt', 'actions']
 
@@ -35,6 +41,7 @@ export class TicketMessagingComponent implements AfterViewInit {
               private notificationService: NotificationsService,
               private recaptchaService: ReCaptchaV3Service,
               private authService: UserAuthService,
+              private websocketService: PacifistaSupportTicketMessageWebsocketService,
               private route: ActivatedRoute) {
   }
 
@@ -45,6 +52,7 @@ export class TicketMessagingComponent implements AfterViewInit {
       if (ticketId) {
         this.ticketId = ticketId;
         this.fetchCurrentUser();
+        this.initWebsocket();
       } else {
         this.notificationService.error('Aucun ticket sélectionné.');
       }
@@ -102,6 +110,22 @@ export class TicketMessagingComponent implements AfterViewInit {
 
   isOwnMessage(message: PacifistaSupportTicketMessageDTO): boolean {
     return this.actualUser !== undefined && message.writtenById !== undefined && this.actualUser.id === message.writtenById;
+  }
+
+  private initWebsocket(): void {
+    this.websocketService.connect().subscribe({
+      next: (messageWs: string) => {
+        if (messageWs === ApiWebsocket.CONNECTED_STATE) {
+          this.websocketService.sendMessage(TicketMessagingComponent.SUBSCRIBE_TICKET_MESSAGE + ':' + this.ticketId);
+        } else if (messageWs.startsWith(TicketMessagingComponent.MESSAGE_EVENT)) {
+          const message: PacifistaSupportTicketMessageDTO = JSON.parse(messageWs.substring(TicketMessagingComponent.MESSAGE_EVENT.length + 1)) as PacifistaSupportTicketMessageDTO;
+          this.messages.push(message);
+        }
+      },
+      complete: () => {
+        this.initWebsocket();
+      }
+    })
   }
 
   private postStaffMessage(messageDTO: PacifistaSupportTicketMessageDTO): void {

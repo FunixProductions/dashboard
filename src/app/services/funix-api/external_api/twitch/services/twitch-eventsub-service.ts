@@ -10,7 +10,7 @@ import {TwitchEventSubListDTO} from "../dtos/TwitchEventSubListDTO";
 })
 export class TwitchEventsubService extends FunixprodHttpClient {
 
-  url: string = environment.funixApiUrl + 'twitch/eventsub'
+  url: string = environment.funixgamingApiUrl + 'twitch/eventsub'
 
   constructor(protected httpClient: HttpClient) {
     super();
