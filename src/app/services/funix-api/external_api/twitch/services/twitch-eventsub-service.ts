@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../../../../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {FunixprodHttpClient} from "../../../../funixprod-http-client";
+import {FunixprodHttpClient} from "../../../../core/components/requests/funixprod-http-client";
 import {Observable} from "rxjs";
 import {TwitchEventSubListDTO} from "../dtos/TwitchEventSubListDTO";
 

@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {CrudHttpClient} from "../../../../crud-http-client";
+import {CrudHttpClient} from "../../../../core/components/requests/crud-http-client";
 import {environment} from "../../../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";

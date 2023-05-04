@@ -1,5 +1,5 @@
 import ApiDTO from "../../dtos/api-dto";
-import {CrudHttpClient} from "../../../crud-http-client";
+import {CrudHttpClient} from "../requests/crud-http-client";
 import {PageOption, Paginated} from "../../dtos/paginated";
 import {QueryBuilder, QueryParam} from "../../../../utils/query.builder";
 import {PageEvent} from "@angular/material/paginator";
