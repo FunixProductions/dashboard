@@ -60,8 +60,10 @@ export class AppComponent implements OnInit {
   private checkNewDashboardVersion() {
     if (this.swUpdate.isEnabled) {
       this.swUpdate.versionUpdates.subscribe((event) => {
-        if (confirm("Une nouvelle version du dashboard est disponible. Voulez-vous recharger la page ?")) {
-          window.location.reload();
+        if (event.type === 'VERSION_DETECTED') {
+          if (confirm("Une nouvelle version du dashboard est disponible. Voulez-vous recharger la page ?")) {
+            window.location.reload();
+          }
         }
       });
     }
