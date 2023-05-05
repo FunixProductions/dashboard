@@ -41,4 +41,14 @@ export default class PacifistaSupportTicketService extends CrudHttpClient<Pacifi
       }
     )
   }
+
+  sendFcm(fcm: string): Observable<void> {
+    return this.httpClient.post<void>(
+      this.domain + this.path + '/web/fcm',
+      fcm,
+      {
+        headers: this.headers
+      }
+    )
+  }
 }
