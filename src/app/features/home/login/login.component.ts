@@ -34,6 +34,15 @@ export class LoginComponent {
         next: (loginDto: UserTokenDTO) => {
           if (loginDto.token) {
             localStorage.setItem('user-token-requests', loginDto.token);
+
+            const date = new Date();
+            while (localStorage.getItem('user-token-requests') === null) {
+              const now = new Date();
+              if (now.getTime() - date.getTime() > 3000) {
+                break;
+              }
+            }
+
             this.router.navigate(['dashboard']);
           } else {
             this.notificationService.error('Veuillez vous reconnecter, une erreur est survenue.');
