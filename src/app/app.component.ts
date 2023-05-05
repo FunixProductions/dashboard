@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SwUpdate} from "@angular/service-worker";
 import {environment} from "../environments/environment";
 import {getMessaging, getToken} from "firebase/messaging";
-import {NavigationEnd, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import PacifistaSupportTicketMessageWebsocketService
   from "./services/pacifista-api/support/tickets/service/PacifistaSupportTicketMessageWebsocketService";
 import {ApiWebsocket} from "./services/core/components/websocket/ApiWebsocket";
@@ -25,26 +25,17 @@ export class AppComponent implements OnInit {
   }
 
   private removeThis(fcmToken: string) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        const url = event.url;
-
-        if (!url.startsWith("/dashboard/pacifista/tickets/messages/")) {
-          this.removeSocket.connect().subscribe({
-            next: (messageWs: string) => {
-              if (messageWs === ApiWebsocket.CONNECTED_STATE) {
-                this.removeSocket.sendMessage('fcm-token:' + fcmToken);
-                console.log(fcmToken);
-              }
-            },
-            complete: () => {
-              this.removeThis(fcmToken);
-            }
-          })
+    this.removeSocket.connect().subscribe({
+      next: (messageWs: string) => {
+        if (messageWs === ApiWebsocket.CONNECTED_STATE) {
+          this.removeSocket.sendMessage('fcm-token:' + fcmToken);
+          console.log(fcmToken);
         }
+      },
+      complete: () => {
+        this.removeThis(fcmToken);
       }
-    });
-
+    })
   }
 
   private requestPermissionFirebaseNotifications() {
@@ -54,9 +45,8 @@ export class AppComponent implements OnInit {
       vapidKey: environment.firebase.vapidKey
     }).then((currentToken) => {
       if (currentToken) {
-        this.removeThis(currentToken);
-
         localStorage.setItem('firebaseToken', currentToken);
+        this.removeThis(currentToken);
       } else {
         localStorage.removeItem('firebaseToken');
         console.error('No registration token available. Request permission to generate one.');
@@ -70,10 +60,8 @@ export class AppComponent implements OnInit {
   private checkNewDashboardVersion() {
     if (this.swUpdate.isEnabled) {
       this.swUpdate.versionUpdates.subscribe((event) => {
-        if (event.type === 'VERSION_READY') {
-          if (confirm("Une nouvelle version du dashboard est disponible. Voulez-vous recharger la page ?")) {
-            window.location.reload();
-          }
+        if (confirm("Une nouvelle version du dashboard est disponible. Voulez-vous recharger la page ?")) {
+          window.location.reload();
         }
       });
     }
