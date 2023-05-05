@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserLoginDTO} from "../../../services/funix-api/user/dtos/requests/user-login-dto";
 import {UserAuthService} from "../../../services/funix-api/user/services/user-auth-service";
 import {Router} from "@angular/router";
@@ -11,7 +11,7 @@ import NotificationsService from "../../../services/core/services/NotificationsS
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   username: string = '';
   password: string = '';
@@ -21,6 +21,12 @@ export class LoginComponent {
               private reCaptchaService: ReCaptchaV3Service,
               private router: Router,
               private notificationService: NotificationsService) {
+  }
+
+  ngOnInit(): void {
+    if (localStorage.getItem('user-token-requests')) {
+      this.router.navigate(['dashboard']);
+    }
   }
 
   login(): void {

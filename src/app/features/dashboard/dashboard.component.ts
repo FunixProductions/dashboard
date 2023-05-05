@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserAuthService} from "../../services/funix-api/user/services/user-auth-service";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
@@ -9,13 +9,13 @@ import {UserDTO} from "../../services/funix-api/user/dtos/user-dto";
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements OnInit {
 
   constructor(private userAuthService: UserAuthService,
               private router: Router) {
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.canActivate();
   }
 
