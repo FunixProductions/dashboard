@@ -6,4 +6,9 @@ import {Component} from '@angular/core';
   styleUrls: ['./topbar.component.css']
 })
 export class TopbarComponent {
+
+  hasAcceptedAlerts(): boolean {
+    return localStorage.getItem('firebaseToken') !== null
+  }
+
 }

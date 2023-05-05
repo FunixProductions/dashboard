@@ -28,6 +28,10 @@
       </div>
     </li>
 
+    <div *ngIf="!hasAcceptedAlerts()" class="mt-4 alert alert-info">
+      Vous n'avez pas accepté les notifications. Vous pouvez les activer dans vos paramètres.
+    </div>
+
     <app-alerts></app-alerts>
 
     <div class="topbar-divider d-none d-sm-block"></div>
