@@ -42,7 +42,7 @@ export class TicketCreationComponent {
     ticket.object = this.object;
     ticket.type = this.type;
 
-    this.captchaService.execute('pacifista-support-ticket-create').subscribe({
+    this.captchaService.execute('pacifistasupportticketcreate').subscribe({
       next: (token: string) => {
         this.ticketService.createTicketFromWeb(ticket, token).subscribe({
           next: (response: PacifistaSupportTicketDTO) => {

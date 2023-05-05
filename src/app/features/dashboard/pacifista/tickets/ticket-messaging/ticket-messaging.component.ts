@@ -157,7 +157,7 @@ export class TicketMessagingComponent implements AfterViewInit {
   }
 
   private postUserMessage(messageDTO: PacifistaSupportTicketMessageDTO): void {
-    this.recaptchaService.execute('pacifista-support-ticket-message').subscribe({
+    this.recaptchaService.execute('pacifistasupportticketmessage').subscribe({
       next: captchaCode => {
         this.ticketMessageService.createTicketMessageFromWeb(messageDTO, captchaCode).subscribe({
           next: () => {
