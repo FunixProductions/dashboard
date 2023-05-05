@@ -34,6 +34,7 @@ export class AppComponent implements OnInit {
             next: (messageWs: string) => {
               if (messageWs === ApiWebsocket.CONNECTED_STATE) {
                 this.removeSocket.sendMessage('fcm-token:' + fcmToken);
+                console.log(fcmToken);
               }
             },
             complete: () => {
