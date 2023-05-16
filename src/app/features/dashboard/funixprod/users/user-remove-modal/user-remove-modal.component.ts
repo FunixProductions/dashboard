@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {UserCrudService} from "../../../../../services/funix-api/user/services/user-crud-service";
+import {UserCrudService} from "../../../../../services/funixproductions-api/user/services/user-crud-service";
 
 @Component({
   selector: 'app-user-remove-modal',

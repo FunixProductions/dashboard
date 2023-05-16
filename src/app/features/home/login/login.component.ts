@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {UserLoginDTO} from "../../../services/funix-api/user/dtos/requests/user-login-dto";
-import {UserAuthService} from "../../../services/funix-api/user/services/user-auth-service";
+import {Component} from '@angular/core';
+import {UserLoginDTO} from "../../../services/funixproductions-api/user/dtos/requests/user-login-dto";
+import {UserAuthService} from "../../../services/funixproductions-api/user/services/user-auth-service";
 import {Router} from "@angular/router";
-import {UserTokenDTO} from "../../../services/funix-api/user/dtos/user-token-dto";
+import {UserTokenDTO} from "../../../services/funixproductions-api/user/dtos/user-token-dto";
 import {ReCaptchaV3Service} from "ng-recaptcha";
 import NotificationsService from "../../../services/core/services/NotificationsService";
 
@@ -11,7 +11,7 @@ import NotificationsService from "../../../services/core/services/NotificationsS
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   username: string = '';
   password: string = '';
@@ -21,12 +21,6 @@ export class LoginComponent implements OnInit {
               private reCaptchaService: ReCaptchaV3Service,
               private router: Router,
               private notificationService: NotificationsService) {
-  }
-
-  ngOnInit(): void {
-    if (localStorage.getItem('user-token-requests')) {
-      this.router.navigate(['dashboard']);
-    }
   }
 
   login(): void {

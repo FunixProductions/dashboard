@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {UserAuthService} from "../../services/funix-api/user/services/user-auth-service";
+import {UserAuthService} from "../../services/funixproductions-api/user/services/user-auth-service";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
-import {UserDTO} from "../../services/funix-api/user/dtos/user-dto";
+import {UserDTO} from "../../services/funixproductions-api/user/dtos/user-dto";
 
 @Component({
   selector: 'app-dashboard',

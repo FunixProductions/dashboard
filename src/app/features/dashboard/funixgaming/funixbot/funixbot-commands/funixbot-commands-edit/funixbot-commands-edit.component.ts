@@ -2,8 +2,8 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {
   FunixbotCommandsCrudService
-} from "../../../../../../services/funix-api/funixbot/services/funixbot-commands-crud-service";
-import {FunixbotCommandDto} from "../../../../../../services/funix-api/funixbot/dtos/funixbot-command-dto";
+} from "../../../../../../services/funixgaming-api/funixbot/services/funixbot-commands-crud-service";
+import {FunixbotCommandDto} from "../../../../../../services/funixgaming-api/funixbot/dtos/funixbot-command-dto";
 import NotificationsService from "../../../../../../services/core/services/NotificationsService";
 
 @Component({

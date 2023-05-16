@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {FunixbotCommandDto} from "../../../../../services/funix-api/funixbot/dtos/funixbot-command-dto";
-import {QueryParam} from "../../../../../utils/query.builder";
+import {FunixbotCommandDto} from "../../../../../services/funixgaming-api/funixbot/dtos/funixbot-command-dto";
+import {QueryParam} from "../../../../../services/core/components/query.builder";
 import {
   FunixbotCommandsCrudService
-} from "../../../../../services/funix-api/funixbot/services/funixbot-commands-crud-service";
+} from "../../../../../services/funixgaming-api/funixbot/services/funixbot-commands-crud-service";
 import {MatDialog} from "@angular/material/dialog";
 import {FunixbotCommandsEditComponent} from "./funixbot-commands-edit/funixbot-commands-edit.component";
 import {

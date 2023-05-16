@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {UserDTO, UserRole} from "../../../../../services/funix-api/user/dtos/user-dto";
+import {UserDTO, UserRole} from "../../../../../services/funixproductions-api/user/dtos/user-dto";
 import {ActivatedRoute} from "@angular/router";
-import {UserCrudService} from "../../../../../services/funix-api/user/services/user-crud-service";
+import {UserCrudService} from "../../../../../services/funixproductions-api/user/services/user-crud-service";
 import NotificationsService from "../../../../../services/core/services/NotificationsService";
 
 @Component({

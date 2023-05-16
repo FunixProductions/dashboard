@@ -4,7 +4,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../../../../environments/environment";
 import {Observable} from "rxjs";
 import {PageOption, Paginated} from "../../dtos/paginated";
-import {QueryBuilder} from "../../../../utils/query.builder";
+import {QueryBuilder} from "../query.builder";
 import {FunixprodHttpClient} from "./funixprod-http-client";
 
 interface RequestParams {

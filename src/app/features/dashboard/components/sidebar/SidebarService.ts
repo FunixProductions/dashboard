@@ -1,5 +1,5 @@
-import {UserAuthService} from "../../../../services/funix-api/user/services/user-auth-service";
-import {UserDTO, UserRole} from "../../../../services/funix-api/user/dtos/user-dto";
+import {UserAuthService} from "../../../../services/funixproductions-api/user/services/user-auth-service";
+import {UserDTO, UserRole} from "../../../../services/funixproductions-api/user/dtos/user-dto";
 
 export abstract class SidebarService {
 

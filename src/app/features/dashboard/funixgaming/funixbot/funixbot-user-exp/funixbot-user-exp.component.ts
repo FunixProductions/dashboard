@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {FunixbotUserExpDto} from "../../../../../services/funix-api/funixbot/dtos/funixbot-user-exp-dto";
+import {FunixbotUserExpDto} from "../../../../../services/funixgaming-api/funixbot/dtos/funixbot-user-exp-dto";
 import {
   FunixbotUserExpCrudService
-} from "../../../../../services/funix-api/funixbot/services/funixbot-user-exp-crud-service";
+} from "../../../../../services/funixgaming-api/funixbot/services/funixbot-user-exp-crud-service";
 import {ListComponent} from "../../../../../services/core/components/lists/ListComponent";
 
 @Component({

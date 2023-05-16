@@ -5,7 +5,7 @@ import PacifistaSupportTicketDTO, {
 } from "../../../../../services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
 import PacifistaSupportTicketService
   from "../../../../../services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
-import {QueryBuilder} from "../../../../../utils/query.builder";
+import {QueryBuilder} from "../../../../../services/core/components/query.builder";
 
 @Component({
   selector: 'app-ticket-list-staff',

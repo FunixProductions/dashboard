@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
-import {UserDTO, UserRole} from "../../../../services/funix-api/user/dtos/user-dto";
-import {UserCrudService} from "../../../../services/funix-api/user/services/user-crud-service";
+import {UserDTO, UserRole} from "../../../../services/funixproductions-api/user/dtos/user-dto";
+import {UserCrudService} from "../../../../services/funixproductions-api/user/services/user-crud-service";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {UserRemoveModalComponent} from "./user-remove-modal/user-remove-modal.component";
 import {ListComponent} from "../../../../services/core/components/lists/ListComponent";
-import {QueryBuilder} from "../../../../utils/query.builder";
+import {QueryBuilder} from "../../../../services/core/components/query.builder";
 
 @Component({
   selector: 'app-users',

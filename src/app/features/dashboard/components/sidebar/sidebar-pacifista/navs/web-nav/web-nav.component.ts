@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {SidebarService} from "../../../SidebarService";
-import {UserAuthService} from "../../../../../../../services/funix-api/user/services/user-auth-service";
+import {UserAuthService} from "../../../../../../../services/funixproductions-api/user/services/user-auth-service";
 
 @Component({
   selector: 'app-web-nav',

@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {SidebarService} from "../../../SidebarService";
-import {UserAuthService} from "../../../../../../../services/funix-api/user/services/user-auth-service";
+import {UserAuthService} from "../../../../../../../services/funixproductions-api/user/services/user-auth-service";
 import PacifistaSupportTicketService
   from "../../../../../../../services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
 import PacifistaSupportTicketDTO, {
   TicketStatus
 } from "../../../../../../../services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
 import {PageOption} from "../../../../../../../services/core/dtos/paginated";
-import {QueryBuilder, QueryParam} from "../../../../../../../utils/query.builder";
+import {QueryBuilder, QueryParam} from "../../../../../../../services/core/components/query.builder";
 import NotificationsService from "../../../../../../../services/core/services/NotificationsService";
-import {UserRole} from "../../../../../../../services/funix-api/user/dtos/user-dto";
+import {UserRole} from "../../../../../../../services/funixproductions-api/user/dtos/user-dto";
 
 @Component({
   selector: 'app-tickets-nav',

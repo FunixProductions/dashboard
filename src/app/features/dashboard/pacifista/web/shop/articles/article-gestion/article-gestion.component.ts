@@ -9,7 +9,7 @@ import PacifistaShopCategoryService
 import PacifistaShopCategoryDTO
   from "../../../../../../../services/pacifista-api/web/shop/categories/dtos/PacifistaShopCategoryDTO";
 import {PageOption, Paginated} from "../../../../../../../services/core/dtos/paginated";
-import {QueryBuilder, QueryParam} from "../../../../../../../utils/query.builder";
+import {QueryBuilder, QueryParam} from "../../../../../../../services/core/components/query.builder";
 import NotificationsService from "../../../../../../../services/core/services/NotificationsService";
 
 @Component({

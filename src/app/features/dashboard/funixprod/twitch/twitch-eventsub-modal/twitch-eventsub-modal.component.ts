@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {
   TwitchEventsubService
-} from "../../../../../services/funix-api/external_api/twitch/services/twitch-eventsub-service";
+} from "../../../../../services/funixproductions-api/external_api/twitch/services/twitch-eventsub-service";
 import NotificationsService from "../../../../../services/core/services/NotificationsService";
 
 @Component({

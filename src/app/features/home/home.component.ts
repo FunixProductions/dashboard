@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {UserAuthService} from "../../services/funix-api/user/services/user-auth-service";
+import {UserAuthService} from "../../services/funixproductions-api/user/services/user-auth-service";
 import {Router} from "@angular/router";
 
 @Component({

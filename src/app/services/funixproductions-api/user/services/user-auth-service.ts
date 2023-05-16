@@ -13,7 +13,7 @@ import {FunixprodHttpClient} from "../../../core/components/requests/funixprod-h
 })
 export class UserAuthService extends FunixprodHttpClient {
 
-  url: string = environment.funixgamingApiUrl + 'user/auth/';
+  url: string = environment.funixproductionsApiUrl + 'user/auth/';
 
   private userDtoCache: Observable<UserDTO> | null = null;
 

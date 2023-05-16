@@ -5,10 +5,10 @@ import PacifistaSupportTicketMessageService
   from "../../../../../services/pacifista-api/support/tickets/service/PacifistaSupportTicketMessageService";
 import {ActivatedRoute} from "@angular/router";
 import NotificationsService from "../../../../../services/core/services/NotificationsService";
-import {UserDTO, UserRole} from "../../../../../services/funix-api/user/dtos/user-dto";
-import {UserAuthService} from "../../../../../services/funix-api/user/services/user-auth-service";
+import {UserDTO, UserRole} from "../../../../../services/funixproductions-api/user/dtos/user-dto";
+import {UserAuthService} from "../../../../../services/funixproductions-api/user/services/user-auth-service";
 import {PageOption, Paginated} from "../../../../../services/core/dtos/paginated";
-import {QueryBuilder, QueryParam} from "../../../../../utils/query.builder";
+import {QueryBuilder, QueryParam} from "../../../../../services/core/components/query.builder";
 import PacifistaSupportTicketDTO, {
   TicketStatus
 } from "../../../../../services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";

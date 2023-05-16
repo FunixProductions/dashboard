@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {
   Condition,
   TwitchEventSubListDTO
-} from "../../../../../services/funix-api/external_api/twitch/dtos/TwitchEventSubListDTO";
-import {TwitchEventsubService} from "../../../../../services/funix-api/external_api/twitch/services/twitch-eventsub-service";
+} from "../../../../../services/funixproductions-api/external_api/twitch/dtos/TwitchEventSubListDTO";
+import {
+  TwitchEventsubService
+} from "../../../../../services/funixproductions-api/external_api/twitch/services/twitch-eventsub-service";
 import {MatDialog} from "@angular/material/dialog";
 import {TwitchEventsubModalComponent} from "../twitch-eventsub-modal/twitch-eventsub-modal.component";
 
@@ -30,7 +32,7 @@ export class TwitchEventsubComponent {
       }
     });
 
-    dialogRef.afterClosed().subscribe(res => {
+    dialogRef.afterClosed().subscribe(() => {
       this.updateList();
     });
   }
@@ -42,7 +44,7 @@ export class TwitchEventsubComponent {
       }
     });
 
-    dialogRef.afterClosed().subscribe(res => {
+    dialogRef.afterClosed().subscribe(() => {
       this.updateList();
     });
   }
