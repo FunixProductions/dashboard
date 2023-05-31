@@ -8,9 +8,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from "../environments/environment";
-import {initializeApp} from "firebase/app";
-
-initializeApp(environment.firebase);
 
 @NgModule({
   declarations: [
