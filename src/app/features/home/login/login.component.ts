@@ -24,6 +24,15 @@ export class LoginComponent implements OnInit {
               private reCaptchaService: ReCaptchaV3Service,
               private router: Router,
               private notificationService: NotificationsService) {
+    this.canActivate();
+  }
+
+  canActivate(): void {
+    this.userAuthService.currentUser().subscribe({
+      next: () => {
+        this.router.navigate(['dashboard']);
+      }
+    });
   }
 
   ngOnInit(): void {

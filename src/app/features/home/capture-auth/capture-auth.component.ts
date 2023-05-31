@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -6,14 +6,14 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './capture-auth.component.html',
   styleUrls: ['./capture-auth.component.css']
 })
-export class CaptureAuthComponent implements AfterViewInit {
+export class CaptureAuthComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router) {
   }
 
-  ngAfterViewInit(): void {
-    this.route.params.subscribe(async params => {
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(async params => {
       const jwt = params['jwt'];
 
       if (!jwt) {
@@ -24,7 +24,5 @@ export class CaptureAuthComponent implements AfterViewInit {
       await this.router.navigate(['dashboard']);
     });
   }
-
-
 
 }
