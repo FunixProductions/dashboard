@@ -33,6 +33,10 @@ export class UserAuthService extends FunixprodHttpClient {
     return this.httpClient.post<UserTokenDTO>(this.url + 'login', request, {headers: this.headers});
   }
 
+  logout(): Observable<void> {
+    return this.httpClient.post<void>(this.url + 'logout', null, {headers: this.headers});
+  }
+
   currentUser(): Observable<UserDTO> {
     if (this.userDtoCache !== null) {
       return this.userDtoCache;
