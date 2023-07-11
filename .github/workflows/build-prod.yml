@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build-pterodactyl-image-and-restart-prod:
+  build-production-image:
     runs-on: ubuntu-latest
 
     permissions:
@@ -27,3 +27,23 @@ jobs:
         run: |
           docker build . --tag ghcr.io/funixproductions/funixproductions-dashboard:latest
           docker push ghcr.io/funixproductions/funixproductions-dashboard:latest
+
+  update-kubernetes-cluster:
+    needs:
+      - build-production-image
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up kubectl
+        uses: azure/k8s-set-context@v3
+        with:
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+        env:
+          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Update Kubernetes Cluster
+        run: cd kubernetes && ./deploy.sh
