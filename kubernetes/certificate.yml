@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: funixproductions-dashboard-certificate
+  namespace: "funixproductions"
+spec:
+  secretName: funixproductions-dashboard-certificate-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  commonName: "dashboard.funixproductions.com"
+  dnsNames:
+    - "dashboard.funixproductions.com"

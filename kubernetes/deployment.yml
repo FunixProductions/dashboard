@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: dashboard-funixprod-deployment
+  namespace: 'funixproductions'
+  labels:
+    app: angular
+    service: dashboard
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: angular
+      service: dashboard
+  template:
+    metadata:
+      namespace: 'funixproductions'
+      annotations:
+        build-time: "TIME-UPDATE-BUILD-FNG"
+      labels:
+        app: angular
+        service: dashboard
+    spec:
+      containers:
+        - name: angular-dashboard-funixprod
+          image: ghcr.io/funixproductions/funixproductions-dashboard:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "750Mi"
+          imagePullPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  namespace: 'funixproductions'
+  name: dashboard
+
+spec:
+  type: ClusterIP
+  selector:
+    app: angular
+    service: dashboard
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+---
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  namespace: 'funixproductions'
+  name: dashboard-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: dashboard-funixprod-deployment
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80

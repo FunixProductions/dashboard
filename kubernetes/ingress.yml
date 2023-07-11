@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: 'funixproductions'
+  name: funixproductions-dashboard-ingress
+  annotations:
+    spec.ingressClassName: traefik
+spec:
+  tls:
+    - secretName: funixproductions-dashboard-certificate-tls
+  rules:
+    - host: dashboard.funixproductions.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dashboard
+                port:
+                  number: 80
