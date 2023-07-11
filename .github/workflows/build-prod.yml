@@ -46,4 +46,4 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Update Kubernetes Cluster
-        run: cd kubernetes && ./deploy.sh
+        run: cd kubernetes && chmod +x ./deployServices.sh && ./deployServices.sh
