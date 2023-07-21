@@ -35,7 +35,12 @@
               "src/styles.css"
             ],
             "scripts": [
-              "./node_modules/tinymce/tinymce.min.js"
+              "node_modules/tinymce/tinymce.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/js/jquery.easing.min.js",
+              "src/assets/js/sb-admin-2.min.js",
+              "src/assets/js/Chart.bundle.min.js"
             ],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
@@ -114,7 +119,12 @@
               "src/styles.css"
             ],
             "scripts": [
-              "./node_modules/tinymce/tinymce.min.js"
+              "node_modules/tinymce/tinymce.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/js/jquery.easing.min.js",
+              "src/assets/js/sb-admin-2.min.js",
+              "src/assets/js/Chart.bundle.min.js"
             ]
           }
         }
