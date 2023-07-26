@@ -15,6 +15,7 @@ export abstract class FunixprodHttpClient {
     let headersToSend = new HttpHeaders({
       'Content-Type': 'application/json'
     });
+
     if (captchaCode.length > 0) {
       headersToSend = headersToSend.set(FunixprodHttpClient.captchaHeaderCode, captchaCode);
     }

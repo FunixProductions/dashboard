@@ -1,0 +1,17 @@
+.btn-twitch {
+  color:white;
+  background-color:#9146FF;
+  border-color:#3e2272
+}
+
+.btn-twitch:hover{
+  color:#fff;
+  background-color:#423064;
+  border-color:#3e2272
+}
+
+.btn-twitch.focus,.btn-twitch:focus{
+  color:white;
+  background-color:#423064;
+  border-color:#423064;
+}
