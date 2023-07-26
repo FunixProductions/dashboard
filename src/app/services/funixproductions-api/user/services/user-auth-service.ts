@@ -15,35 +15,24 @@ export class UserAuthService extends FunixprodHttpClient {
 
   url: string = environment.funixproductionsApiUrl + 'user/auth/';
 
-  private userDtoCache: Observable<UserDTO> | null = null;
-
   constructor(protected httpClient: HttpClient) {
     super();
   }
 
   register(request: UserCreationDTO, captchaCode: string): Observable<UserDTO> {
-    this.addCaptchaToHeader(captchaCode);
-
-    return this.httpClient.post<UserDTO>(this.url + 'register', request, {headers: this.headers});
+    return this.httpClient.post<UserDTO>(this.url + 'register', request, {headers: super.getHeaders(captchaCode)});
   }
 
   login(request: UserLoginDTO, captchaCode: string): Observable<UserTokenDTO> {
-    this.addCaptchaToHeader(captchaCode);
-
-    return this.httpClient.post<UserTokenDTO>(this.url + 'login', request, {headers: this.headers});
+    return this.httpClient.post<UserTokenDTO>(this.url + 'login', request, {headers: super.getHeaders(captchaCode)});
   }
 
   logout(): Observable<void> {
-    return this.httpClient.post<void>(this.url + 'logout', null, {headers: this.headers});
+    return this.httpClient.post<void>(this.url + 'logout', null, {headers: super.getHeaders()});
   }
 
   currentUser(): Observable<UserDTO> {
-    if (this.userDtoCache !== null) {
-      return this.userDtoCache;
-    } else {
-      this.userDtoCache = this.httpClient.get<UserDTO>(this.url + 'current', {headers: this.headers});
-      return this.userDtoCache;
-    }
+    return this.httpClient.get<UserDTO>(this.url + 'current', {headers: super.getHeaders()});
   }
 
 }

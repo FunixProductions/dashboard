@@ -39,19 +39,19 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> extends FunixprodHttpCl
       search: (queryBuilder === null ? '' : queryBuilder.get())
     };
 
-    return this.http.get<Paginated<DTO>>(this.domain + this.path, {headers: this.headers, params: {...params}});
+    return this.http.get<Paginated<DTO>>(this.domain + this.path, {headers: super.getHeaders(), params: {...params}});
   }
 
   getById(id: string): Observable<DTO> {
-    return this.http.get<DTO>(this.domain + this.path + "/" + id, {headers: this.headers});
+    return this.http.get<DTO>(this.domain + this.path + "/" + id, {headers: super.getHeaders()});
   }
 
   create(dto: DTO): Observable<DTO> {
-    return this.http.post<DTO>(this.domain + this.path, dto, {headers: this.headers})
+    return this.http.post<DTO>(this.domain + this.path, dto, {headers: super.getHeaders()})
   }
 
   patch(dto: DTO): Observable<DTO> {
-    return this.http.patch<DTO>(this.domain + this.path, dto, {headers: this.headers})
+    return this.http.patch<DTO>(this.domain + this.path, dto, {headers: super.getHeaders()})
   }
 
   delete(id: string): Observable<any> {
@@ -59,7 +59,7 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> extends FunixprodHttpCl
 
     return this.http.delete(this.domain + this.path, {
       params: httpParams,
-      headers: this.headers
+      headers: super.getHeaders()
     })
   }
 }

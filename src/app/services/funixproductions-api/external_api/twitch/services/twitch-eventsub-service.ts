@@ -17,11 +17,11 @@ export class TwitchEventsubService extends FunixprodHttpClient {
   }
 
   getAppSubscriptions(): Observable<TwitchEventSubListDTO> {
-    return this.httpClient.get<TwitchEventSubListDTO>(this.url, {headers: this.headers});
+    return this.httpClient.get<TwitchEventSubListDTO>(this.url, {headers: super.getHeaders()});
   }
 
   createSubscription(streamerUsername: string = 'funixgaming'): Observable<any> {
-    return this.httpClient.post<any>(this.url, streamerUsername, {headers: this.headers});
+    return this.httpClient.post<any>(this.url, streamerUsername, {headers: super.getHeaders()});
   }
 
   deleteSubscription(streamerUsername: string = 'funixgaming'): Observable<any> {
@@ -29,7 +29,7 @@ export class TwitchEventsubService extends FunixprodHttpClient {
 
     return this.httpClient.delete(this.url, {
       params: httpParams,
-      headers: this.headers
+      headers: super.getHeaders()
     })
   }
 }

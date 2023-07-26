@@ -26,18 +26,16 @@ export default class PacifistaSupportTicketMessageService extends CrudHttpClient
 
     return this.httpClient.get<Paginated<PacifistaSupportTicketMessageDTO>>(
       this.domain + this.path + '/web',
-      {headers: this.headers, params: params}
+      {headers: super.getHeaders(), params: params}
     );
   }
 
   createTicketMessageFromWeb(request: PacifistaSupportTicketMessageDTO, captchaCode: string): Observable<PacifistaSupportTicketMessageDTO> {
-    this.addCaptchaToHeader(captchaCode);
-
     return this.httpClient.post<PacifistaSupportTicketMessageDTO>(
       this.domain + this.path + '/web',
       request,
       {
-        headers: this.headers
+        headers: super.getHeaders(captchaCode)
       }
     )
   }

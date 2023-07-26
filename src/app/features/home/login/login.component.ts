@@ -6,6 +6,7 @@ import {UserTokenDTO} from "../../../services/funixproductions-api/user/dtos/use
 import {ReCaptchaV3Service} from "ng-recaptcha";
 import NotificationsService from "../../../services/core/services/NotificationsService";
 import {environment} from "../../../../environments/environment";
+import {FunixprodHttpClient} from "../../../services/core/components/requests/funixprod-http-client";
 
 @Component({
   selector: 'app-login',
@@ -73,7 +74,7 @@ export class LoginComponent implements OnInit {
       this.userAuthService.login(loginRequest, token).subscribe({
         next: async (loginDto: UserTokenDTO) => {
           if (loginDto.token) {
-            await localStorage.setItem('user-token-requests', loginDto.token);
+            await localStorage.setItem(FunixprodHttpClient.accessTokenLocalStorageName, loginDto.token);
             await this.router.navigate(['dashboard']);
           } else {
             this.notificationService.error('Erreur de connection. Veuillez recommencer.')

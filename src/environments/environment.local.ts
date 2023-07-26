@@ -1,16 +1,19 @@
 export const environment = {
   production: false,
 
-  funixgamingApiUrl: 'http://localhost:8080/',
-  funixproductionsApiUrl: 'http://localhost:4242/',
-  pacifistaApiUrl: 'http://localhost:9010/',
+  //Urls HTTP for apis
+  funixgamingApiUrl: 'https://dev.api.funixgaming.fr/',
+  funixproductionsApiUrl: 'https://dev.api.funixproductions.com/',
+  pacifistaApiUrl: 'https://dev.api.pacifista.fr/',
 
-  funixgamingWebsocketUrl: 'ws://localhost:8080/',
-  funixproductionsWebsocketUrl: 'ws://localhost:4242/',
-  pacifistaWebsocketUrl: 'ws://localhost:9010/',
+  //Urls websocket for apis
+  funixgamingWebsocketUrl: 'wss://dev.api.funixgaming.fr/',
+  funixproductionsWebsocketUrl: 'wss://dev.api.funixproductions.com/',
+  pacifistaWebsocketUrl: 'wss://dev.api.pacifista.fr/',
 
-  reCaptchaSiteKey: '6LdG6kYgAAAAAGOntHH8P7V_d55rEd39sSos2xmF',
+  //Configuration for Google recaptcha
+  reCaptchaSiteKey: '6Ldg71gfAAAAAGgG3d3vrIuroxue_Qasp6SGSYeh',
 
-//configuration for Google auth
+  //configuration for Google auth
   googleClientId: '589571042618-800pup4tagrbo3isp3j8tf64o0li4k0e.apps.googleusercontent.com'
 }

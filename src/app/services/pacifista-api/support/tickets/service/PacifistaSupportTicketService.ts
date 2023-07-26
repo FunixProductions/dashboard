@@ -26,18 +26,16 @@ export default class PacifistaSupportTicketService extends CrudHttpClient<Pacifi
 
     return this.httpClient.get<Paginated<PacifistaSupportTicketDTO>>(
       this.domain + this.path + '/web',
-      {headers: this.headers, params: params},
+      {headers: super.getHeaders(), params: params},
     );
   }
 
   createTicketFromWeb(request: PacifistaSupportTicketDTO, captchaCode: string): Observable<PacifistaSupportTicketDTO> {
-    this.addCaptchaToHeader(captchaCode);
-
     return this.httpClient.post<PacifistaSupportTicketDTO>(
       this.domain + this.path + '/web',
       request,
       {
-        headers: this.headers
+        headers: super.getHeaders(captchaCode)
       }
     )
   }
@@ -47,7 +45,7 @@ export default class PacifistaSupportTicketService extends CrudHttpClient<Pacifi
       this.domain + this.path + '/web/fcm',
       fcm,
       {
-        headers: this.headers
+        headers: super.getHeaders()
       }
     )
   }

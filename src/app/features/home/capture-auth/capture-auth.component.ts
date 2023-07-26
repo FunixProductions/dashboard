@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
+import {FunixprodHttpClient} from "../../../services/core/components/requests/funixprod-http-client";
 
 @Component({
   selector: 'app-capture-auth',
@@ -20,7 +21,7 @@ export class CaptureAuthComponent implements OnInit {
         await this.router.navigate(['']);
       }
 
-      await localStorage.setItem('user-token-requests', jwt);
+      await localStorage.setItem(FunixprodHttpClient.accessTokenLocalStorageName, jwt);
       await this.router.navigate(['dashboard']);
     });
   }
