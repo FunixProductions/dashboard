@@ -11,7 +11,7 @@ export default class NotificationsService {
 
   public onErrorRequest(err: HttpErrorResponse, customMessage: string = ''): void {
     if (err.error && err.error.error) {
-      this.error((customMessage.length > 0 ? 'Message: ' + customMessage : '') + ' (Erreur ' + err.status + ')');
+      this.error(customMessage + ' : ' + err.error.error + ' (Erreur code ' + err.status + ')');
     } else {
       if (err.status === 401) {
         this.error('Vous devez être connecté pour accéder à cette ressource. (Erreur 401)' + (customMessage.length > 0 ? 'Message: ' + customMessage : ''));
