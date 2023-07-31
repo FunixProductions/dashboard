@@ -8,13 +8,15 @@ import {FormsModule} from "@angular/forms";
 import {RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module} from "ng-recaptcha";
 import {environment} from "../../../environments/environment";
 import {CaptureAuthComponent} from "./capture-auth/capture-auth.component";
+import {ResetPasswordComponent} from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    CaptureAuthComponent
+    CaptureAuthComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
