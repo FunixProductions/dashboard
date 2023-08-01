@@ -7,6 +7,8 @@ import {environment} from "../../../../../environments/environment";
 import {UserLoginDTO} from "../dtos/requests/user-login-dto";
 import {UserTokenDTO} from "../dtos/user-token-dto";
 import {FunixprodHttpClient} from "../../../core/components/requests/funixprod-http-client";
+import UserPasswordResetRequestDTO from "../dtos/requests/user-password-reset-request-dto";
+import UserPasswordResetDTO from "../dtos/requests/user-password-reset-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +35,17 @@ export class UserAuthService extends FunixprodHttpClient {
 
   currentUser(): Observable<UserDTO> {
     return this.httpClient.get<UserDTO>(this.url + 'current', {headers: super.getHeaders()});
+  }
+
+  resetPasswordRequest(email: string, captchaCode: string): Observable<void> {
+    const request = new UserPasswordResetRequestDTO();
+    request.email = email;
+
+    return this.httpClient.post<void>(this.url + 'resetPasswordRequest', request, {headers: super.getHeaders(captchaCode)});
+  }
+
+  resetPassword(request: UserPasswordResetDTO, captchaCode: string): Observable<void> {
+    return this.httpClient.post<void>(this.url + 'resetPassword', request, {headers: super.getHeaders(captchaCode)});
   }
 
 }
