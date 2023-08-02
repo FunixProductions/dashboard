@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "./dashboard.component";
 import {HomeDashboardComponent} from "./home/home-dashboard.component";
-import {ProfileComponent} from "./profile/profile.component";
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, children: [
@@ -12,7 +11,7 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        component: ProfileComponent
+        loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
       },
       {
         path: 'funixprod',
