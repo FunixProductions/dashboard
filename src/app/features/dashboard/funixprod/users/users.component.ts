@@ -16,7 +16,7 @@ export class UsersComponent extends ListComponent<UserDTO, UserCrudService> {
 
   columnsToDisplay = ['username', 'email', 'role', 'createdAt', 'updatedAt', 'actions'];
 
-  constructor(private userCrudService: UserCrudService,
+  constructor(userCrudService: UserCrudService,
               private router: Router,
               private dialog: MatDialog) {
     super(userCrudService);

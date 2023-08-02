@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserCreationDTO} from "../dtos/requests/user-creation-dto";
 import {UserDTO} from "../dtos/user-dto";
@@ -9,6 +9,7 @@ import {UserTokenDTO} from "../dtos/user-token-dto";
 import {FunixprodHttpClient} from "../../../core/components/requests/funixprod-http-client";
 import UserPasswordResetRequestDTO from "../dtos/requests/user-password-reset-request-dto";
 import UserPasswordResetDTO from "../dtos/requests/user-password-reset-dto";
+import {Paginated} from "../../../core/dtos/paginated";
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,22 @@ export class UserAuthService extends FunixprodHttpClient {
 
   currentUser(): Observable<UserDTO> {
     return this.httpClient.get<UserDTO>(this.url + 'current', {headers: super.getHeaders()});
+  }
+
+  getSessions(page: string = '0', elemsPerPage: string = '30'): Observable<Paginated<UserTokenDTO>> {
+    const params: HttpParams = new HttpParams().set('page', page).set('elementsPerPage', elemsPerPage);
+    return this.httpClient.get<Paginated<UserTokenDTO>>(this.url + 'sessions', {headers: super.getHeaders(), params: params});
+  }
+
+  deleteSessions(ids: string | string[]): Observable<void> {
+    let params: HttpParams;
+    if (Array.isArray(ids)) {
+      params = new HttpParams().set('id', ids.join(','));
+    } else {
+      params = new HttpParams().set('id', ids as string);
+    }
+
+    return this.httpClient.delete<void>(this.url + 'sessions', {headers: super.getHeaders(), params: params});
   }
 
   resetPasswordRequest(email: string, captchaCode: string): Observable<void> {
