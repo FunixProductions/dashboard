@@ -14,7 +14,7 @@ import {FunixprodHttpClient} from "../../../../services/core/components/requests
 })
 export class SessionsComponent implements OnInit {
 
-  columnsToDisplay = ['createdAt', 'actions'];
+  columnsToDisplay = ['createdAt', 'expirationDate', 'actions'];
 
   entities: Paginated<UserTokenDTO> = new Paginated<UserTokenDTO>();
   sort: string = 'createdAt:desc';
