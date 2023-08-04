@@ -52,4 +52,15 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  requestValidationCodeEmail() {
+    this.userAuthService.requestValidationCode().subscribe({
+      next: () => {
+        this.notificationService.success('Un email de validation vous a été envoyé.');
+      },
+      error: (error: HttpErrorResponse) => {
+        this.notificationService.onErrorRequest(error, 'Erreur lors de l\'envoi de l\'email de validation');
+      }
+    });
+  }
+
 }

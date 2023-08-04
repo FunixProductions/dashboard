@@ -65,4 +65,8 @@ export class UserAuthService extends FunixprodHttpClient {
     return this.httpClient.post<void>(this.url + 'resetPassword', request, {headers: super.getHeaders(captchaCode)});
   }
 
+  requestValidationCode(): Observable<void> {
+    return this.httpClient.post<void>(this.url + 'valid-account', null, {headers: super.getHeaders()});
+  }
+
 }

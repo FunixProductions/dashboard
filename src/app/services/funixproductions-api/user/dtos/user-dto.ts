@@ -12,4 +12,5 @@ export class UserDTO extends ApiDTO {
   username: string = '';
   email: string = '';
   role?: UserRole
+  valid: boolean = true;
 }
