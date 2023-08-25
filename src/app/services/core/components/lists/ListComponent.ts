@@ -9,7 +9,7 @@ export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttp
   entities: Paginated<DTO> = new Paginated<DTO>();
   sort: string = 'createdAt:desc';
   page: number = 0;
-  elemsPerPage: number = 30;
+  elemsPerPage: number = 15;
 
   protected queryBuilder: QueryBuilder = new QueryBuilder();
   protected pageOption: PageOption = new PageOption();
@@ -17,6 +17,7 @@ export abstract class ListComponent<DTO extends ApiDTO, SERVICE extends CrudHttp
   protected constructor(protected service: SERVICE) {
     this.pageOption.sort = this.sort;
     this.pageOption.page = this.page;
+    this.pageOption.elemsPerPage = this.elemsPerPage;
     this.updateList();
   }
 
