@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FunixbotCommandDto} from "../../../../../services/funixgaming-api/funixbot/dtos/funixbot-command-dto";
-import {QueryParam} from "../../../../../services/core/components/query.builder";
+import {QueryBuilder, QueryParam} from "../../../../../services/core/components/query.builder";
 import {
   FunixbotCommandsCrudService
 } from "../../../../../services/funixgaming-api/funixbot/services/funixbot-commands-crud-service";
@@ -13,6 +13,7 @@ import {
   FunixbotCommandCreateModalComponent
 } from "./funixbot-command-create-modal/funixbot-command-create-modal.component";
 import {ListComponent} from "../../../../../services/core/components/lists/ListComponent";
+import {FunixbotCommandType} from "../../../../../services/funixgaming-api/funixbot/enums/funixbot-command-type";
 
 @Component({
   selector: 'app-funixbot-commands',
@@ -21,7 +22,8 @@ import {ListComponent} from "../../../../../services/core/components/lists/ListC
 })
 export class FunixbotCommandsComponent extends ListComponent<FunixbotCommandDto, FunixbotCommandsCrudService> {
 
-  columnsToDisplay = ['command', 'message', 'createdAt', 'updatedAt', 'actions'];
+  columnsToDisplay = ['command', 'type', 'message', 'createdAt', 'updatedAt', 'actions'];
+  commandTypes = Object.values(FunixbotCommandType);
 
   searchCommands: QueryParam = new QueryParam();
 
@@ -60,6 +62,16 @@ export class FunixbotCommandsComponent extends ListComponent<FunixbotCommandDto,
     dialogRef.afterClosed().subscribe(() => {
       this.updateList();
     });
+  }
+
+  onCommandTypeChange(event: any) {
+    let selectedCommandType: FunixbotCommandType = event.target.value;
+
+    if (selectedCommandType) {
+      super.onSearchChange('type', selectedCommandType, QueryBuilder.equal);
+    } else {
+      super.onSearchChange('type', '', QueryBuilder.equal);
+    }
   }
 
 }

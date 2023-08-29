@@ -5,6 +5,8 @@ import {
   FunixbotCommandsCrudService
 } from "../../../../../../services/funixgaming-api/funixbot/services/funixbot-commands-crud-service";
 import NotificationsService from "../../../../../../services/core/services/NotificationsService";
+import {FunixbotCommandType} from "../../../../../../services/funixgaming-api/funixbot/enums/funixbot-command-type";
+import {QueryBuilder} from "../../../../../../services/core/components/query.builder";
 
 @Component({
   selector: 'app-funixbot-command-create-modal',
@@ -14,6 +16,7 @@ import NotificationsService from "../../../../../../services/core/services/Notif
 export class FunixbotCommandCreateModalComponent {
 
   command: FunixbotCommandDto = new FunixbotCommandDto();
+  commandTypes = Object.values(FunixbotCommandType);
 
   constructor(public dialogRef: MatDialogRef<FunixbotCommandCreateModalComponent>,
               private funixBotCommandsService: FunixbotCommandsCrudService,
@@ -34,6 +37,16 @@ export class FunixbotCommandCreateModalComponent {
         this.notificationService.onErrorRequest(err);
       }
     })
+  }
+
+  onCommandTypeChange(event: any) {
+    let selectedCommandType: FunixbotCommandType = event.target.value;
+
+    if (selectedCommandType) {
+      this.command.type = selectedCommandType;
+    } else {
+      this.command.type = FunixbotCommandType.OTHER;
+    }
   }
 
 }

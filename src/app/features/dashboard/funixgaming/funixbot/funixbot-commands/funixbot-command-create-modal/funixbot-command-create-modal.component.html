@@ -15,6 +15,13 @@
       </div>
 
       <div class="form-group">
+        <label for="commandTypeSelect">Type</label>
+        <select id="commandTypeSelect" class="form-control" [(ngModel)]="command.type" (change)="onCommandTypeChange($event)">
+          <option *ngFor="let type of commandTypes" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
         <label for="commandMessageInput">Message</label>
         <textarea type="text" id="commandMessageInput" [(ngModel)]="command.message"
                   name="message" class="form-control" placeholder="Message de la commande"></textarea>
