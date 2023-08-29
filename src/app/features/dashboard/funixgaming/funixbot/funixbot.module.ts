@@ -24,6 +24,9 @@ import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
+import { FunixbotAutomessagesComponent } from './funixbot-automessages/funixbot-automessages.component';
+import { FunixbotAutomessageHandleModalComponent } from './funixbot-automessages/funixbot-automessage-handle-modal/funixbot-automessage-handle-modal.component';
+import { FunixbotAutomessageRemoveModalComponent } from './funixbot-automessages/funixbot-automessage-remove-modal/funixbot-automessage-remove-modal.component';
 
 
 @NgModule({
@@ -35,7 +38,10 @@ import {MatDialogModule} from "@angular/material/dialog";
     FunixbotCommandCreateModalComponent,
     FunixbotUserExpComponent,
     FunixbotUserExpEditComponent,
-    FunixbotUserExpRemoveModalComponent
+    FunixbotUserExpRemoveModalComponent,
+    FunixbotAutomessagesComponent,
+    FunixbotAutomessageHandleModalComponent,
+    FunixbotAutomessageRemoveModalComponent
   ],
   imports: [
     CommonModule,

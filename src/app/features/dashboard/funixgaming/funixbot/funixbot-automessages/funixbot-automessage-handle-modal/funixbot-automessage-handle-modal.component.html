@@ -1,0 +1,54 @@
+<div class="card">
+  <div class="card-header">
+    <h3 mat-dialog-title class="text-primary">{{ !automessage.id ? 'Création' : 'Modification' }} d'un message automatique.</h3>
+  </div>
+
+  <div mat-dialog-content class="card-body">
+    <form class="user">
+
+      <div class="form-group">
+        <label for="automessageMessage">Message</label>
+        <textarea type="text" id="automessageMessage" [(ngModel)]="automessage.message"
+                  name="automessage"
+                  class="form-control"
+                  placeholder="Message automatique"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="gameNameInput">Nom du jeu</label>
+        <p>Vous pouvez remplir ce champ pour que le message soit envoyé uniquement sur un jeu spécifique.</p>
+        <input type="text" id="gameNameInput" [(ngModel)]="automessage.gameName"
+               name="gameName"
+               class="form-control form-control-user"
+               placeholder="Jeu, exemple: Minecraft">
+      </div>
+
+      <div class="form-group">
+        <label for="annnonceMode">Annoncé ?</label>
+        <p>Cochez cette case si vous voulez que le bot envoie le message en /annonce dans le chat.</p>
+        <input type="checkbox" id="annnonceMode" [(ngModel)]="automessage.isAnnounced"
+               name="message" class="form-control" placeholder="Annoncer la commande">
+      </div>
+    </form>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary btn-icon-split" (click)="onNoClick()">
+    <span class="icon text-white-50">
+      <i class="fas fa-arrow-right"></i>
+    </span>
+      <span class="text">
+      Annuler
+    </span>
+    </button>
+
+    <button class="btn btn-success btn-icon-split" (click)="onYesClick()">
+    <span class="icon text-white-50">
+      <i class="fas fa-paper-plane"></i>
+    </span>
+      <span class="text">
+      {{ !automessage.id ? 'Créer' : 'Modifier' }}
+    </span>
+    </button>
+  </div>
+</div>

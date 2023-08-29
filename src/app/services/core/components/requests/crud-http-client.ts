@@ -54,6 +54,10 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> extends FunixprodHttpCl
     return this.http.patch<DTO>(this.domain + this.path, dto, {headers: super.getHeaders()})
   }
 
+  update(dto: DTO): Observable<DTO> {
+    return this.http.put<DTO>(this.domain + this.path, dto, {headers: super.getHeaders()})
+  }
+
   delete(id: string): Observable<any> {
     const httpParams: HttpParams = new HttpParams().set('id', id);
 
