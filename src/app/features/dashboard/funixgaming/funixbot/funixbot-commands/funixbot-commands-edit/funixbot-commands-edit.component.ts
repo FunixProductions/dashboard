@@ -5,6 +5,7 @@ import {
 } from "../../../../../../services/funixgaming-api/funixbot/services/funixbot-commands-crud-service";
 import {FunixbotCommandDto} from "../../../../../../services/funixgaming-api/funixbot/dtos/funixbot-command-dto";
 import NotificationsService from "../../../../../../services/core/services/NotificationsService";
+import {FunixbotCommandType} from "../../../../../../services/funixgaming-api/funixbot/enums/funixbot-command-type";
 
 @Component({
   selector: 'app-funixbot-commands-edit',
@@ -14,6 +15,7 @@ import NotificationsService from "../../../../../../services/core/services/Notif
 export class FunixbotCommandsEditComponent {
 
   command: FunixbotCommandDto = new FunixbotCommandDto();
+  commandTypes = Object.values(FunixbotCommandType);
 
   constructor(public dialogRef: MatDialogRef<FunixbotCommandsEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -36,6 +38,16 @@ export class FunixbotCommandsEditComponent {
         this.notificationService.onErrorRequest(err);
       }
     })
+  }
+
+  onCommandTypeChange(event: any) {
+    let selectedCommandType: FunixbotCommandType = event.target.value;
+
+    if (selectedCommandType) {
+      this.command.type = selectedCommandType;
+    } else {
+      this.command.type = FunixbotCommandType.OTHER;
+    }
   }
 
 }
