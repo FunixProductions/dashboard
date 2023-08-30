@@ -14,9 +14,10 @@ export class FunixbotUserExpComponent extends ListComponent<FunixbotUserExpDto, 
 
   columnsToDisplay = ['twitchUsername', 'twitch-user-id', 'level', 'xp', 'xp-next-level', 'actions'];
 
-  constructor(private funixBotUserExpService: FunixbotUserExpCrudService) {
+  constructor(funixBotUserExpService: FunixbotUserExpCrudService) {
     super(funixBotUserExpService);
     super.pageOption.sort = 'level:desc,xp:desc';
+    super.updateList();
   }
 
 }
