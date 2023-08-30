@@ -12,11 +12,10 @@ import {ListComponent} from "../../../../../services/core/components/lists/ListC
 })
 export class FunixbotUserExpComponent extends ListComponent<FunixbotUserExpDto, FunixbotUserExpCrudService> {
 
-  override sort: string = 'xp:desc,level:desc'
   columnsToDisplay = ['twitchUsername', 'twitch-user-id', 'level', 'xp', 'xp-next-level', 'actions'];
 
   constructor(funixBotUserExpService: FunixbotUserExpCrudService) {
-    super(funixBotUserExpService);
+    super(funixBotUserExpService, 'xp:desc,level:desc');
   }
 
 }
