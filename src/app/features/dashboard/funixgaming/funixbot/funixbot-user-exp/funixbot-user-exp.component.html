@@ -16,6 +16,17 @@
     <div class="table-responsive">
       <table mat-table [dataSource]="entities.content" class="table table-bordered" id="dataTable">
 
+        <ng-container matColumnDef="twitchUsername">
+          <th mat-header-cell *matHeaderCellDef>
+            Pseudo Twitch
+            <div class="input-group">
+              <input #searchUsername (keyup)="onSearchChange('twitchUsername', searchUsername.value)" type="text" class="form-control bg-light border-0 small" placeholder="Recherche pseudo">
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let user">{{ user.twitchUsername }}</td>
+          <th mat-footer-cell *matFooterCellDef>Pseudo Twitch</th>
+        </ng-container>
+
         <ng-container matColumnDef="twitch-user-id">
           <th mat-header-cell *matHeaderCellDef>Twitch user ID</th>
           <td mat-cell *matCellDef="let user">{{ user.twitchUserId }}</td>
