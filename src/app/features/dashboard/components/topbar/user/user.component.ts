@@ -1,19 +1,25 @@
-import {Component} from '@angular/core';
-import {UserDTO} from "../../../../../services/funixproductions-api/user/dtos/user-dto";
-import {UserAuthService} from "../../../../../services/funixproductions-api/user/services/user-auth-service";
+import {AfterViewInit, Component} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {UserLogoutModalComponent} from "./user-logout-modal/user-logout-modal.component";
+import {HttpClient} from "@angular/common/http";
+import {UserAuthService, UserDTO} from "@funixproductions/funixproductions-requests";
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent {
+export class UserComponent implements AfterViewInit {
+  private readonly authService: UserAuthService;
   private userDTO: UserDTO = new UserDTO();
 
-  constructor(private authService: UserAuthService,
+  constructor(httpClient: HttpClient,
               private matDialog: MatDialog) {
+    this.authService = new UserAuthService(httpClient, environment.production);
+  }
+
+  ngAfterViewInit(): void {
     this.authService.currentUser().subscribe({
       next: (user: UserDTO) => {
         this.userDTO = user;

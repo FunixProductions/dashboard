@@ -83,7 +83,7 @@
       </table>
 
       <mat-paginator [length]="entities.totalElementsDatabase"
-                     (page)="onPaginateChange($event)"
+                     (page)="onPaginateChange($event.pageIndex)"
                      [pageIndex]="page"
                      [pageSize]="elemsPerPage"
                      [hidePageSize]="true"

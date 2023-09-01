@@ -1,9 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {
-  TwitchEventsubService
-} from "../../../../../services/funixproductions-api/external_api/twitch/services/twitch-eventsub-service";
-import NotificationsService from "../../../../../services/core/services/NotificationsService";
+import NotificationsService from "../../../../../services/NotificationService";
+import {TwitchEventsubService} from "@funixproductions/funixproductions-requests";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-twitch-eventsub-modal',
@@ -12,14 +12,16 @@ import NotificationsService from "../../../../../services/core/services/Notifica
 })
 export class TwitchEventsubModalComponent {
 
+  private readonly eventSubService: TwitchEventsubService;
   creation: boolean = false;
   streamerUsername = '';
   loading = false;
 
   constructor(private dialogRef: MatDialogRef<TwitchEventsubModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private eventSubService: TwitchEventsubService,
+              httpClient: HttpClient,
               private notificationService: NotificationsService) {
+    this.eventSubService = new TwitchEventsubService(httpClient, environment.production);
     this.creation = data.creation;
   }
 

@@ -1,13 +1,9 @@
 import {Component} from '@angular/core';
-import {
-  Condition,
-  TwitchEventSubListDTO
-} from "../../../../../services/funixproductions-api/external_api/twitch/dtos/TwitchEventSubListDTO";
-import {
-  TwitchEventsubService
-} from "../../../../../services/funixproductions-api/external_api/twitch/services/twitch-eventsub-service";
 import {MatDialog} from "@angular/material/dialog";
 import {TwitchEventsubModalComponent} from "../twitch-eventsub-modal/twitch-eventsub-modal.component";
+import {Condition, TwitchEventSubListDTO, TwitchEventsubService} from "@funixproductions/funixproductions-requests";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-twitch-eventsub',
@@ -17,11 +13,12 @@ import {TwitchEventsubModalComponent} from "../twitch-eventsub-modal/twitch-even
 export class TwitchEventsubComponent {
 
   columnsToDisplay = ['status', 'type', 'condition', 'created_at', 'cost'];
-
+  private readonly twitchEventSubService: TwitchEventsubService;
   twitchEventSubs: TwitchEventSubListDTO = new TwitchEventSubListDTO();
 
-  constructor(private twitchEventSubService: TwitchEventsubService,
+  constructor(httpClient: HttpClient,
               private dialog: MatDialog) {
+    this.twitchEventSubService = new TwitchEventsubService(httpClient, environment.production);
     this.updateList();
   }
 

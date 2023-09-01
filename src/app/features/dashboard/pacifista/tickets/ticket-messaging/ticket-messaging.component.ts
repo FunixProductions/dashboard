@@ -1,23 +1,25 @@
 import {AfterViewInit, Component} from '@angular/core';
-import PacifistaSupportTicketMessageDTO
-  from "../../../../../services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketMessageDTO";
-import PacifistaSupportTicketMessageService
-  from "../../../../../services/pacifista-api/support/tickets/service/PacifistaSupportTicketMessageService";
-import {ActivatedRoute} from "@angular/router";
-import NotificationsService from "../../../../../services/core/services/NotificationsService";
-import {UserDTO, UserRole} from "../../../../../services/funixproductions-api/user/dtos/user-dto";
-import {UserAuthService} from "../../../../../services/funixproductions-api/user/services/user-auth-service";
-import {PageOption, Paginated} from "../../../../../services/core/dtos/paginated";
-import {QueryBuilder, QueryParam} from "../../../../../services/core/components/query.builder";
-import PacifistaSupportTicketDTO, {
-  TicketStatus
-} from "../../../../../services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
+import {
+  ApiWebsocket,
+  PacifistaSupportTicketDTO,
+  PacifistaSupportTicketMessageDTO,
+  PacifistaSupportTicketMessageService,
+  PacifistaSupportTicketMessageWebsocketService,
+  PacifistaSupportTicketService,
+  PageOption,
+  Paginated,
+  QueryBuilder,
+  QueryParam,
+  TicketStatus,
+  UserAuthService,
+  UserDTO,
+  UserRole
+} from "@funixproductions/funixproductions-requests";
+import NotificationsService from "../../../../../services/NotificationService";
 import {ReCaptchaV3Service} from "ng-recaptcha";
-import PacifistaSupportTicketService
-  from "../../../../../services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
-import PacifistaSupportTicketMessageWebsocketService
-  from "../../../../../services/pacifista-api/support/tickets/service/PacifistaSupportTicketMessageWebsocketService";
-import {ApiWebsocket} from "../../../../../services/core/components/websocket/ApiWebsocket";
+import {ActivatedRoute} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-ticket-messaging',
@@ -29,6 +31,11 @@ export class TicketMessagingComponent implements AfterViewInit {
   private static readonly SUBSCRIBE_TICKET_MESSAGE: string = 'subscribe-channel';
   private static readonly MESSAGE_EVENT: string = 'ticket-message-event';
 
+  private websocketService: PacifistaSupportTicketMessageWebsocketService;
+  private ticketMessageService: PacifistaSupportTicketMessageService;
+  private ticketService: PacifistaSupportTicketService;
+  private authService: UserAuthService;
+
   columnsToDisplay = ['object', 'createdByName', 'ticketType', 'status', 'creationSource', 'createdAt', 'updatedAt', 'actions']
 
   ticketId?: string;
@@ -36,13 +43,14 @@ export class TicketMessagingComponent implements AfterViewInit {
   messages: PacifistaSupportTicketMessageDTO[] = [];
   messageInput: string = '';
 
-  constructor(private ticketMessageService: PacifistaSupportTicketMessageService,
-              private ticketService: PacifistaSupportTicketService,
+  constructor(httpClient: HttpClient,
               private notificationService: NotificationsService,
               private recaptchaService: ReCaptchaV3Service,
-              private authService: UserAuthService,
-              private websocketService: PacifistaSupportTicketMessageWebsocketService,
               private route: ActivatedRoute) {
+    this.websocketService = new PacifistaSupportTicketMessageWebsocketService(environment.production);
+    this.ticketMessageService = new PacifistaSupportTicketMessageService(httpClient, environment.production);
+    this.ticketService = new PacifistaSupportTicketService(httpClient, environment.production);
+    this.authService = new UserAuthService(httpClient, environment.production);
   }
 
   ngAfterViewInit(): void {

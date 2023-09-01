@@ -1,12 +1,13 @@
 import {Component} from '@angular/core';
-import {FunixbotCommandDto} from "../../../../../../services/funixgaming-api/funixbot/dtos/funixbot-command-dto";
 import {MatDialogRef} from "@angular/material/dialog";
 import {
-  FunixbotCommandsCrudService
-} from "../../../../../../services/funixgaming-api/funixbot/services/funixbot-commands-crud-service";
-import NotificationsService from "../../../../../../services/core/services/NotificationsService";
-import {FunixbotCommandType} from "../../../../../../services/funixgaming-api/funixbot/enums/funixbot-command-type";
-import {QueryBuilder} from "../../../../../../services/core/components/query.builder";
+  FunixbotCommandDto,
+  FunixbotCommandsCrudService,
+  FunixbotCommandType
+} from "@funixproductions/funixproductions-requests";
+import {HttpClient} from "@angular/common/http";
+import NotificationsService from "../../../../../../services/NotificationService";
+import {environment} from "../../../../../../../environments/environment";
 
 @Component({
   selector: 'app-funixbot-command-create-modal',
@@ -15,12 +16,14 @@ import {QueryBuilder} from "../../../../../../services/core/components/query.bui
 })
 export class FunixbotCommandCreateModalComponent {
 
+  private readonly funixBotCommandsService: FunixbotCommandsCrudService;
   command: FunixbotCommandDto = new FunixbotCommandDto();
   commandTypes = Object.values(FunixbotCommandType);
 
   constructor(public dialogRef: MatDialogRef<FunixbotCommandCreateModalComponent>,
-              private funixBotCommandsService: FunixbotCommandsCrudService,
+              httpClient: HttpClient,
               private notificationService: NotificationsService) {
+    this.funixBotCommandsService = new FunixbotCommandsCrudService(httpClient, environment.production);
   }
 
   onNoClick(): void {

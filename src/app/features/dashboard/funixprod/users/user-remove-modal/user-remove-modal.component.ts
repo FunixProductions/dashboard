@@ -1,6 +1,8 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {UserCrudService} from "../../../../../services/funixproductions-api/user/services/user-crud-service";
+import {UserCrudService} from "@funixproductions/funixproductions-requests";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-user-remove-modal',
@@ -9,9 +11,12 @@ import {UserCrudService} from "../../../../../services/funixproductions-api/user
 })
 export class UserRemoveModalComponent {
 
+  private readonly userService: UserCrudService;
+
   constructor(public dialogRef: MatDialogRef<UserRemoveModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private userService: UserCrudService) {
+              httpClient: HttpClient) {
+    this.userService = new UserCrudService(httpClient, environment.production);
   }
 
   onNoClick(): void {

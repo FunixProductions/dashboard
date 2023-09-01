@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {UserAuthService} from "../../../services/funixproductions-api/user/services/user-auth-service";
-import UserPasswordResetDTO from "../../../services/funixproductions-api/user/dtos/requests/user-password-reset-dto";
-import NotificationsService from "../../../services/core/services/NotificationsService";
 import {ReCaptchaV3Service} from "ng-recaptcha";
-import {HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {UserAuthService, UserPasswordResetDTO} from "@funixproductions/funixproductions-requests";
+import {environment} from "../../../../environments/environment";
+import NotificationsService from "../../../services/NotificationService";
 
 @Component({
   selector: 'app-reset-password',
@@ -13,15 +13,18 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class ResetPasswordComponent {
 
+  private readonly userAuthService: UserAuthService;
   passwordReset: UserPasswordResetDTO = new UserPasswordResetDTO();
 
   emailReset: string = "";
 
   constructor(activeRoute: ActivatedRoute,
+              httpClient: HttpClient,
               private router: Router,
-              private userAuthService: UserAuthService,
-              private captchaService: ReCaptchaV3Service,
-              private notificationService: NotificationsService) {
+              private notificationService: NotificationsService,
+              private captchaService: ReCaptchaV3Service) {
+    this.userAuthService = new UserAuthService(httpClient, environment.production);
+
     activeRoute.queryParams.subscribe(params => {
       this.passwordReset.resetToken = params['token'];
     });

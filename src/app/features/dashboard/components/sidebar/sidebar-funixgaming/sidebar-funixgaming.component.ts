@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {SidebarService} from "../SidebarService";
-import {UserAuthService} from "../../../../../services/funixproductions-api/user/services/user-auth-service";
+import {HttpClient} from "@angular/common/http";
+import {UserAuthService} from "@funixproductions/funixproductions-requests";
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-sidebar-funixgaming',
@@ -9,8 +11,8 @@ import {UserAuthService} from "../../../../../services/funixproductions-api/user
 })
 export class SidebarFunixgamingComponent extends SidebarService {
 
-  constructor(authService: UserAuthService) {
-    super(authService);
+  constructor(httpClient: HttpClient) {
+    super(new UserAuthService(httpClient, environment.production));
   }
 
 }

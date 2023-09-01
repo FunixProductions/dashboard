@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import {UserAuthService} from "../../../services/funixproductions-api/user/services/user-auth-service";
-import {UserCreationDTO} from "../../../services/funixproductions-api/user/dtos/requests/user-creation-dto";
 import {Router} from "@angular/router";
 import {ReCaptchaV3Service} from "ng-recaptcha";
-import NotificationsService from "../../../services/core/services/NotificationsService";
+import NotificationsService from "../../../services/NotificationService";
+import {HttpClient} from "@angular/common/http";
+import {UserAuthService, UserCreationDTO} from "@funixproductions/funixproductions-requests";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,8 @@ import NotificationsService from "../../../services/core/services/NotificationsS
 })
 export class RegisterComponent {
 
+  private readonly userAuthService: UserAuthService;
+
   username: string = '';
   email: string = '';
   password: string = '';
@@ -19,10 +22,11 @@ export class RegisterComponent {
   acceptCgu: boolean = false;
   acceptCgv: boolean = false;
 
-  constructor(private userAuthService: UserAuthService,
+  constructor(httpClient: HttpClient,
               private reCaptchaService: ReCaptchaV3Service,
               private router: Router,
               private notificationService: NotificationsService) {
+    this.userAuthService = new UserAuthService(httpClient, environment.production);
   }
 
   register(): void {

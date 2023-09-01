@@ -14,19 +14,17 @@ import {
   FunixbotCommandCreateModalComponent
 } from "./funixbot-commands/funixbot-command-create-modal/funixbot-command-create-modal.component";
 import {FunixbotUserExpComponent} from "./funixbot-user-exp/funixbot-user-exp.component";
-import {
-  FunixbotUserExpRemoveModalComponent
-} from "./funixbot-user-exp/funixbot-user-exp-remove-modal/funixbot-user-exp-remove-modal.component";
-import {
-  FunixbotUserExpEditComponent
-} from "./funixbot-user-exp/funixbot-user-exp-edit/funixbot-user-exp-edit.component";
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
-import { FunixbotAutomessagesComponent } from './funixbot-automessages/funixbot-automessages.component';
-import { FunixbotAutomessageHandleModalComponent } from './funixbot-automessages/funixbot-automessage-handle-modal/funixbot-automessage-handle-modal.component';
-import { FunixbotAutomessageRemoveModalComponent } from './funixbot-automessages/funixbot-automessage-remove-modal/funixbot-automessage-remove-modal.component';
+import {FunixbotAutomessagesComponent} from './funixbot-automessages/funixbot-automessages.component';
+import {
+  FunixbotAutomessageHandleModalComponent
+} from './funixbot-automessages/funixbot-automessage-handle-modal/funixbot-automessage-handle-modal.component';
+import {
+  FunixbotAutomessageRemoveModalComponent
+} from './funixbot-automessages/funixbot-automessage-remove-modal/funixbot-automessage-remove-modal.component';
 
 
 @NgModule({
@@ -37,8 +35,6 @@ import { FunixbotAutomessageRemoveModalComponent } from './funixbot-automessages
     FunixbotCommandsRemoveModalComponent,
     FunixbotCommandCreateModalComponent,
     FunixbotUserExpComponent,
-    FunixbotUserExpEditComponent,
-    FunixbotUserExpRemoveModalComponent,
     FunixbotAutomessagesComponent,
     FunixbotAutomessageHandleModalComponent,
     FunixbotAutomessageRemoveModalComponent

@@ -1,9 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {
-  FunixbotCommandsCrudService
-} from "../../../../../../services/funixgaming-api/funixbot/services/funixbot-commands-crud-service";
-import NotificationsService from "../../../../../../services/core/services/NotificationsService";
+import {FunixbotCommandsCrudService} from "@funixproductions/funixproductions-requests";
+import NotificationsService from "../../../../../../services/NotificationService";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../../environments/environment";
 
 @Component({
   selector: 'app-funixbot-commands-remove-modal',
@@ -12,10 +12,13 @@ import NotificationsService from "../../../../../../services/core/services/Notif
 })
 export class FunixbotCommandsRemoveModalComponent {
 
+  private readonly funixBotCommandsService: FunixbotCommandsCrudService;
+
   constructor(public dialogRef: MatDialogRef<FunixbotCommandsRemoveModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private funixBotCommandsService: FunixbotCommandsCrudService,
+              httpClient: HttpClient,
               private notificationService: NotificationsService) {
+    this.funixBotCommandsService = new FunixbotCommandsCrudService(httpClient, environment.production);
   }
 
   onNoClick(): void {

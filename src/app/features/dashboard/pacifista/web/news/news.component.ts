@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import PacifistaNewsDTO from "../../../../../services/pacifista-api/web/news/dtos/PacifistaNewsDTO";
-import PacifistaNewsService from "../../../../../services/pacifista-api/web/news/services/PacifistaNewsService";
 import {MatDialog} from "@angular/material/dialog";
 import {NewsRemoveModalComponent} from "./news-remove-modal/news-remove-modal.component";
-import {ListComponent} from "../../../../../services/core/components/lists/ListComponent";
+import {ListComponent, PacifistaNewsDTO, PacifistaNewsService} from "@funixproductions/funixproductions-requests";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-news',
@@ -15,9 +15,9 @@ export class NewsComponent extends ListComponent<PacifistaNewsDTO, PacifistaNews
   columnsToDisplay = ['name', 'title', 'originalWriter', 'updateWriter', 'createdAt', 'updatedAt', 'actions'];
 
 
-  constructor(private newsServices: PacifistaNewsService,
+  constructor(httpClient: HttpClient,
               private dialog: MatDialog) {
-    super(newsServices);
+    super(new PacifistaNewsService(httpClient, environment.production));
   }
 
   openRemoveDialog(news: PacifistaNewsDTO): void {

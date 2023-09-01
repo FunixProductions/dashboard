@@ -1,7 +1,9 @@
 import {Component} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
-import {UserAuthService} from "../../../../../../services/funixproductions-api/user/services/user-auth-service";
-import NotificationsService from "../../../../../../services/core/services/NotificationsService";
+import {UserAuthService} from "@funixproductions/funixproductions-requests";
+import NotificationsService from "../../../../../../services/NotificationService";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../../environments/environment";
 
 @Component({
   selector: 'app-user-logout-modal',
@@ -10,9 +12,12 @@ import NotificationsService from "../../../../../../services/core/services/Notif
 })
 export class UserLogoutModalComponent {
 
+  private readonly authService: UserAuthService;
+
   constructor(public dialogRef: MatDialogRef<UserLogoutModalComponent>,
-              private authService: UserAuthService,
+              httpClient: HttpClient,
               private notificationService: NotificationsService) {
+    this.authService = new UserAuthService(httpClient, environment.production);
   }
 
   onNoClick(): void {

@@ -1,9 +1,4 @@
 import {Component} from '@angular/core';
-import {FunixbotCommandDto} from "../../../../../services/funixgaming-api/funixbot/dtos/funixbot-command-dto";
-import {QueryBuilder, QueryParam} from "../../../../../services/core/components/query.builder";
-import {
-  FunixbotCommandsCrudService
-} from "../../../../../services/funixgaming-api/funixbot/services/funixbot-commands-crud-service";
 import {MatDialog} from "@angular/material/dialog";
 import {FunixbotCommandsEditComponent} from "./funixbot-commands-edit/funixbot-commands-edit.component";
 import {
@@ -12,8 +7,16 @@ import {
 import {
   FunixbotCommandCreateModalComponent
 } from "./funixbot-command-create-modal/funixbot-command-create-modal.component";
-import {ListComponent} from "../../../../../services/core/components/lists/ListComponent";
-import {FunixbotCommandType} from "../../../../../services/funixgaming-api/funixbot/enums/funixbot-command-type";
+import {
+  FunixbotCommandDto,
+  FunixbotCommandsCrudService,
+  FunixbotCommandType,
+  ListComponent,
+  QueryBuilder,
+  QueryParam
+} from "@funixproductions/funixproductions-requests";
+import {environment} from "../../../../../../environments/environment";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-funixbot-commands',
@@ -27,9 +30,9 @@ export class FunixbotCommandsComponent extends ListComponent<FunixbotCommandDto,
 
   searchCommands: QueryParam = new QueryParam();
 
-  constructor(private funixBotCommandService: FunixbotCommandsCrudService,
+  constructor(httpClient: HttpClient,
               private dialog: MatDialog) {
-    super(funixBotCommandService);
+    super(new FunixbotCommandsCrudService(httpClient, environment.production));
   }
 
   openEditDialog(command: FunixbotCommandDto): void {

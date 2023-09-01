@@ -1,12 +1,12 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import FunixbotAutomessageDto from "../../../../../../services/funixgaming-api/funixbot/dtos/funixbot-automessage-dto";
-import FunixbotAutomessagesService
-  from "../../../../../../services/funixgaming-api/funixbot/services/funixbot-automessages-service";
-import NotificationsService from "../../../../../../services/core/services/NotificationsService";
 import {
   FunixbotCommandsRemoveModalComponent
 } from "../../funixbot-commands/funixbot-commands-remove-modal/funixbot-commands-remove-modal.component";
+import NotificationsService from "../../../../../../services/NotificationService";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../../environments/environment";
+import {FunixbotAutomessageDto, FunixbotAutomessagesService} from "@funixproductions/funixproductions-requests";
 
 @Component({
   selector: 'app-funixbot-automessage-remove-modal',
@@ -15,12 +15,14 @@ import {
 })
 export class FunixbotAutomessageRemoveModalComponent {
 
+  private readonly funixBotAutomessageService: FunixbotAutomessagesService;
   automessage: FunixbotAutomessageDto = new FunixbotAutomessageDto();
 
   constructor(public dialogRef: MatDialogRef<FunixbotCommandsRemoveModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private funixBotAutomessageService: FunixbotAutomessagesService,
+              httpClient: HttpClient,
               private notificationService: NotificationsService) {
+    this.funixBotAutomessageService = new FunixbotAutomessagesService(httpClient, environment.production);
     this.automessage = data.automessage;
   }
 

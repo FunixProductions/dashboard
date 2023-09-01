@@ -1,11 +1,16 @@
 import {Component} from '@angular/core';
-import {UserDTO, UserRole} from "../../../../services/funixproductions-api/user/dtos/user-dto";
-import {UserCrudService} from "../../../../services/funixproductions-api/user/services/user-crud-service";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {UserRemoveModalComponent} from "./user-remove-modal/user-remove-modal.component";
-import {ListComponent} from "../../../../services/core/components/lists/ListComponent";
-import {QueryBuilder} from "../../../../services/core/components/query.builder";
+import {
+    ListComponent,
+    QueryBuilder,
+    UserCrudService,
+    UserDTO,
+    UserRole
+} from "@funixproductions/funixproductions-requests";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-users',
@@ -16,10 +21,10 @@ export class UsersComponent extends ListComponent<UserDTO, UserCrudService> {
 
   columnsToDisplay = ['username', 'email', 'role', 'createdAt', 'updatedAt', 'actions'];
 
-  constructor(userCrudService: UserCrudService,
-              private router: Router,
+  constructor(private router: Router,
+              httpClient: HttpClient,
               private dialog: MatDialog) {
-    super(userCrudService);
+    super(new UserCrudService(httpClient, environment.production));
   }
 
   getEditUrl(userDto: UserDTO): string {

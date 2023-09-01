@@ -1,8 +1,9 @@
 import {AfterViewInit, Component} from '@angular/core';
-import PacifistaNewsDTO from "../../../../../../services/pacifista-api/web/news/dtos/PacifistaNewsDTO";
 import {ActivatedRoute} from "@angular/router";
-import PacifistaNewsService from "../../../../../../services/pacifista-api/web/news/services/PacifistaNewsService";
-import NotificationsService from "../../../../../../services/core/services/NotificationsService";
+import NotificationsService from "../../../../../../services/NotificationService";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../../environments/environment";
+import {PacifistaNewsDTO, PacifistaNewsService} from "@funixproductions/funixproductions-requests";
 
 @Component({
   selector: 'app-news-edition',
@@ -11,11 +12,13 @@ import NotificationsService from "../../../../../../services/core/services/Notif
 })
 export class NewsEditionComponent implements AfterViewInit {
 
+  private readonly newsService: PacifistaNewsService;
   news: PacifistaNewsDTO = new PacifistaNewsDTO();
 
   constructor(private route: ActivatedRoute,
-              private newsService: PacifistaNewsService,
-              private notificationService: NotificationsService) {
+              private notificationService: NotificationsService,
+              httpClient: HttpClient) {
+    this.newsService = new PacifistaNewsService(httpClient, environment.production);
   }
 
   ngAfterViewInit(): void {

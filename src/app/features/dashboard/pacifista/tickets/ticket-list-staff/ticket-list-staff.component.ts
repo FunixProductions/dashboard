@@ -1,11 +1,13 @@
 import {Component} from '@angular/core';
-import {ListComponent} from "../../../../../services/core/components/lists/ListComponent";
-import PacifistaSupportTicketDTO, {
+import {
+  ListComponent,
+  PacifistaSupportTicketDTO,
+  PacifistaSupportTicketService,
+  QueryBuilder,
   TicketStatus
-} from "../../../../../services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
-import PacifistaSupportTicketService
-  from "../../../../../services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
-import {QueryBuilder} from "../../../../../services/core/components/query.builder";
+} from "@funixproductions/funixproductions-requests";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-ticket-list-staff',
@@ -18,8 +20,8 @@ export class TicketListStaffComponent extends ListComponent<PacifistaSupportTick
 
   pending: boolean = true;
 
-  constructor(private ticketService: PacifistaSupportTicketService) {
-    super(ticketService);
+  constructor(httpClient: HttpClient) {
+    super(new PacifistaSupportTicketService(httpClient, environment.production));
     this.switchToPending();
   }
 

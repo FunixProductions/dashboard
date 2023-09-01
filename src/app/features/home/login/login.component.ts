@@ -1,12 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {UserLoginDTO} from "../../../services/funixproductions-api/user/dtos/requests/user-login-dto";
-import {UserAuthService} from "../../../services/funixproductions-api/user/services/user-auth-service";
 import {Router} from "@angular/router";
-import {UserTokenDTO} from "../../../services/funixproductions-api/user/dtos/user-token-dto";
 import {ReCaptchaV3Service} from "ng-recaptcha";
-import NotificationsService from "../../../services/core/services/NotificationsService";
 import {environment} from "../../../../environments/environment";
-import {FunixprodHttpClient} from "../../../services/core/components/requests/funixprod-http-client";
+import NotificationsService from "../../../services/NotificationService";
+import {HttpClient} from "@angular/common/http";
+import {
+    FunixprodHttpClient,
+    UserAuthService,
+    UserLoginDTO,
+    UserTokenDTO
+} from "@funixproductions/funixproductions-requests";
 
 @Component({
   selector: 'app-login',
@@ -15,16 +18,19 @@ import {FunixprodHttpClient} from "../../../services/core/components/requests/fu
 })
 export class LoginComponent implements OnInit {
 
+  private readonly userAuthService: UserAuthService;
+
   username: string = '';
   password: string = '';
   stayLogin: boolean = false;
 
   googleAuthRedirectUri: string = environment.funixproductionsApiUrl + 'google/auth/verifyGoogleIdToken?origin=funixproductions-dashboard';
 
-  constructor(private userAuthService: UserAuthService,
+  constructor(httpClient: HttpClient,
               private reCaptchaService: ReCaptchaV3Service,
               private router: Router,
               private notificationService: NotificationsService) {
+    this.userAuthService = new UserAuthService(httpClient, environment.production);
     this.canActivate();
   }
 

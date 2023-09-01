@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {UserDTO, UserRole} from "../../../../../services/funixproductions-api/user/dtos/user-dto";
 import {ActivatedRoute} from "@angular/router";
-import {UserCrudService} from "../../../../../services/funixproductions-api/user/services/user-crud-service";
-import NotificationsService from "../../../../../services/core/services/NotificationsService";
+import {UserCrudService, UserDTO, UserRole} from "@funixproductions/funixproductions-requests";
+import NotificationsService from "../../../../../services/NotificationService";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-user-edit',
@@ -11,12 +12,14 @@ import NotificationsService from "../../../../../services/core/services/Notifica
 })
 export class UserEditComponent implements OnInit {
 
+  private readonly userService: UserCrudService;
   userToEdit: UserDTO = new UserDTO();
   roles: string[] = []
 
   constructor(private route: ActivatedRoute,
-              private userService: UserCrudService,
+              httpClient: HttpClient,
               private notificationService: NotificationsService) {
+    this.userService = new UserCrudService(httpClient, environment.production);
     for (const role in UserRole) {
       this.roles.push(role);
     }
