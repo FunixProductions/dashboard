@@ -1,13 +1,15 @@
 import {Component} from '@angular/core';
-import PacifistaShopCategoryService
-  from "../../../../../../services/pacifista-api/web/shop/categories/services/PacifistaShopCategoryService";
-import PacifistaShopCategoryDTO
-  from "../../../../../../services/pacifista-api/web/shop/categories/dtos/PacifistaShopCategoryDTO";
 import {MatDialog} from "@angular/material/dialog";
 import {CategoryCreationModalComponent} from "./category-creation-modal/category-creation-modal.component";
 import {CategoryEditModalComponent} from "./category-edit-modal/category-edit-modal.component";
 import {CategoryRemoveModalComponent} from "./category-remove-modal/category-remove-modal.component";
-import {ListComponent} from "../../../../../../services/core/components/lists/ListComponent";
+import {ListComponent} from "@funixproductions/funixproductions-requests";
+import PacifistaShopCategoryDTO
+  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/categories/dtos/PacifistaShopCategoryDTO";
+import PacifistaShopCategoryService
+  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/categories/services/PacifistaShopCategoryService";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../../environments/environment";
 
 @Component({
   selector: 'app-categories',
@@ -18,9 +20,9 @@ export class CategoriesComponent extends ListComponent<PacifistaShopCategoryDTO,
 
   columnsToDisplay = ['categoryName', 'createdAt', 'updatedAt', 'actions']
 
-  constructor(private categoriesService: PacifistaShopCategoryService,
+  constructor(httpClient: HttpClient,
               private dialog: MatDialog) {
-    super(categoriesService);
+    super(new PacifistaShopCategoryService(httpClient, environment.production));
   }
 
   openEditDialog(category: PacifistaShopCategoryDTO): void {

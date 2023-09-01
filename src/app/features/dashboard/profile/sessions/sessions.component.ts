@@ -1,11 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {UserTokenDTO} from "../../../../services/funixproductions-api/user/dtos/user-token-dto";
-import {UserAuthService} from "../../../../services/funixproductions-api/user/services/user-auth-service";
-import {Paginated} from "../../../../services/core/dtos/paginated";
 import {PageEvent} from "@angular/material/paginator";
 import {MatDialog} from "@angular/material/dialog";
 import {SessionRemoveModalComponent} from "./session-remove-modal/session-remove-modal.component";
-import {FunixprodHttpClient} from "../../../../services/core/components/requests/funixprod-http-client";
+import {
+    FunixprodHttpClient,
+    Paginated,
+    UserAuthService,
+    UserTokenDTO
+} from "@funixproductions/funixproductions-requests";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-sessions',
@@ -14,6 +18,7 @@ import {FunixprodHttpClient} from "../../../../services/core/components/requests
 })
 export class SessionsComponent implements OnInit {
 
+  private readonly userAuthService: UserAuthService;
   columnsToDisplay = ['createdAt', 'expirationDate', 'actions'];
 
   entities: Paginated<UserTokenDTO> = new Paginated<UserTokenDTO>();
@@ -21,8 +26,9 @@ export class SessionsComponent implements OnInit {
   page: number = 0;
   elemsPerPage: number = 30;
 
-  constructor(private service: UserAuthService,
+  constructor(httpClient: HttpClient,
               private dialog: MatDialog) {
+    this.userAuthService = new UserAuthService(httpClient, environment.production);
   }
 
   ngOnInit(): void {
@@ -52,7 +58,7 @@ export class SessionsComponent implements OnInit {
   }
 
   updateList(): void {
-    this.service.getSessions(this.page.toString(), this.elemsPerPage.toString()).subscribe({
+    this.userAuthService.getSessions(this.page.toString(), this.elemsPerPage.toString()).subscribe({
       next: (entitiesGot) => {
         this.entities = entitiesGot;
       }

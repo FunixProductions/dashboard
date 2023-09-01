@@ -1,7 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {UserAuthService} from "../../../../../services/funixproductions-api/user/services/user-auth-service";
-import NotificationsService from "../../../../../services/core/services/NotificationsService";
+import NotificationsService from "../../../../../services/NotificationService";
+import {UserAuthService} from "@funixproductions/funixproductions-requests";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-session-remove-modal',
@@ -10,10 +12,13 @@ import NotificationsService from "../../../../../services/core/services/Notifica
 })
 export class SessionRemoveModalComponent {
 
+  private readonly sessionService: UserAuthService;
+
   constructor(public dialogRef: MatDialogRef<SessionRemoveModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private notificationService: NotificationsService,
-              private sessionService: UserAuthService) {
+              httpClient: HttpClient) {
+    this.sessionService = new UserAuthService(httpClient, environment.production);
   }
 
   onNoClick(): void {

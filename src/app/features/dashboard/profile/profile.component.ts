@@ -1,14 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {UserDTO} from "../../../services/funixproductions-api/user/dtos/user-dto";
-import {UserAuthService} from "../../../services/funixproductions-api/user/services/user-auth-service";
-import TwitchClientTokenDTO from "../../../services/funixproductions-api/external_api/twitch/dtos/TwitchClientTokenDTO";
-import {
-  TwitchAuthService
-} from "../../../services/funixproductions-api/external_api/twitch/services/twitch-auth-service";
-import {TwitchTokenType} from "../../../services/funixproductions-api/external_api/twitch/enums/TwitchTokenType";
 import {faTwitch} from '@fortawesome/free-brands-svg-icons';
-import NotificationsService from "../../../services/core/services/NotificationsService";
-import {HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {
+    TwitchAuthService,
+    TwitchTokenType,
+    UserAuthService,
+    UserDTO
+} from "@funixproductions/funixproductions-requests";
+import TwitchClientTokenDTO
+    from "@funixproductions/funixproductions-requests/lib/services/funixproductions-api/twitch/dtos/TwitchClientTokenDTO";
+import NotificationsService from "../../../services/NotificationService";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-profile',
@@ -17,14 +19,18 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class ProfileComponent implements OnInit {
 
+  private readonly userAuthService: UserAuthService;
+  private readonly twitchAuthService: TwitchAuthService;
+
   faTwitch = faTwitch;
 
   user: UserDTO = new UserDTO();
   twitchClientToken: TwitchClientTokenDTO | null = null;
 
-  constructor(private userAuthService: UserAuthService,
-              private twitchAuthService: TwitchAuthService,
+  constructor(httpClient: HttpClient,
               private notificationService: NotificationsService) {
+    this.userAuthService = new UserAuthService(httpClient, environment.production);
+    this.twitchAuthService = new TwitchAuthService(httpClient, environment.production);
   }
 
   ngOnInit(): void {

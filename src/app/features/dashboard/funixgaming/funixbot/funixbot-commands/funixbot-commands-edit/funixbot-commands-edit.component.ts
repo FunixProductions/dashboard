@@ -1,11 +1,13 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {
-  FunixbotCommandsCrudService
-} from "../../../../../../services/funixgaming-api/funixbot/services/funixbot-commands-crud-service";
-import {FunixbotCommandDto} from "../../../../../../services/funixgaming-api/funixbot/dtos/funixbot-command-dto";
-import NotificationsService from "../../../../../../services/core/services/NotificationsService";
-import {FunixbotCommandType} from "../../../../../../services/funixgaming-api/funixbot/enums/funixbot-command-type";
+  FunixbotCommandDto,
+  FunixbotCommandsCrudService,
+  FunixbotCommandType
+} from "@funixproductions/funixproductions-requests";
+import {HttpClient} from "@angular/common/http";
+import NotificationsService from "../../../../../../services/NotificationService";
+import {environment} from "../../../../../../../environments/environment";
 
 @Component({
   selector: 'app-funixbot-commands-edit',
@@ -14,13 +16,15 @@ import {FunixbotCommandType} from "../../../../../../services/funixgaming-api/fu
 })
 export class FunixbotCommandsEditComponent {
 
+  private readonly funixBotCommandsService: FunixbotCommandsCrudService;
   command: FunixbotCommandDto = new FunixbotCommandDto();
   commandTypes = Object.values(FunixbotCommandType);
 
   constructor(public dialogRef: MatDialogRef<FunixbotCommandsEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private funixBotCommandsService: FunixbotCommandsCrudService,
+              httpClient: HttpClient,
               private notificationService: NotificationsService) {
+    this.funixBotCommandsService = new FunixbotCommandsCrudService(httpClient, environment.production);
     this.command = data.command;
   }
 

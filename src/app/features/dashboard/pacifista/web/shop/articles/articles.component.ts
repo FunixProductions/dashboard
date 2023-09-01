@@ -1,13 +1,15 @@
 import {Component} from '@angular/core';
-import PacifistaShopCategoryDTO
-  from "../../../../../../services/pacifista-api/web/shop/categories/dtos/PacifistaShopCategoryDTO";
 import {MatDialog} from "@angular/material/dialog";
-import PacifistaShopArticleDTO
-  from "../../../../../../services/pacifista-api/web/shop/articles/dtos/PacifistaShopArticleDTO";
-import PacifistaShopArticleService
-  from "../../../../../../services/pacifista-api/web/shop/articles/services/PacifistaShopArticleService";
 import {ArticleRemoveModalComponent} from "./article-remove-modal/article-remove-modal.component";
-import {ListComponent} from "../../../../../../services/core/components/lists/ListComponent";
+import {ListComponent} from "@funixproductions/funixproductions-requests";
+import PacifistaShopArticleDTO
+  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/articles/dtos/PacifistaShopArticleDTO";
+import PacifistaShopArticleService
+  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/articles/services/PacifistaShopArticleService";
+import PacifistaShopCategoryDTO
+  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/categories/dtos/PacifistaShopCategoryDTO";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../../environments/environment";
 
 @Component({
   selector: 'app-articles',
@@ -18,8 +20,8 @@ export class ArticlesComponent extends ListComponent<PacifistaShopArticleDTO, Pa
 
   columnsToDisplay = ['categoryName', 'name', 'description', 'price', 'createdAt', 'updatedAt', 'actions']
 
-  constructor(private articleService: PacifistaShopArticleService, private dialog: MatDialog) {
-    super(articleService);
+  constructor(httpClient: HttpClient, private dialog: MatDialog) {
+    super(new PacifistaShopArticleService(httpClient, environment.production));
   }
 
   openRemoveDialog(article: PacifistaShopCategoryDTO): void {

@@ -1,10 +1,12 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import PacifistaShopArticleDTO
-  from "../../../../../../../services/pacifista-api/web/shop/articles/dtos/PacifistaShopArticleDTO";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../../../environments/environment";
 import PacifistaShopArticleService
-  from "../../../../../../../services/pacifista-api/web/shop/articles/services/PacifistaShopArticleService";
-import NotificationsService from "../../../../../../../services/core/services/NotificationsService";
+  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/articles/services/PacifistaShopArticleService";
+import PacifistaShopArticleDTO
+  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/articles/dtos/PacifistaShopArticleDTO";
+import NotificationsService from "../../../../../../../services/NotificationService";
 
 @Component({
   selector: 'app-article-remove-modal',
@@ -13,12 +15,14 @@ import NotificationsService from "../../../../../../../services/core/services/No
 })
 export class ArticleRemoveModalComponent {
 
+  private readonly articleService: PacifistaShopArticleService;
   article: PacifistaShopArticleDTO = new PacifistaShopArticleDTO();
 
   constructor(public dialogRef: MatDialogRef<ArticleRemoveModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private articleService: PacifistaShopArticleService,
-              private notificationService: NotificationsService) {
+              private notificationService: NotificationsService,
+              httpClient: HttpClient) {
+    this.articleService = new PacifistaShopArticleService(httpClient, environment.production);
     this.article = data.article;
   }
 

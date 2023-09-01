@@ -1,16 +1,17 @@
 import {AfterViewInit, Component} from '@angular/core';
-import PacifistaShopArticleDTO
-  from "../../../../../../../services/pacifista-api/web/shop/articles/dtos/PacifistaShopArticleDTO";
 import {ActivatedRoute} from "@angular/router";
-import PacifistaShopArticleService
-  from "../../../../../../../services/pacifista-api/web/shop/articles/services/PacifistaShopArticleService";
-import PacifistaShopCategoryService
-  from "../../../../../../../services/pacifista-api/web/shop/categories/services/PacifistaShopCategoryService";
 import PacifistaShopCategoryDTO
-  from "../../../../../../../services/pacifista-api/web/shop/categories/dtos/PacifistaShopCategoryDTO";
-import {PageOption, Paginated} from "../../../../../../../services/core/dtos/paginated";
-import {QueryBuilder, QueryParam} from "../../../../../../../services/core/components/query.builder";
-import NotificationsService from "../../../../../../../services/core/services/NotificationsService";
+  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/categories/dtos/PacifistaShopCategoryDTO";
+import {PageOption, Paginated, QueryBuilder, QueryParam} from "@funixproductions/funixproductions-requests";
+import NotificationsService from "../../../../../../../services/NotificationService";
+import PacifistaShopArticleDTO
+  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/articles/dtos/PacifistaShopArticleDTO";
+import PacifistaShopArticleService
+  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/articles/services/PacifistaShopArticleService";
+import PacifistaShopCategoryService
+  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/categories/services/PacifistaShopCategoryService";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../../../environments/environment";
 
 @Component({
   selector: 'app-article-gestion',
@@ -19,6 +20,8 @@ import NotificationsService from "../../../../../../../services/core/services/No
 })
 export class ArticleGestionComponent implements AfterViewInit {
 
+  private readonly articleService: PacifistaShopArticleService;
+  private readonly categoryService: PacifistaShopCategoryService;
   article: PacifistaShopArticleDTO = new PacifistaShopArticleDTO();
 
   categorySearch: string = '';
@@ -27,9 +30,10 @@ export class ArticleGestionComponent implements AfterViewInit {
   pageOption: PageOption = new PageOption();
 
   constructor(private route: ActivatedRoute,
-              private articleService: PacifistaShopArticleService,
-              private categoryService: PacifistaShopCategoryService,
+              httpClient: HttpClient,
               private notificationService: NotificationsService) {
+    this.articleService = new PacifistaShopArticleService(httpClient, environment.production);
+    this.categoryService = new PacifistaShopCategoryService(httpClient, environment.production);
     this.pageOption.elemsPerPage = 5;
     this.pageOption.page = 0;
   }

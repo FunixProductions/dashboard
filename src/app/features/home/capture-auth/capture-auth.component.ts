@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {FunixprodHttpClient} from "../../../services/core/components/requests/funixprod-http-client";
+import {FunixprodHttpClient} from "@funixproductions/funixproductions-requests";
 
 @Component({
   selector: 'app-capture-auth',

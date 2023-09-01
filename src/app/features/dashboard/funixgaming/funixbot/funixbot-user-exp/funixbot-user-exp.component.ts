@@ -1,9 +1,11 @@
 import {Component} from '@angular/core';
-import {FunixbotUserExpDto} from "../../../../../services/funixgaming-api/funixbot/dtos/funixbot-user-exp-dto";
 import {
-  FunixbotUserExpCrudService
-} from "../../../../../services/funixgaming-api/funixbot/services/funixbot-user-exp-crud-service";
-import {ListComponent} from "../../../../../services/core/components/lists/ListComponent";
+  FunixbotUserExpCrudService,
+  FunixbotUserExpDto,
+  ListComponent
+} from "@funixproductions/funixproductions-requests";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-funixbot-user-exp',
@@ -14,8 +16,8 @@ export class FunixbotUserExpComponent extends ListComponent<FunixbotUserExpDto, 
 
   columnsToDisplay = ['twitchUsername', 'twitch-user-id', 'level', 'xp', 'xp-next-level', 'actions'];
 
-  constructor(funixBotUserExpService: FunixbotUserExpCrudService) {
-    super(funixBotUserExpService, 'xp:desc,level:desc');
+  constructor(httpClient: HttpClient) {
+    super(new FunixbotUserExpCrudService(httpClient, environment.production), 'level:desc,xp:desc');
   }
 
 }

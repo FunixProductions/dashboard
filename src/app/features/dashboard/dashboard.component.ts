@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {UserAuthService} from "../../services/funixproductions-api/user/services/user-auth-service";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
-import {UserDTO} from "../../services/funixproductions-api/user/dtos/user-dto";
+import {HttpClient} from "@angular/common/http";
+import {UserAuthService, UserDTO} from "@funixproductions/funixproductions-requests";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,8 +12,11 @@ import {UserDTO} from "../../services/funixproductions-api/user/dtos/user-dto";
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private userAuthService: UserAuthService,
+  private readonly userAuthService: UserAuthService;
+
+  constructor(httpClient: HttpClient,
               private router: Router) {
+    this.userAuthService = new UserAuthService(httpClient, environment.production);
   }
 
   ngOnInit(): void {

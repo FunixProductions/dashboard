@@ -1,15 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {SidebarService} from "../../../SidebarService";
-import {UserAuthService} from "../../../../../../../services/funixproductions-api/user/services/user-auth-service";
+import PacifistaSupportTicketDTO
+    from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
+import {
+    PageOption,
+    QueryBuilder,
+    QueryParam,
+    TicketStatus,
+    UserAuthService,
+    UserRole
+} from "@funixproductions/funixproductions-requests";
 import PacifistaSupportTicketService
-  from "../../../../../../../services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
-import PacifistaSupportTicketDTO, {
-  TicketStatus
-} from "../../../../../../../services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
-import {PageOption} from "../../../../../../../services/core/dtos/paginated";
-import {QueryBuilder, QueryParam} from "../../../../../../../services/core/components/query.builder";
-import NotificationsService from "../../../../../../../services/core/services/NotificationsService";
-import {UserRole} from "../../../../../../../services/funixproductions-api/user/dtos/user-dto";
+    from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
+import NotificationsService from "../../../../../../../services/NotificationService";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../../../environments/environment";
 
 @Component({
   selector: 'app-tickets-nav',
@@ -18,12 +23,13 @@ import {UserRole} from "../../../../../../../services/funixproductions-api/user/
 })
 export class TicketsNavComponent extends SidebarService implements OnInit {
 
+  protected readonly ticketService: PacifistaSupportTicketService;
   ticketsActive: PacifistaSupportTicketDTO[] = [];
 
-  constructor(authService: UserAuthService,
-              protected ticketService: PacifistaSupportTicketService,
+  constructor(httpClient: HttpClient,
               protected notificationService: NotificationsService) {
-    super(authService);
+    super(new UserAuthService(httpClient, environment.production));
+    this.ticketService = new PacifistaSupportTicketService(httpClient, environment.production);
   }
 
   ngOnInit(): void {

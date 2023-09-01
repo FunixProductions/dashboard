@@ -1,12 +1,14 @@
 import {Component} from '@angular/core';
-import PacifistaSupportTicketDTO, {
-  TicketType
-} from "../../../../../services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
-import PacifistaSupportTicketService
-  from "../../../../../services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
 import {ReCaptchaV3Service} from "ng-recaptcha";
-import NotificationsService from "../../../../../services/core/services/NotificationsService";
 import {Router} from "@angular/router";
+import {TicketType} from "@funixproductions/funixproductions-requests";
+import PacifistaSupportTicketService
+    from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
+import NotificationsService from "../../../../../services/NotificationService";
+import PacifistaSupportTicketDTO
+    from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-ticket-creation',
@@ -15,6 +17,7 @@ import {Router} from "@angular/router";
 })
 export class TicketCreationComponent {
 
+  protected readonly ticketService: PacifistaSupportTicketService;
   object?: string;
   type?: TicketType;
 
@@ -26,10 +29,11 @@ export class TicketCreationComponent {
     {value: TicketType.ONLINE_PURCHASE, viewValue: 'Achat en ligne'},
   ];
 
-  constructor(protected ticketService: PacifistaSupportTicketService,
+  constructor(httpClient: HttpClient,
               protected captchaService: ReCaptchaV3Service,
               protected notificationService: NotificationsService,
               private router: Router) {
+    this.ticketService = new PacifistaSupportTicketService(httpClient, environment.production);
   }
 
   selectType(type: TicketType): void {

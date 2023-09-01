@@ -1,8 +1,4 @@
-import { Component } from '@angular/core';
-import {ListComponent} from "../../../../../services/core/components/lists/ListComponent";
-import FunixbotAutomessageDto from "../../../../../services/funixgaming-api/funixbot/dtos/funixbot-automessage-dto";
-import FunixbotAutomessagesService
-  from "../../../../../services/funixgaming-api/funixbot/services/funixbot-automessages-service";
+import {Component} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {
   FunixbotAutomessageHandleModalComponent
@@ -10,6 +6,13 @@ import {
 import {
   FunixbotAutomessageRemoveModalComponent
 } from "./funixbot-automessage-remove-modal/funixbot-automessage-remove-modal.component";
+import {ListComponent} from "@funixproductions/funixproductions-requests";
+import FunixbotAutomessageDto
+  from "@funixproductions/funixproductions-requests/lib/services/funixgaming-api/funixbot/dtos/funixbot-automessage-dto";
+import FunixbotAutomessagesService
+  from "@funixproductions/funixproductions-requests/lib/services/funixgaming-api/funixbot/services/funixbot-automessages-service";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-funixbot-automessages',
@@ -20,9 +23,9 @@ export class FunixbotAutomessagesComponent extends ListComponent<FunixbotAutomes
 
   columnsToDisplay = ['message', 'gameName', 'isAnnounced', 'createdAt', 'updatedAt', 'actions'];
 
-  constructor(funixBotAutomessageService: FunixbotAutomessagesService,
+  constructor(httpCLient: HttpClient,
               private dialog: MatDialog) {
-    super(funixBotAutomessageService);
+    super(new FunixbotAutomessagesService(httpCLient, environment.production));
   }
 
   openCreationModal(): void {

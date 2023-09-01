@@ -1,9 +1,12 @@
-import {AfterViewInit, Component, Inject} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import FunixbotAutomessageDto from "../../../../../../services/funixgaming-api/funixbot/dtos/funixbot-automessage-dto";
-import NotificationsService from "../../../../../../services/core/services/NotificationsService";
 import FunixbotAutomessagesService
-  from "../../../../../../services/funixgaming-api/funixbot/services/funixbot-automessages-service";
+  from "@funixproductions/funixproductions-requests/lib/services/funixgaming-api/funixbot/services/funixbot-automessages-service";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../../../../environments/environment";
+import NotificationsService from "../../../../../../services/NotificationService";
+import FunixbotAutomessageDto
+  from "@funixproductions/funixproductions-requests/lib/services/funixgaming-api/funixbot/dtos/funixbot-automessage-dto";
 
 @Component({
   selector: 'app-funixbot-automessage-handle-modal',
@@ -12,12 +15,14 @@ import FunixbotAutomessagesService
 })
 export class FunixbotAutomessageHandleModalComponent {
 
+  private readonly funixBotAutomessageService: FunixbotAutomessagesService;
   automessage: FunixbotAutomessageDto;
 
   constructor(public dialogRef: MatDialogRef<FunixbotAutomessageHandleModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private funixBotAutomessageService: FunixbotAutomessagesService,
+              httpClient: HttpClient,
               private notificationService: NotificationsService) {
+    this.funixBotAutomessageService = new FunixbotAutomessagesService(httpClient, environment.production);
     this.automessage = this.data.automessage;
   }
 
