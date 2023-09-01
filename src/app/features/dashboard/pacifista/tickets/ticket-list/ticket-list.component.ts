@@ -1,9 +1,11 @@
 import {Component} from '@angular/core';
-import {ListComponent, Paginated, TicketStatus} from "@funixproductions/funixproductions-requests";
-import PacifistaSupportTicketService
-    from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
-import PacifistaSupportTicketDTO
-    from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
+import {
+  ListComponent,
+  PacifistaSupportTicketDTO,
+  PacifistaSupportTicketService,
+  Paginated,
+  TicketStatus
+} from "@funixproductions/funixproductions-requests";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../environments/environment";
 

@@ -3,11 +3,11 @@ import {MatDialog} from "@angular/material/dialog";
 import {CategoryCreationModalComponent} from "./category-creation-modal/category-creation-modal.component";
 import {CategoryEditModalComponent} from "./category-edit-modal/category-edit-modal.component";
 import {CategoryRemoveModalComponent} from "./category-remove-modal/category-remove-modal.component";
-import {ListComponent} from "@funixproductions/funixproductions-requests";
-import PacifistaShopCategoryDTO
-  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/categories/dtos/PacifistaShopCategoryDTO";
-import PacifistaShopCategoryService
-  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/categories/services/PacifistaShopCategoryService";
+import {
+  ListComponent,
+  PacifistaShopCategoryDTO,
+  PacifistaShopCategoryService
+} from "@funixproductions/funixproductions-requests";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../../environments/environment";
 

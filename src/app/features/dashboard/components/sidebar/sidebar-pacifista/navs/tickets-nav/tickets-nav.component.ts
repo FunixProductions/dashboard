@@ -1,17 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {SidebarService} from "../../../SidebarService";
-import PacifistaSupportTicketDTO
-    from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
 import {
-    PageOption,
-    QueryBuilder,
-    QueryParam,
-    TicketStatus,
-    UserAuthService,
-    UserRole
+  PacifistaSupportTicketDTO,
+  PacifistaSupportTicketService,
+  PageOption,
+  QueryBuilder,
+  QueryParam,
+  TicketStatus,
+  UserAuthService,
+  UserRole
 } from "@funixproductions/funixproductions-requests";
-import PacifistaSupportTicketService
-    from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
 import NotificationsService from "../../../../../../../services/NotificationService";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../../../environments/environment";

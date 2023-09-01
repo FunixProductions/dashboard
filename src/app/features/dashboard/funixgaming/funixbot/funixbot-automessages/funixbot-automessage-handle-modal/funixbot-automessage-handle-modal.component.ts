@@ -1,12 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import FunixbotAutomessagesService
-  from "@funixproductions/funixproductions-requests/lib/services/funixgaming-api/funixbot/services/funixbot-automessages-service";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../../environments/environment";
 import NotificationsService from "../../../../../../services/NotificationService";
-import FunixbotAutomessageDto
-  from "@funixproductions/funixproductions-requests/lib/services/funixgaming-api/funixbot/dtos/funixbot-automessage-dto";
+import {FunixbotAutomessageDto, FunixbotAutomessagesService} from "@funixproductions/funixproductions-requests";
 
 @Component({
   selector: 'app-funixbot-automessage-handle-modal',

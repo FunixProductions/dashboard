@@ -1,11 +1,7 @@
 import {Component} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {NewsRemoveModalComponent} from "./news-remove-modal/news-remove-modal.component";
-import {ListComponent} from "@funixproductions/funixproductions-requests";
-import PacifistaNewsService
-  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/news/services/PacifistaNewsService";
-import PacifistaNewsDTO
-  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/news/dtos/PacifistaNewsDTO";
+import {ListComponent, PacifistaNewsDTO, PacifistaNewsService} from "@funixproductions/funixproductions-requests";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../environments/environment";
 

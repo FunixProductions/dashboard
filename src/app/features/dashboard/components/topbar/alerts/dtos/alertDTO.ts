@@ -1,4 +1,4 @@
-import ApiDTO from "@funixproductions/funixproductions-requests/lib/services/core/dtos/api-dto";
+import {ApiDTO} from "@funixproductions/funixproductions-requests";
 
 export enum AlertImportance {
   URGENT = "URGENT",

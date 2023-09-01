@@ -1,12 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import PacifistaShopCategoryDTO
-  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/categories/dtos/PacifistaShopCategoryDTO";
-import PacifistaShopCategoryService
-  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/categories/services/PacifistaShopCategoryService";
 import NotificationsService from "../../../../../../../services/NotificationService";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../../../environments/environment";
+import {PacifistaShopCategoryDTO, PacifistaShopCategoryService} from "@funixproductions/funixproductions-requests";
 
 @Component({
   selector: 'app-category-edit-modal',

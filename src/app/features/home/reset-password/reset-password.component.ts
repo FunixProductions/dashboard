@@ -2,9 +2,7 @@ import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ReCaptchaV3Service} from "ng-recaptcha";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import UserPasswordResetDTO
-    from "@funixproductions/funixproductions-requests/lib/services/funixproductions-api/user/dtos/requests/user-password-reset-dto";
-import {UserAuthService} from "@funixproductions/funixproductions-requests";
+import {UserAuthService, UserPasswordResetDTO} from "@funixproductions/funixproductions-requests";
 import {environment} from "../../../../environments/environment";
 import NotificationsService from "../../../services/NotificationService";
 

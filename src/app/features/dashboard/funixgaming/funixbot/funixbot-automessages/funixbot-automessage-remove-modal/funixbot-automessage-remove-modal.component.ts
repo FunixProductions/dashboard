@@ -3,13 +3,10 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {
   FunixbotCommandsRemoveModalComponent
 } from "../../funixbot-commands/funixbot-commands-remove-modal/funixbot-commands-remove-modal.component";
-import FunixbotAutomessageDto
-  from "@funixproductions/funixproductions-requests/lib/services/funixgaming-api/funixbot/dtos/funixbot-automessage-dto";
-import FunixbotAutomessagesService
-  from "@funixproductions/funixproductions-requests/lib/services/funixgaming-api/funixbot/services/funixbot-automessages-service";
 import NotificationsService from "../../../../../../services/NotificationService";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../../environments/environment";
+import {FunixbotAutomessageDto, FunixbotAutomessagesService} from "@funixproductions/funixproductions-requests";
 
 @Component({
   selector: 'app-funixbot-automessage-remove-modal',

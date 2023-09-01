@@ -1,28 +1,23 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {
-    ApiWebsocket,
-    PageOption,
-    Paginated,
-    QueryBuilder,
-    QueryParam,
-    TicketStatus,
-    UserAuthService,
-    UserDTO,
-    UserRole
+  ApiWebsocket,
+  PacifistaSupportTicketDTO,
+  PacifistaSupportTicketMessageDTO,
+  PacifistaSupportTicketMessageService,
+  PacifistaSupportTicketMessageWebsocketService,
+  PacifistaSupportTicketService,
+  PageOption,
+  Paginated,
+  QueryBuilder,
+  QueryParam,
+  TicketStatus,
+  UserAuthService,
+  UserDTO,
+  UserRole
 } from "@funixproductions/funixproductions-requests";
-import PacifistaSupportTicketMessageDTO
-    from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketMessageDTO";
-import PacifistaSupportTicketMessageService
-    from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/support/tickets/service/PacifistaSupportTicketMessageService";
-import PacifistaSupportTicketService
-    from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
 import NotificationsService from "../../../../../services/NotificationService";
 import {ReCaptchaV3Service} from "ng-recaptcha";
-import PacifistaSupportTicketMessageWebsocketService
-    from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/support/tickets/service/PacifistaSupportTicketMessageWebsocketService";
 import {ActivatedRoute} from "@angular/router";
-import PacifistaSupportTicketDTO
-    from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../environments/environment";
 

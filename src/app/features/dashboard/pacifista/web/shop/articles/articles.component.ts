@@ -1,15 +1,14 @@
 import {Component} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {ArticleRemoveModalComponent} from "./article-remove-modal/article-remove-modal.component";
-import {ListComponent} from "@funixproductions/funixproductions-requests";
-import PacifistaShopArticleDTO
-  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/articles/dtos/PacifistaShopArticleDTO";
-import PacifistaShopArticleService
-  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/articles/services/PacifistaShopArticleService";
-import PacifistaShopCategoryDTO
-  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/categories/dtos/PacifistaShopCategoryDTO";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../../environments/environment";
+import {
+  ListComponent,
+  PacifistaShopArticleDTO,
+  PacifistaShopArticleService,
+  PacifistaShopCategoryDTO
+} from "@funixproductions/funixproductions-requests";
 
 @Component({
   selector: 'app-articles',

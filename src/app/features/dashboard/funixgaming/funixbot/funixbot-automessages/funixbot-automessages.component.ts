@@ -6,11 +6,11 @@ import {
 import {
   FunixbotAutomessageRemoveModalComponent
 } from "./funixbot-automessage-remove-modal/funixbot-automessage-remove-modal.component";
-import {ListComponent} from "@funixproductions/funixproductions-requests";
-import FunixbotAutomessageDto
-  from "@funixproductions/funixproductions-requests/lib/services/funixgaming-api/funixbot/dtos/funixbot-automessage-dto";
-import FunixbotAutomessagesService
-  from "@funixproductions/funixproductions-requests/lib/services/funixgaming-api/funixbot/services/funixbot-automessages-service";
+import {
+  FunixbotAutomessageDto,
+  FunixbotAutomessagesService,
+  ListComponent
+} from "@funixproductions/funixproductions-requests";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../environments/environment";
 

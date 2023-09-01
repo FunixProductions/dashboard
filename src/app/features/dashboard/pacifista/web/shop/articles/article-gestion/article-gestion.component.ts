@@ -1,15 +1,16 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import PacifistaShopCategoryDTO
-  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/categories/dtos/PacifistaShopCategoryDTO";
-import {PageOption, Paginated, QueryBuilder, QueryParam} from "@funixproductions/funixproductions-requests";
+import {
+  PacifistaShopArticleDTO,
+  PacifistaShopArticleService,
+  PacifistaShopCategoryDTO,
+  PacifistaShopCategoryService,
+  PageOption,
+  Paginated,
+  QueryBuilder,
+  QueryParam
+} from "@funixproductions/funixproductions-requests";
 import NotificationsService from "../../../../../../../services/NotificationService";
-import PacifistaShopArticleDTO
-  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/articles/dtos/PacifistaShopArticleDTO";
-import PacifistaShopArticleService
-  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/articles/services/PacifistaShopArticleService";
-import PacifistaShopCategoryService
-  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/categories/services/PacifistaShopCategoryService";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../../../environments/environment";
 

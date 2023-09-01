@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
 import {ReCaptchaV3Service} from "ng-recaptcha";
 import {Router} from "@angular/router";
-import {TicketType} from "@funixproductions/funixproductions-requests";
-import PacifistaSupportTicketService
-    from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/support/tickets/service/PacifistaSupportTicketService";
+import {
+  PacifistaSupportTicketDTO,
+  PacifistaSupportTicketService,
+  TicketType
+} from "@funixproductions/funixproductions-requests";
 import NotificationsService from "../../../../../services/NotificationService";
-import PacifistaSupportTicketDTO
-    from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/support/tickets/dtos/PacifistaSupportTicketDTO";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../environments/environment";
 

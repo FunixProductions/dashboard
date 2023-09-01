@@ -2,11 +2,8 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../../../environments/environment";
-import PacifistaShopArticleService
-  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/articles/services/PacifistaShopArticleService";
-import PacifistaShopArticleDTO
-  from "@funixproductions/funixproductions-requests/lib/services/pacifista-api/web/shop/articles/dtos/PacifistaShopArticleDTO";
 import NotificationsService from "../../../../../../../services/NotificationService";
+import {PacifistaShopArticleDTO, PacifistaShopArticleService} from "@funixproductions/funixproductions-requests";
 
 @Component({
   selector: 'app-article-remove-modal',

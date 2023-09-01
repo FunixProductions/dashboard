@@ -2,13 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {faTwitch} from '@fortawesome/free-brands-svg-icons';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {
-    TwitchAuthService,
-    TwitchTokenType,
-    UserAuthService,
-    UserDTO
+  TwitchAuthService,
+  TwitchClientTokenDTO,
+  TwitchTokenType,
+  UserAuthService,
+  UserDTO
 } from "@funixproductions/funixproductions-requests";
-import TwitchClientTokenDTO
-    from "@funixproductions/funixproductions-requests/lib/services/funixproductions-api/twitch/dtos/TwitchClientTokenDTO";
 import NotificationsService from "../../../services/NotificationService";
 import {environment} from "../../../../environments/environment";
 
