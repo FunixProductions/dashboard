@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {FunixbotCommandsCrudService} from "@funixproductions/funixproductions-requests";
+import {FunixbotCommandsService} from "@funixproductions/funixproductions-requests";
 import NotificationsService from "../../../../../../services/NotificationService";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../../environments/environment";
@@ -12,13 +12,13 @@ import {environment} from "../../../../../../../environments/environment";
 })
 export class FunixbotCommandsRemoveModalComponent {
 
-  private readonly funixBotCommandsService: FunixbotCommandsCrudService;
+  private readonly funixBotCommandsService: FunixbotCommandsService;
 
   constructor(public dialogRef: MatDialogRef<FunixbotCommandsRemoveModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               httpClient: HttpClient,
               private notificationService: NotificationsService) {
-    this.funixBotCommandsService = new FunixbotCommandsCrudService(httpClient, environment.production);
+    this.funixBotCommandsService = new FunixbotCommandsService(httpClient, environment.production);
   }
 
   onNoClick(): void {

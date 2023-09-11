@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {
   FunixbotCommandDto,
-  FunixbotCommandsCrudService,
+  FunixbotCommandsService,
   FunixbotCommandType
 } from "@funixproductions/funixproductions-requests";
 import {HttpClient} from "@angular/common/http";
@@ -16,7 +16,7 @@ import {environment} from "../../../../../../../environments/environment";
 })
 export class FunixbotCommandsEditComponent {
 
-  private readonly funixBotCommandsService: FunixbotCommandsCrudService;
+  private readonly funixBotCommandsService: FunixbotCommandsService;
   command: FunixbotCommandDto = new FunixbotCommandDto();
   commandTypes = Object.values(FunixbotCommandType);
 
@@ -24,7 +24,7 @@ export class FunixbotCommandsEditComponent {
               @Inject(MAT_DIALOG_DATA) public data: any,
               httpClient: HttpClient,
               private notificationService: NotificationsService) {
-    this.funixBotCommandsService = new FunixbotCommandsCrudService(httpClient, environment.production);
+    this.funixBotCommandsService = new FunixbotCommandsService(httpClient, environment.production);
     this.command = data.command;
   }
 

@@ -9,7 +9,7 @@ import {
 } from "./funixbot-command-create-modal/funixbot-command-create-modal.component";
 import {
   FunixbotCommandDto,
-  FunixbotCommandsCrudService,
+  FunixbotCommandsService,
   FunixbotCommandType,
   ListComponent,
   QueryBuilder,
@@ -23,7 +23,7 @@ import {HttpClient} from "@angular/common/http";
   templateUrl: './funixbot-commands.component.html',
   styleUrls: ['./funixbot-commands.component.css']
 })
-export class FunixbotCommandsComponent extends ListComponent<FunixbotCommandDto, FunixbotCommandsCrudService> {
+export class FunixbotCommandsComponent extends ListComponent<FunixbotCommandDto, FunixbotCommandsService> {
 
   columnsToDisplay = ['command', 'type', 'message', 'createdAt', 'updatedAt', 'actions'];
   commandTypes = Object.values(FunixbotCommandType);
@@ -32,7 +32,7 @@ export class FunixbotCommandsComponent extends ListComponent<FunixbotCommandDto,
 
   constructor(httpClient: HttpClient,
               private dialog: MatDialog) {
-    super(new FunixbotCommandsCrudService(httpClient, environment.production));
+    super(new FunixbotCommandsService(httpClient, environment.production));
   }
 
   openEditDialog(command: FunixbotCommandDto): void {

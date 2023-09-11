@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
 import {
   FunixbotCommandDto,
-  FunixbotCommandsCrudService,
+  FunixbotCommandsService,
   FunixbotCommandType
 } from "@funixproductions/funixproductions-requests";
 import {HttpClient} from "@angular/common/http";
@@ -16,14 +16,14 @@ import {environment} from "../../../../../../../environments/environment";
 })
 export class FunixbotCommandCreateModalComponent {
 
-  private readonly funixBotCommandsService: FunixbotCommandsCrudService;
+  private readonly funixBotCommandsService: FunixbotCommandsService;
   command: FunixbotCommandDto = new FunixbotCommandDto();
   commandTypes = Object.values(FunixbotCommandType);
 
   constructor(public dialogRef: MatDialogRef<FunixbotCommandCreateModalComponent>,
               httpClient: HttpClient,
               private notificationService: NotificationsService) {
-    this.funixBotCommandsService = new FunixbotCommandsCrudService(httpClient, environment.production);
+    this.funixBotCommandsService = new FunixbotCommandsService(httpClient, environment.production);
   }
 
   onNoClick(): void {
