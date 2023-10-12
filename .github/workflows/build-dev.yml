@@ -25,7 +25,7 @@ jobs:
 
       - name: Build and push dashboard funixproductions dev
         run: |
-          docker build . --tag ghcr.io/funixproductions/funixproductions-dashboard:dev
+          docker build . -f dev.Dockerfile --tag ghcr.io/funixproductions/funixproductions-dashboard:dev
           docker push ghcr.io/funixproductions/funixproductions-dashboard:dev
 
   update-kubernetes-cluster:
