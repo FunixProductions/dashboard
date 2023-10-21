@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: dashboard-dev-funixprod-deployment
+  namespace: 'funixproductions-dev'
+  labels:
+    app: angular
+    service: dashboard
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular
+      service: dashboard
+  template:
+    metadata:
+      namespace: 'funixproductions-dev'
+      annotations:
+        build-time: "TIME-UPDATE-BUILD-FNG"
+      labels:
+        app: angular
+        service: dashboard
+    spec:
+      containers:
+        - name: angular-dashboard-funixprod
+          image: ghcr.io/funixproductions/funixproductions-dashboard:dev
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "300Mi"
+          imagePullPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  namespace: 'funixproductions-dev'
+  name: dashboard
+
+spec:
+  type: ClusterIP
+  selector:
+    app: angular
+    service: dashboard
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
