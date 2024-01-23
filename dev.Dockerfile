@@ -1,4 +1,4 @@
-FROM node:18 as BUILD
+FROM node:20 as BUILD
 
 MAINTAINER Antoine PRONNIER, <antoine.pronnier@gmail.com>
 
