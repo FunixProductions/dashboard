@@ -12,6 +12,10 @@ jobs:
       contents: read
       packages: write
 
+    environment:
+      name: development
+      url: https://dev.dashboard.funixproductions.com
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

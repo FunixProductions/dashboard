@@ -28,6 +28,11 @@
                 "input": "node_modules/tinymce",
                 "output": "/tinymce/"
               },
+              {
+                "glob": "**/*",
+                "input": "node_modules/svg-country-flags/svg",
+                "output": "/assets/svg-country-flags/svg"
+              },
               "src/manifest.webmanifest"
             ],
             "styles": [

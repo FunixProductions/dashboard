@@ -9,6 +9,8 @@ import {RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module} from "ng-recaptcha";
 import {environment} from "../../../environments/environment";
 import {CaptureAuthComponent} from "./capture-auth/capture-auth.component";
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
+import {HttpClientModule} from "@angular/common/http";
+import {MatSelectCountryModule} from "@angular-material-extensions/select-country";
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import {ResetPasswordComponent} from './reset-password/reset-password.component'
     ResetPasswordComponent
   ],
   imports: [
+    HttpClientModule,
+    MatSelectCountryModule.forRoot('fr'),
     CommonModule,
     HomeRoutingModule,
     FormsModule,
