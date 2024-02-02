@@ -59,12 +59,21 @@ export class RegisterComponent {
         });
     }
 
-    onCountryChange($event: Country) {
+    onCountryChange(event?: Country) {
+        if (!event || !event.name || !event.alpha2Code || !event.alpha3Code || !event.numericCode) {
+            return;
+        }
+
         const country = new UserCountry();
-        country.name = $event.name ?? '';
-        country.countryCode2Chars = $event.alpha2Code ?? '';
-        country.countryCode3Chars = $event.alpha3Code ?? '';
-        country.code = parseInt($event.numericCode ?? '0');
+        country.name = event.name;
+        country.countryCode2Chars = event.alpha2Code;
+        country.countryCode3Chars = event.alpha3Code;
+        const numeric = parseInt(event.numericCode);
+        if (!isNaN(numeric)) {
+            country.code = numeric;
+        } else {
+            return;
+        }
 
         this.country = country;
     }
