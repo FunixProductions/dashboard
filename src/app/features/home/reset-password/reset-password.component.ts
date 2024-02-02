@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ReCaptchaV3Service} from "ng-recaptcha";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {UserAuthService, UserPasswordResetDTO} from "@funixproductions/funixproductions-requests";
 import {environment} from "../../../../environments/environment";
 import NotificationsService from "../../../services/NotificationService";
@@ -39,7 +39,7 @@ export class ResetPasswordComponent {
               this.notificationService.success("Votre mot de passe a été réinitialisé.");
               this.router.navigate(['/login']);
             },
-            error: (error: HttpErrorResponse) => {
+            error: (error) => {
               this.notificationService.onErrorRequest(error);
             }
           })
@@ -58,7 +58,7 @@ export class ResetPasswordComponent {
             next: () => {
               this.notificationService.success("Un email vous a été envoyé pour réinitialiser votre mot de passe.");
             },
-            error: (error: HttpErrorResponse) => {
+            error: (error) => {
               this.notificationService.onErrorRequest(error);
             }
           })

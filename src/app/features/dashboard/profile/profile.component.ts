@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {faTwitch} from '@fortawesome/free-brands-svg-icons';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {
   TwitchAuthService,
   TwitchClientTokenDTO,
@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
         next: (twitchAuthUrl: string) => {
           window.open(twitchAuthUrl, "TwitchAuth", "resizable=no, toolbar=no, scrollbars=no, menubar=no, status=no, directories=no, location=no, width=1000, height=1000, left=10 top=100");
         },
-        error: (error: HttpErrorResponse) => {
+        error: (error) => {
           this.notificationService.onErrorRequest(error, 'Erreur lors de la récupération de l\'url de connexion Twitch');
         }
       });
@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit {
       next: () => {
         this.notificationService.success('Un email de validation vous a été envoyé.');
       },
-      error: (error: HttpErrorResponse) => {
+      error: (error) => {
         this.notificationService.onErrorRequest(error, 'Erreur lors de l\'envoi de l\'email de validation');
       }
     });

@@ -34,6 +34,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    environment:
+      name: production
+      url: https://dashboard.funixproductions.com
+
     steps:
       - name: Set up kubectl
         uses: azure/k8s-set-context@v3
