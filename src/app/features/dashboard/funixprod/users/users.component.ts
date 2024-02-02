@@ -19,7 +19,7 @@ import {environment} from "../../../../../environments/environment";
 })
 export class UsersComponent extends ListComponent<UserDTO, UserCrudService> {
 
-    columnsToDisplay = ['username', 'email', 'role', 'valid', 'createdAt', 'updatedAt', 'actions'];
+    columnsToDisplay = ['username', 'email', 'role', 'valid', 'country', 'createdAt', 'updatedAt', 'actions'];
 
     valid: string = '';
 
