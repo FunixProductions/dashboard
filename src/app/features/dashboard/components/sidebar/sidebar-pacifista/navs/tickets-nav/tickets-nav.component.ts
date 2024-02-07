@@ -7,7 +7,8 @@ import {
   QueryBuilder,
   QueryParam,
   TicketStatus,
-  UserAuthService,
+  UserDTO,
+  UserJwtCheckerService,
   UserRole
 } from "@funixproductions/funixproductions-requests";
 import NotificationsService from "../../../../../../../services/NotificationService";
@@ -21,25 +22,29 @@ import {environment} from "../../../../../../../../environments/environment";
 })
 export class TicketsNavComponent extends SidebarService implements OnInit {
 
+  private readonly jwtService: UserJwtCheckerService;
   protected readonly ticketService: PacifistaSupportTicketService;
   ticketsActive: PacifistaSupportTicketDTO[] = [];
 
   constructor(httpClient: HttpClient,
               protected notificationService: NotificationsService) {
-    super(new UserAuthService(httpClient, environment.production));
+    super();
     this.ticketService = new PacifistaSupportTicketService(httpClient, environment.production);
+    this.jwtService = new UserJwtCheckerService();
   }
 
   ngOnInit(): void {
-    this.authService.currentUser().subscribe({
-      next: user => {
-        if (user.role && (user.role === UserRole.PACIFISTA_ADMIN || user.role === UserRole.PACIFISTA_MODERATOR || user.role === UserRole.ADMIN)) {
-          this.fetchAmountStaffActive();
-        } else {
-          this.fetchAmountUserActive();
-        }
-      }
-    })
+    const user: UserDTO | null = this.jwtService.getUser();
+
+    if (user && user.role && (user.role === UserRole.PACIFISTA_ADMIN || user.role === UserRole.PACIFISTA_MODERATOR || user.role === UserRole.ADMIN)) {
+      this.fetchAmountStaffActive();
+    } else {
+      this.fetchAmountUserActive();
+    }
+  }
+
+  protected currentUser(): UserDTO | null {
+    return this.jwtService.getUser();
   }
 
   private fetchAmountUserActive(): void {

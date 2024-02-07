@@ -2,7 +2,11 @@ import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ReCaptchaV3Service} from "ng-recaptcha";
 import {HttpClient} from "@angular/common/http";
-import {UserAuthService, UserPasswordResetDTO} from "@funixproductions/funixproductions-requests";
+import {
+  UserAuthService,
+  UserPasswordResetDTO,
+  UserPasswordResetRequestDTO
+} from "@funixproductions/funixproductions-requests";
 import {environment} from "../../../../environments/environment";
 import NotificationsService from "../../../services/NotificationService";
 
@@ -54,7 +58,11 @@ export class ResetPasswordComponent {
     if (this.emailReset.length > 0) {
       this.captchaService.execute("resetPasswordRequest").subscribe({
         next: captchaCode => {
-          this.userAuthService.resetPasswordRequest(this.emailReset, captchaCode).subscribe({
+          const request = new UserPasswordResetRequestDTO();
+          request.email = this.emailReset;
+          request.origin = "FUNIX_PRODUCTIONS_DASHBOARD";
+
+          this.userAuthService.resetPasswordRequest(request, captchaCode).subscribe({
             next: () => {
               this.notificationService.success("Un email vous a été envoyé pour réinitialiser votre mot de passe.");
             },

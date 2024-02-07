@@ -1,8 +1,5 @@
 import {Component} from '@angular/core';
 import {SidebarService} from "../SidebarService";
-import {HttpClient} from "@angular/common/http";
-import {UserAuthService} from "@funixproductions/funixproductions-requests";
-import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-sidebar-funixprod',
@@ -10,9 +7,5 @@ import {environment} from "../../../../../../environments/environment";
   styleUrls: ['./sidebar-funixprod.component.css']
 })
 export class SidebarFunixprodComponent extends SidebarService {
-
-  constructor(httpClient: HttpClient) {
-    super(new UserAuthService(httpClient, environment.production));
-  }
 
 }

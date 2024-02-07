@@ -19,3 +19,18 @@
     </div>
   </div>
 </li>
+
+<!-- Accounting section -->
+<li class="nav-item" *ngIf="hasAccessToPanelWithAdmin()">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#accountingCollapse"
+       aria-expanded="false" aria-controls="accountingCollapse">
+        <i class="fas fa-fw fa-film"></i>
+        <span>Comptabilité</span>
+    </a>
+    <div id="accountingCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Tools</h6>
+            <a class="collapse-item" href="/dashboard/funixprod/twitch/eventsub">Twitch eventsub</a>
+        </div>
+    </div>
+</li>
