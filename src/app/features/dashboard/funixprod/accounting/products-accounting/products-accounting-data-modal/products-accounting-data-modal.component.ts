@@ -21,7 +21,7 @@ export class ProductsAccountingDataModalComponent {
               private notificationService: NotificationsService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.productAccountingService = new ProductAccountingService(httpClient, environment.production);
-    this.product = data.income ?? new ProductDTO();
+    this.product = data.product ?? new ProductDTO();
     this.isEdit = data.isEdit ?? false;
   }
 
