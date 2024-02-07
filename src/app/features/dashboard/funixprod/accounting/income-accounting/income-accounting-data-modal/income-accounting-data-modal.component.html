@@ -1,0 +1,54 @@
+<div class="card">
+    <div class="card-header">
+        <h3 mat-dialog-title class="text-primary">{{ isEdit ? 'Modification' : 'Création' }} d'un revenu</h3>
+    </div>
+
+    <div mat-dialog-content class="card-body">
+        <form class="user">
+
+            <div class="form-group">
+                <label for="incomeName">Nom du revenu</label>
+                <input type="text" id="incomeName" [(ngModel)]="income.incomeName"
+                       name="incomeName"
+                       class="form-control form-control-user"
+                       placeholder="Nom du revenu">
+            </div>
+
+            <div class="form-group">
+                <label for="incomeDescription">Description du revenu</label>
+                <input type="text" id="incomeDescription" [(ngModel)]="income.incomeDescription"
+                       name="incomeDescription"
+                       class="form-control form-control-user"
+                       placeholder="Description du revenu">
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Montant en €</label>
+                <input type="number" id="amount" [(ngModel)]="income.amount"
+                       name="incomeDescription"
+                       class="form-control form-control-user"
+                       placeholder="Montant">
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary btn-icon-split" (click)="onNoClick()">
+            <span class="icon text-white-50">
+              <i class="fas fa-arrow-right"></i>
+            </span>
+            <span class="text">
+              Annuler
+            </span>
+        </button>
+
+        <button class="btn {{ isEdit ? 'btn-info' : 'btn-success' }} btn-icon-split" (click)="sendRequest()">
+            <span class="icon text-white-50">
+              <i class="fas fa-pen"></i>
+            </span>
+            <span class="text">
+              {{ isEdit ? 'Modifier' : 'Créer' }}
+            </span>
+        </button>
+    </div>
+</div>

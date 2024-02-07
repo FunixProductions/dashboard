@@ -24,13 +24,14 @@
 <li class="nav-item" *ngIf="hasAccessToPanelWithAdmin()">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#accountingCollapse"
        aria-expanded="false" aria-controls="accountingCollapse">
-        <i class="fas fa-fw fa-film"></i>
+        <i class="fas fa-fw fa-money-bill"></i>
         <span>Comptabilité</span>
     </a>
     <div id="accountingCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Tools</h6>
-            <a class="collapse-item" href="/dashboard/funixprod/twitch/eventsub">Twitch eventsub</a>
+            <h6 class="collapse-header">Transactions B to B</h6>
+            <a class="collapse-item" href="/dashboard/funixprod/accounting/incomes">Revenus</a>
+            <a class="collapse-item" href="/dashboard/funixprod/accounting/products">Dépenses</a>
         </div>
     </div>
 </li>

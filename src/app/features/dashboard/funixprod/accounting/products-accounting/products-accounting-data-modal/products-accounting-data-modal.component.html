@@ -1,0 +1,83 @@
+<div class="card">
+    <div class="card-header">
+        <h3 mat-dialog-title class="text-primary">{{ isEdit ? 'Modification' : 'Création' }} d'une dépense</h3>
+    </div>
+
+    <div mat-dialog-content class="card-body">
+        <form class="user">
+
+            <div class="form-group">
+                <label for="productName">Nom de la dépense</label>
+                <input type="text" id="productName" [(ngModel)]="product.productName"
+                       name="productName"
+                       class="form-control form-control-user"
+                       placeholder="Nom de la dépense">
+            </div>
+
+            <div class="form-group">
+                <label for="productDescription">Description de la dépense</label>
+                <input type="text" id="productDescription" [(ngModel)]="product.productDescription"
+                       name="productDescription"
+                       class="form-control form-control-user"
+                       placeholder="Description de la dépense">
+            </div>
+
+            <div class="form-group">
+                <label for="monthly">Dépense mensuelle</label>
+                <input type="checkbox" id="monthly" [(ngModel)]="product.monthly"
+                       name="monthly"
+                       class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="isEu">Dépense européenne</label>
+                <input type="checkbox" id="isEu" [(ngModel)]="product.isEu"
+                       name="isEu"
+                       class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="isPhysical">Bien physique</label>
+                <input type="checkbox" id="isPhysical" [(ngModel)]="product.isPhysical"
+                       name="isPhysical"
+                       class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="amountHT">Montant HT en €</label>
+                <input type="number" id="amountHT" [(ngModel)]="product.amountHT"
+                       name="amountHT"
+                       class="form-control form-control-user"
+                       placeholder="Montant HT">
+            </div>
+
+            <div class="form-group">
+                <label for="amountTax">Montant TVA en €</label>
+                <input type="number" id="amountTax" [(ngModel)]="product.amountTax"
+                       name="amountTax"
+                       class="form-control form-control-user"
+                       placeholder="Montant HT">
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary btn-icon-split" (click)="onNoClick()">
+            <span class="icon text-white-50">
+              <i class="fas fa-arrow-right"></i>
+            </span>
+            <span class="text">
+              Annuler
+            </span>
+        </button>
+
+        <button class="btn {{ isEdit ? 'btn-info' : 'btn-success' }} btn-icon-split" (click)="sendRequest()">
+            <span class="icon text-white-50">
+              <i class="fas fa-pen"></i>
+            </span>
+            <span class="text">
+              {{ isEdit ? 'Modifier' : 'Créer' }}
+            </span>
+        </button>
+    </div>
+</div>
