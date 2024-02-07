@@ -17,7 +17,8 @@ import {
 })
 export class ArticlesComponent extends ListComponent<PacifistaShopArticleDTO, PacifistaShopArticleService> {
 
-  columnsToDisplay = ['categoryName', 'name', 'description', 'price', 'createdAt', 'updatedAt', 'actions']
+  columnsToDisplay = ['categoryName', 'name', 'description', 'logo', 'price', 'createdAt', 'updatedAt', 'actions']
+  protected readonly pacifistaApiDomain: string = environment.pacifistaApiUrl;
 
   constructor(httpClient: HttpClient, private dialog: MatDialog) {
     super(new PacifistaShopArticleService(httpClient, environment.production));

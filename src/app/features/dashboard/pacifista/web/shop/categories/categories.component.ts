@@ -18,7 +18,7 @@ import {environment} from "../../../../../../../environments/environment";
 })
 export class CategoriesComponent extends ListComponent<PacifistaShopCategoryDTO, PacifistaShopCategoryService> {
 
-  columnsToDisplay = ['categoryName', 'createdAt', 'updatedAt', 'actions']
+  columnsToDisplay = ['categoryName', 'description', 'createdAt', 'updatedAt', 'actions']
 
   constructor(httpClient: HttpClient,
               private dialog: MatDialog) {
@@ -26,33 +26,27 @@ export class CategoriesComponent extends ListComponent<PacifistaShopCategoryDTO,
   }
 
   openEditDialog(category: PacifistaShopCategoryDTO): void {
-    const dialogRef = this.dialog.open(CategoryEditModalComponent, {
+    this.dialog.open(CategoryEditModalComponent, {
       data: {
         category: category
       }
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
+    }).afterClosed().subscribe(() => {
       this.updateList();
     });
   }
 
   openCreationModal(): void {
-    const dialogRef = this.dialog.open(CategoryCreationModalComponent);
-
-    dialogRef.afterClosed().subscribe(() => {
+    this.dialog.open(CategoryCreationModalComponent).afterClosed().subscribe(() => {
       this.updateList();
     });
   }
 
   openRemoveDialog(category: PacifistaShopCategoryDTO): void {
-    const dialogRef = this.dialog.open(CategoryRemoveModalComponent, {
+    this.dialog.open(CategoryRemoveModalComponent, {
       data: {
         category: category
       }
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
+    }).afterClosed().subscribe(() => {
       this.updateList();
     });
   }
