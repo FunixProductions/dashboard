@@ -8,7 +8,7 @@
   <div id="ticketsCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
 
-      <div *ngIf="currentUser?.role === UserRole.USER; else elseBlock">
+      <div *ngIf="currentUser()?.role === UserRole.USER; else elseBlock">
         <a class="collapse-item" href="/dashboard/pacifista/tickets/create">Créer un ticket</a>
         <a class="collapse-item" href="/dashboard/pacifista/tickets/list">
           Tickets

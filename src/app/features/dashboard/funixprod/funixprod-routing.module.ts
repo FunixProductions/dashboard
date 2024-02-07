@@ -7,6 +7,9 @@ import {TwitchEventsubComponent} from "./twitch/twitch-eventsub/twitch-eventsub.
 
 const routes: Routes = [
   { path: '', component: FunixprodComponent, children: [
+
+      { path: 'accounting', loadChildren: () => import('./accounting/accounting.module').then(m => m.AccountingModule)},
+
       { path: 'users', component: UsersComponent},
       { path: 'users/:id', component: UserEditComponent},
 

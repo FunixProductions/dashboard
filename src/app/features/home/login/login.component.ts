@@ -81,8 +81,9 @@ export class LoginComponent implements OnInit {
             this.userAuthService.login(loginRequest, token).subscribe({
                 next: async (loginDto: UserTokenDTO) => {
                     if (loginDto.token) {
-                        await localStorage.setItem(FunixprodHttpClient.accessTokenLocalStorageName, loginDto.token);
-                        await this.router.navigate(['dashboard']);
+                        localStorage.setItem(FunixprodHttpClient.accessTokenLocalStorageName, loginDto.token);
+                        console.log(localStorage.getItem(FunixprodHttpClient.accessTokenLocalStorageName));
+                        this.router.navigate(['dashboard']);
                     } else {
                         this.notificationService.error('Erreur de connection. Veuillez recommencer.')
                     }

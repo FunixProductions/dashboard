@@ -14,14 +14,14 @@ import {TwitchEventsubComponent} from './twitch/twitch-eventsub/twitch-eventsub.
 import {TwitchEventsubModalComponent} from './twitch/twitch-eventsub-modal/twitch-eventsub-modal.component';
 
 @NgModule({
-  declarations: [
-    FunixprodComponent,
-    UsersComponent,
-    UserEditComponent,
-    UserRemoveModalComponent,
-    TwitchEventsubComponent,
-    TwitchEventsubModalComponent
-  ],
+    declarations: [
+        FunixprodComponent,
+        UsersComponent,
+        UserEditComponent,
+        UserRemoveModalComponent,
+        TwitchEventsubComponent,
+        TwitchEventsubModalComponent
+    ],
     imports: [
         CommonModule,
         FunixprodRoutingModule,

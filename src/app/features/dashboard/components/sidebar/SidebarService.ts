@@ -1,44 +1,26 @@
-import {UserAuthService, UserDTO, UserRole} from "@funixproductions/funixproductions-requests";
+import {UserJwtCheckerService, UserRole} from "@funixproductions/funixproductions-requests";
 
 export abstract class SidebarService {
 
-  currentUser?: UserDTO;
+  private jwtCheckerService: UserJwtCheckerService;
 
-  protected constructor(protected authService: UserAuthService) {
-    this.authService.currentUser().subscribe((user) => {
-      this.currentUser = user;
-    });
+  protected constructor() {
+    this.jwtCheckerService = new UserJwtCheckerService();
   }
 
   hasAccessToPanelWithAdmin(): boolean {
-    if (this.currentUser) {
-      return this.currentUser.role === UserRole.ADMIN;
-    } else {
-      return false;
-    }
+    return this.jwtCheckerService.hasRole(UserRole.ADMIN);
   }
 
   hasAccessToPanelWithModo(): boolean {
-    if (this.currentUser) {
-      return this.currentUser.role === UserRole.ADMIN || this.currentUser.role === UserRole.MODERATOR
-    } else {
-      return false;
-    }
+    return this.jwtCheckerService.hasRole(UserRole.ADMIN) || this.jwtCheckerService.hasRole(UserRole.MODERATOR);
   }
 
   hasAccessToPanelWithPacifistaAdmin(): boolean {
-    if (this.currentUser) {
-      return this.currentUser.role === UserRole.ADMIN || this.currentUser.role === UserRole.PACIFISTA_ADMIN
-    } else {
-      return false;
-    }
+    return this.jwtCheckerService.hasRole(UserRole.ADMIN) || this.jwtCheckerService.hasRole(UserRole.PACIFISTA_ADMIN);
   }
 
   hasAccessToPanelWithPacifistaModo(): boolean {
-    if (this.currentUser) {
-      return this.currentUser.role === UserRole.ADMIN || this.currentUser.role === UserRole.PACIFISTA_ADMIN || this.currentUser.role === UserRole.PACIFISTA_MODERATOR
-    } else {
-      return false;
-    }
+    return this.jwtCheckerService.hasRole(UserRole.ADMIN) || this.jwtCheckerService.hasRole(UserRole.PACIFISTA_ADMIN) || this.jwtCheckerService.hasRole(UserRole.PACIFISTA_MODERATOR);
   }
 }
