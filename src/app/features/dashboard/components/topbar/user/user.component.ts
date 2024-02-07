@@ -1,30 +1,19 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {Component} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {UserLogoutModalComponent} from "./user-logout-modal/user-logout-modal.component";
-import {HttpClient} from "@angular/common/http";
-import {UserAuthService, UserDTO} from "@funixproductions/funixproductions-requests";
-import {environment} from "../../../../../../environments/environment";
+import {UserDTO, UserJwtCheckerService} from "@funixproductions/funixproductions-requests";
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements AfterViewInit {
-  private readonly authService: UserAuthService;
-  private userDTO: UserDTO = new UserDTO();
+export class UserComponent {
+  private readonly userDTO: UserDTO;
 
-  constructor(httpClient: HttpClient,
-              private matDialog: MatDialog) {
-    this.authService = new UserAuthService(httpClient, environment.production);
-  }
-
-  ngAfterViewInit(): void {
-    this.authService.currentUser().subscribe({
-      next: (user: UserDTO) => {
-        this.userDTO = user;
-      }
-    });
+  constructor(private matDialog: MatDialog) {
+    const jwtService = new UserJwtCheckerService();
+    this.userDTO = jwtService.getUser() ?? new UserDTO();
   }
 
   public getUsername(): string | undefined {
