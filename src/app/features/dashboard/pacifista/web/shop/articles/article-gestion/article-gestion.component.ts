@@ -23,7 +23,9 @@ export class ArticleGestionComponent implements AfterViewInit {
 
   private readonly articleService: PacifistaShopArticleService;
   private readonly categoryService: PacifistaShopCategoryService;
+
   article: PacifistaShopArticleDTO = new PacifistaShopArticleDTO();
+  file?: File;
 
   categorySearch: string = '';
   categoriesSearchResult: PacifistaShopCategoryDTO[] = [];
@@ -56,8 +58,13 @@ export class ArticleGestionComponent implements AfterViewInit {
   }
 
   saveEntity(): void {
+    if (!this.file) {
+      this.notificationService.error('Veuillez ajouter un fichier.');
+      return;
+    }
+
     if (this.article.id) {
-      this.articleService.patch(this.article).subscribe({
+      this.articleService.fullUpdateFile(this.article, this.file).subscribe({
         next: (article: PacifistaShopArticleDTO) => {
           this.article = article;
           this.notificationService.success('Article mis à jour.');
@@ -67,7 +74,7 @@ export class ArticleGestionComponent implements AfterViewInit {
         }
       });
     } else {
-      this.articleService.create(this.article).subscribe({
+      this.articleService.sendFile(this.article, this.file).subscribe({
         next: (article: PacifistaShopArticleDTO) => {
           this.article = article;
           this.notificationService.success('Article crée.');
@@ -100,6 +107,11 @@ export class ArticleGestionComponent implements AfterViewInit {
 
   selectCategory(category: PacifistaShopCategoryDTO): void {
     this.article.category = category;
+  }
+
+  onFileSelected(event: any): void {
+    console.log(event)
+    this.file = event.target.files[0];
   }
 
 }
