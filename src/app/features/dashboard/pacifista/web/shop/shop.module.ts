@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 
 import {ShopRoutingModule} from './shop-routing.module';
 import {ShopComponent} from './shop.component';
@@ -27,15 +27,16 @@ import {EditorModule, TINYMCE_SCRIPT_SRC} from "@tinymce/tinymce-angular";
     ArticleRemoveModalComponent,
     ArticleGestionComponent
   ],
-  imports: [
-    CommonModule,
-    ShopRoutingModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatDialogModule,
-    FormsModule,
-    EditorModule
-  ],
+    imports: [
+        CommonModule,
+        ShopRoutingModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatDialogModule,
+        FormsModule,
+        EditorModule,
+        NgOptimizedImage
+    ],
   providers: [
     { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
   ]

@@ -41,15 +41,15 @@
         </div>
 
         <div class="form-group">
-            <label for="commandExecInput">Description de l'article</label>
-            <textarea type="text" [(ngModel)]="article.commandExecuted"
+            <label for="commandExecInput">Commande lancée sur Pacifista après l'achat de l'article</label>
+            <input type="text" [(ngModel)]="article.commandExecuted"
                       name="commandExecuted"
                       id="commandExecInput"
                       class="form-control"
-                      placeholder="Commande lancée sur le serveur"></textarea>
+                      placeholder="Commande lancée sur le serveur (sans /)">
         </div>
 
-        <div *ngIf="!article.id" class="form-group">
+        <div class="form-group">
             <label for="articleImageInput">Image de l'article</label>
             <input type="file"
                    (change)="onFileSelected($event)"
@@ -82,7 +82,7 @@
         <button (click)="saveEntity()"
                 [disabled]="!(article.category && article.category.id &&
             article.name && article.description &&
-            article.htmlDescription &&
+            article.htmlDescription && file &&
             article.price)"
                 class="btn btn-primary btn-user btn-block">
             {{ article.id ? 'Modifier' : 'Créer' }} l'article

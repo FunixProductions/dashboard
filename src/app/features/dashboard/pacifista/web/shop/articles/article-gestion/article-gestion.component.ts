@@ -58,8 +58,13 @@ export class ArticleGestionComponent implements AfterViewInit {
   }
 
   saveEntity(): void {
+    if (!this.file) {
+      this.notificationService.error('Veuillez ajouter un fichier.');
+      return;
+    }
+
     if (this.article.id) {
-      this.articleService.patch(this.article).subscribe({
+      this.articleService.fullUpdateFile(this.article, this.file).subscribe({
         next: (article: PacifistaShopArticleDTO) => {
           this.article = article;
           this.notificationService.success('Article mis à jour.');
@@ -69,19 +74,15 @@ export class ArticleGestionComponent implements AfterViewInit {
         }
       });
     } else {
-      if (this.file) {
-        this.articleService.sendFile(this.article, this.file).subscribe({
-          next: (article: PacifistaShopArticleDTO) => {
-            this.article = article;
-            this.notificationService.success('Article crée.');
-          },
-          error: err => {
-            this.notificationService.onErrorRequest(err);
-          }
-        });
-      } else {
-        this.notificationService.error('Veuillez ajouter un fichier.');
-      }
+      this.articleService.sendFile(this.article, this.file).subscribe({
+        next: (article: PacifistaShopArticleDTO) => {
+          this.article = article;
+          this.notificationService.success('Article crée.');
+        },
+        error: err => {
+          this.notificationService.onErrorRequest(err);
+        }
+      });
     }
   }
 

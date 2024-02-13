@@ -46,15 +46,15 @@
                 <ng-container matColumnDef="logo">
                     <th mat-header-cell *matHeaderCellDef>Logo</th>
                     <td mat-cell *matCellDef="let c">
-                        <a href="{{ pacifistaApiDomain }}/web/shop/articles/file/{{ c.id }}" target="_blank">Url de l'image</a>
+                        <img alt="logo de l'article {{ c.name }}" width="100" height="100" ngSrc="{{ pacifistaApiDomain }}web/shop/articles/file/{{ c.id }}">
                     </td>
                     <th mat-footer-cell *matFooterCellDef>Logo</th>
                 </ng-container>
 
                 <ng-container matColumnDef="price">
-                    <th mat-header-cell *matHeaderCellDef>Prix</th>
+                    <th mat-header-cell *matHeaderCellDef>Prix HT</th>
                     <td mat-cell *matCellDef="let c">{{ c.price }}€</td>
-                    <th mat-footer-cell *matFooterCellDef>Prix</th>
+                    <th mat-footer-cell *matFooterCellDef>Prix HT</th>
                 </ng-container>
 
                 <ng-container matColumnDef="createdAt">
