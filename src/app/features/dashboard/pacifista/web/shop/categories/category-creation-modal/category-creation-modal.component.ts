@@ -26,6 +26,10 @@ export class CategoryCreationModalComponent {
   }
 
   onYesClick(): void {
+    if (!this.category.multiPurchaseAllowed) {
+      this.category.multiPurchaseAllowed = false;
+    }
+
     this.categoryService.create(this.category).subscribe({
       next: () => {
         this.dialogRef.close();

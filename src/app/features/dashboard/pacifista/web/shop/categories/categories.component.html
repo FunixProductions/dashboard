@@ -47,6 +47,12 @@
                     <th mat-footer-cell *matFooterCellDef>Description</th>
                 </ng-container>
 
+                <ng-container matColumnDef="multiPurchaseAllowed">
+                    <th mat-header-cell *matHeaderCellDef>Achat multiple</th>
+                    <td mat-cell *matCellDef="let c">{{ c.multiPurchaseAllowed ? 'Oui' : 'Non' }}</td>
+                    <th mat-footer-cell *matFooterCellDef>Achat multiple</th>
+                </ng-container>
+
                 <ng-container matColumnDef="createdAt">
                     <th mat-header-cell *matHeaderCellDef> Date de création </th>
                     <td mat-cell *matCellDef="let c">{{ c.createdAt ? (c.createdAt | date : 'dd/MM/YY - HH:mm') : '-'  }}</td>

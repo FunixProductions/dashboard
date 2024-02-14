@@ -5,7 +5,7 @@
     <span>Support </span>
     <span class="badge badge-secondary">{{ ticketsActive.length }}</span>
   </a>
-  <div id="ticketsCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+  <div id="ticketsCollapse" class="collapse {{ currentRoute.includes('pacifista/tickets') ? 'show' : '' }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
 
       <div *ngIf="currentUser()?.role === UserRole.USER; else elseBlock">

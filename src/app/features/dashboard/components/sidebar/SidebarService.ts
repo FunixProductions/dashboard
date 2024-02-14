@@ -1,11 +1,14 @@
 import {UserJwtCheckerService, UserRole} from "@funixproductions/funixproductions-requests";
+import {Router} from "@angular/router";
 
 export abstract class SidebarService {
 
-  private jwtCheckerService: UserJwtCheckerService;
+  protected readonly currentRoute: string;
+  private readonly jwtCheckerService: UserJwtCheckerService;
 
-  protected constructor() {
+  protected constructor(router: Router) {
     this.jwtCheckerService = new UserJwtCheckerService();
+    this.currentRoute = router.url;
   }
 
   hasAccessToPanelWithAdmin(): boolean {

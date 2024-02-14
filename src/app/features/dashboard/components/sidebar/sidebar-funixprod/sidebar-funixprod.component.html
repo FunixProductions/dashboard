@@ -12,7 +12,7 @@
     <i class="fas fa-fw fa-film"></i>
     <span>Twitch</span>
   </a>
-  <div id="twitchCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+  <div id="twitchCollapse" class="collapse {{ currentRoute.includes('funixprod/twitch') ? 'show' : '' }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
       <h6 class="collapse-header">Tools</h6>
       <a class="collapse-item" href="/dashboard/funixprod/twitch/eventsub">Twitch eventsub</a>
@@ -27,7 +27,7 @@
         <i class="fas fa-fw fa-money-bill"></i>
         <span>Comptabilité</span>
     </a>
-    <div id="accountingCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div id="accountingCollapse" class="collapse {{ currentRoute.includes('funixprod/accounting') ? 'show' : '' }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Transactions B to B</h6>
             <a class="collapse-item" href="/dashboard/funixprod/accounting/incomes">Revenus</a>

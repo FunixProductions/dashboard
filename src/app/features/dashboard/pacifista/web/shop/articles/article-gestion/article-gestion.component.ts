@@ -110,7 +110,6 @@ export class ArticleGestionComponent implements AfterViewInit {
   }
 
   onFileSelected(event: any): void {
-    console.log(event)
     this.file = event.target.files[0];
   }
 

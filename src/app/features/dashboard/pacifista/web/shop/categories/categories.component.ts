@@ -18,7 +18,7 @@ import {environment} from "../../../../../../../environments/environment";
 })
 export class CategoriesComponent extends ListComponent<PacifistaShopCategoryDTO, PacifistaShopCategoryService> {
 
-  columnsToDisplay = ['categoryName', 'description', 'createdAt', 'updatedAt', 'actions']
+  columnsToDisplay = ['categoryName', 'description', 'multiPurchaseAllowed', 'createdAt', 'updatedAt', 'actions']
 
   constructor(httpClient: HttpClient,
               private dialog: MatDialog) {

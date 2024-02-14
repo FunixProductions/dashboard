@@ -14,6 +14,7 @@ import {
 import NotificationsService from "../../../../../../../services/NotificationService";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../../../environments/environment";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-tickets-nav',
@@ -27,8 +28,9 @@ export class TicketsNavComponent extends SidebarService implements OnInit {
   ticketsActive: PacifistaSupportTicketDTO[] = [];
 
   constructor(httpClient: HttpClient,
+              router: Router,
               protected notificationService: NotificationsService) {
-    super();
+    super(router);
     this.ticketService = new PacifistaSupportTicketService(httpClient, environment.production);
     this.jwtService = new UserJwtCheckerService();
   }

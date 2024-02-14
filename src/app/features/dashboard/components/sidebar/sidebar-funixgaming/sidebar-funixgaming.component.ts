@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {SidebarService} from "../SidebarService";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sidebar-funixgaming',
@@ -7,5 +8,9 @@ import {SidebarService} from "../SidebarService";
   styleUrls: ['./sidebar-funixgaming.component.css']
 })
 export class SidebarFunixgamingComponent extends SidebarService {
+
+  constructor(router: Router) {
+    super(router);
+  }
 
 }

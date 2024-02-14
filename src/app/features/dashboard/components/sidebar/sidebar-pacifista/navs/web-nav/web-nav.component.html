@@ -5,7 +5,7 @@
     <i class="fas fa-fw fa-globe"></i>
     <span>Web</span>
   </a>
-  <div id="webCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+  <div id="webCollapse" class="collapse {{ currentRoute.includes('pacifista/web/shop') ? 'show' : '' }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
       <h6 class="collapse-header">Boutique</h6>
       <a class="collapse-item" href="/dashboard/pacifista/web/shop/categories">Categories</a>
