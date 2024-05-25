@@ -1,35 +1,36 @@
-<h1 class="h3 mb-4 text-gray-800">Edition de l'utilisateur {{ userToEdit.username }}</h1>
+<div *ngIf="userToEdit">
+    <h1 class="h3 mb-4 text-gray-800">Edition de l'utilisateur {{ userToEdit.username }}</h1>
 
-<div class="col-sm-8 p-5">
-  <form class="user">
+    <div class="col-sm-8 p-5">
+        <form class="user">
 
-    <div class="form-group">
-      <input type="text" [(ngModel)]="userToEdit.username"
-             name="username"
-             class="form-control form-control-user"
-             placeholder="Nom d'utilisateur">
+            <div class="form-group">
+                <input type="text" [(ngModel)]="userToEdit.username"
+                       name="username"
+                       class="form-control form-control-user"
+                       placeholder="Nom d'utilisateur">
+            </div>
+
+            <div class="form-group">
+                <input type="email" [(ngModel)]="userToEdit.email"
+                       name="email"
+                       class="form-control form-control-user"
+                       placeholder="Addresse email">
+            </div>
+
+            <div class="form-group">
+                <label for="role-select">Sélection du rôle :</label>
+                <select class="custom-select"
+                        id="role-select"
+                        [(ngModel)]="userToEdit.role"
+                        name="role">
+                    <option *ngFor="let role of roles">{{role}}</option>
+                </select>
+            </div>
+
+            <button (click)="saveUserEdit()" class="btn btn-primary btn-user btn-block">
+                Modifier le compte
+            </button>
+        </form>
     </div>
-
-    <div class="form-group">
-      <input type="email" [(ngModel)]="userToEdit.email"
-             name="email"
-             class="form-control form-control-user"
-             placeholder="Addresse email">
-    </div>
-
-    <div class="form-group">
-      <label for="role-select">Sélection du rôle :</label>
-      <select class="custom-select"
-              id="role-select"
-              [(ngModel)]="userToEdit.role"
-              name="role">
-        <option *ngFor="let role of roles">{{role}}</option>
-      </select>
-    </div>
-
-    <button (click)="saveUserEdit()" class="btn btn-primary btn-user btn-block">
-      Modifier le compte
-    </button>
-  </form>
 </div>
-

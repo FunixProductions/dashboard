@@ -1,4 +1,4 @@
-<div *ngIf="!user.valid" class="w-50 alert alert-warning" role="alert">
+<div *ngIf="user && !user.valid" class="w-50 alert alert-warning" role="alert">
   <div class="col-12">
     <p>Votre compte n'a pas été validé. Vous devez cliquer sur le lien de validation que vous avez reçu par mail.</p>
   </div>

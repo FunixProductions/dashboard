@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
 
   faTwitch = faTwitch;
 
-  user: UserDTO = new UserDTO();
+  user?: UserDTO;
   twitchClientToken: TwitchClientTokenDTO | null = null;
 
   constructor(httpClient: HttpClient,

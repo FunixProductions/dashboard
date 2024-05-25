@@ -13,7 +13,7 @@ import {environment} from "../../../../../../environments/environment";
 export class UserEditComponent implements OnInit {
 
   private readonly userService: UserCrudService;
-  userToEdit: UserDTO = new UserDTO();
+  userToEdit?: UserDTO;
   roles: string[] = []
 
   constructor(private route: ActivatedRoute,
@@ -39,6 +39,9 @@ export class UserEditComponent implements OnInit {
   }
 
   saveUserEdit(): void {
+    if (this.userToEdit == null) {
+      return;
+    }
     this.userService.patch(this.userToEdit).subscribe({
       next: (user: UserDTO) => {
         this.userToEdit = user;

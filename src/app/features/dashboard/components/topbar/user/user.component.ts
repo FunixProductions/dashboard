@@ -9,15 +9,15 @@ import {UserDTO, UserJwtCheckerService} from "@funixproductions/funixproductions
   styleUrls: ['./user.component.css']
 })
 export class UserComponent {
-  private readonly userDTO: UserDTO;
+  private readonly userDTO: UserDTO | null;
 
   constructor(private matDialog: MatDialog) {
     const jwtService = new UserJwtCheckerService();
-    this.userDTO = jwtService.getUser() ?? new UserDTO();
+    this.userDTO = jwtService.getUser();
   }
 
   public getUsername(): string | undefined {
-    return this.userDTO.username;
+    return this.userDTO?.username;
   }
 
   public openLogoutDialog(): void {
