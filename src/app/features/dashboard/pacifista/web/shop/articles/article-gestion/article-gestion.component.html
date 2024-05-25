@@ -42,6 +42,12 @@
 
         <div class="form-group">
             <label for="commandExecInput">Commande lancée sur Pacifista après l'achat de l'article</label>
+            <p>
+                Arguments disponibles pour la commande :<br/>
+                <strong>{{ '{QUANTITY}' }}</strong> : Quantité<br/>
+                <strong>{{ '{PLAYER_UUID}' }}</strong> : ID mojang du joueur<br/>
+                <strong>{{ '{PLAYER_NAME}' }}</strong> : Pseudo du joueur<br/>
+            </p>
             <input type="text" [(ngModel)]="article.commandExecuted"
                    name="commandExecuted"
                    id="commandExecInput"
