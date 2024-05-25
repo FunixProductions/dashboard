@@ -43,10 +43,17 @@
         <div class="form-group">
             <label for="commandExecInput">Commande lancée sur Pacifista après l'achat de l'article</label>
             <input type="text" [(ngModel)]="article.commandExecuted"
-                      name="commandExecuted"
-                      id="commandExecInput"
-                      class="form-control"
-                      placeholder="Commande lancée sur le serveur (sans /)">
+                   name="commandExecuted"
+                   id="commandExecInput"
+                   class="form-control"
+                   placeholder="Commande lancée sur le serveur (sans /)">
+        </div>
+
+        <div class="form-group">
+            <pacifista-server-selector
+                    [selectedServer]="article.serverType"
+                    (onServerSelected)="selectServer($event)"
+            ></pacifista-server-selector>
         </div>
 
         <div class="form-group">
