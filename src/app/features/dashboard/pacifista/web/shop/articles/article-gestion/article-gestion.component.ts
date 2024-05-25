@@ -1,6 +1,7 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {
+  PacifistaServerType,
   PacifistaShopArticleDTO,
   PacifistaShopArticleService,
   PacifistaShopCategoryDTO,
@@ -111,6 +112,10 @@ export class ArticleGestionComponent implements AfterViewInit {
 
   onFileSelected(event: any): void {
     this.file = event.target.files[0];
+  }
+
+  selectServer(server?: PacifistaServerType): void {
+    this.article.serverType = server;
   }
 
 }

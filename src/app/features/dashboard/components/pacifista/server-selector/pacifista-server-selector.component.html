@@ -1,0 +1,6 @@
+<div>
+    <label [for]="idInput">{{ label }}</label>
+    <select [id]="idInput" class="custom-select" [(ngModel)]="selectedServer" (change)="onSeverSelected()">
+        <option *ngFor="let status of serversTypes" [value]="status">{{ status }}</option>
+    </select>
+</div>

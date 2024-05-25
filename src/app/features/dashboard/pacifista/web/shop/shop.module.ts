@@ -15,18 +15,21 @@ import {FormsModule} from "@angular/forms";
 import {ArticleRemoveModalComponent} from './articles/article-remove-modal/article-remove-modal.component';
 import {ArticleGestionComponent} from './articles/article-gestion/article-gestion.component';
 import {EditorModule, TINYMCE_SCRIPT_SRC} from "@tinymce/tinymce-angular";
+import {
+    PacifistaServerSelectorComponent
+} from "../../../components/pacifista/server-selector/pacifista-server-selector.component";
 
 @NgModule({
-  declarations: [
-    ShopComponent,
-    ArticlesComponent,
-    CategoriesComponent,
-    CategoryCreationModalComponent,
-    CategoryEditModalComponent,
-    CategoryRemoveModalComponent,
-    ArticleRemoveModalComponent,
-    ArticleGestionComponent
-  ],
+    declarations: [
+        ShopComponent,
+        ArticlesComponent,
+        CategoriesComponent,
+        CategoryCreationModalComponent,
+        CategoryEditModalComponent,
+        CategoryRemoveModalComponent,
+        ArticleRemoveModalComponent,
+        ArticleGestionComponent
+    ],
     imports: [
         CommonModule,
         ShopRoutingModule,
@@ -35,10 +38,11 @@ import {EditorModule, TINYMCE_SCRIPT_SRC} from "@tinymce/tinymce-angular";
         MatDialogModule,
         FormsModule,
         EditorModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        PacifistaServerSelectorComponent
     ],
-  providers: [
-    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
-  ]
+    providers: [
+        { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
+    ]
 })
 export class ShopModule { }
