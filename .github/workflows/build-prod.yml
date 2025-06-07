@@ -42,7 +42,9 @@ jobs:
     needs:
       - build-production-image
 
-    runs-on: k3s-funixproductions
+    runs-on:
+      - self-hosted
+      - k3s-funixproductions
 
     environment:
       name: production
