@@ -1,6 +1,6 @@
-FROM node:20 as BUILD
+FROM node:22 AS BUILD
 
-MAINTAINER Antoine PRONNIER, <antoine.pronnier@gmail.com>
+LABEL maintainer="Antoine PRONNIER <antoine.pronnier@gmail.com>"
 
 WORKDIR /container/build-dashboard/
 
@@ -11,9 +11,9 @@ COPY . .
 RUN npm ci
 RUN ng build --configuration=development
 
-FROM nginx:alpine as NGINX
+FROM nginx:alpine AS NGINX
 
-MAINTAINER Antoine PRONNIER, <antoine.pronnier@gmail.com>
+LABEL maintainer="Antoine PRONNIER <antoine.pronnier@gmail.com>"
 
 ENV HOME /home/container
 WORKDIR /home/container

@@ -9,7 +9,7 @@ spec:
   tls:
     - secretName: funixproductions-dev-dashboard-certificate-tls
   rules:
-    - host: dev.dashboard.funixproductions.com
+    - host: dev-dashboard.funixproductions.com
       http:
         paths:
           - path: /
