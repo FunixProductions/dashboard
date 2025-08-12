@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up QEMU (for cross-building)
         uses: docker/setup-qemu-action@v3
@@ -53,7 +53,7 @@ jobs:
 
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Update Kubernetes Cluster
         run: cd kubernetes && chmod +x ./deploy.sh && ./deploy.sh
